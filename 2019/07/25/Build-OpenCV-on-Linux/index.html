@@ -7,7 +7,7 @@
 
 
 
-<title>Hello World | Li Xuetao&#39;s Homepage</title>
+<title>Build OpenCV on Linux | Li Xuetao&#39;s Homepage</title>
 
 
 
@@ -111,11 +111,73 @@
             <div class="container">
     
     
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
 
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">Hello World</h1>
+            <h1 class="post-title">Build OpenCV on Linux</h1>
             
                 <div class="post-meta">
                     
@@ -124,14 +186,14 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">July 25, 2019&nbsp;&nbsp;18:56:29</a>
+                        Date: <a href="#">July 25, 2019&nbsp;&nbsp;20:51:03</a>
                         </span>
                     
                     
                         <span class="post-category">
                     Category:
                             
-                                <a href="/categories/Zen/">Zen</a>
+                                <a href="/categories/Software-Development/">Software Development</a>
                             
                         </span>
                     
@@ -140,10 +202,17 @@
         </header>
 
         <div class="post-content">
-            <p>Hello everyone, welcome to my BLOG!</p>
-<p>Starting today, my personal blog will be enabled.</p>
-<p>I will use it to write posts about software development, technology and some cranky thoughts.</p>
-<p>HAVE A NICE DAY :)</p>
+            <h3 id="input-these-commands-in-terminal"><a href="#input-these-commands-in-terminal" class="headerlink" title="input these commands in terminal"></a>input these commands in terminal</h3><ol>
+<li>sudo apt-get install build-essential</li>
+<li>sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev</li>
+<li>cd ~/opencv</li>
+<li>mkdir build</li>
+<li>cd build</li>
+<li>cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local ..</li>
+<li>make -j”n” # n represents the number of YOUR CPU threads</li>
+<li>sudo make install</li>
+</ol>
+<p>done</p>
 
         </div>
 
@@ -153,6 +222,12 @@
                 <span>Tag(s):</span>
                 <span class="tag">
                     
+                    
+                        <a href="/tags/OpenCV/"># OpenCV</a>
+                    
+                        <a href="/tags/Linux/"># Linux</a>
+                    
+                        
                 </span>
             </div>
             <div>
@@ -163,10 +238,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2019/07/25/Build-OpenCV-on-Linux/">Build OpenCV on Linux</a>
             
-            
-            <a class="next" rel="next" href="/2019/07/12/Category-for-tech/">Category for tech</a>
+            <a class="next" rel="next" href="/2019/07/25/Hello-World/">Hello World</a>
             
         </section>
 
