@@ -80,4 +80,4 @@ theme: Chic
 deploy: 
   type: git
   repo: git@github.com:lixuetaoleo/lixuetaoleo.github.io.git
-  branch: master
+  branch: hexo
