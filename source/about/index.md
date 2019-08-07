@@ -8,6 +8,9 @@ date: 2019-07-12 16:05:16
 - M.S. | Xidian University(XDU) | Software Engineering | 2018.9--2021.7
 
 ***
+### Contact ME
+email : lixuetaoleo@163.com or lixuetaoleo@gmail.com
+***
 ### Hobby 
 - Coding
   
