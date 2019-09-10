@@ -7,7 +7,7 @@
 
 
 
-<title>How to completely clean the history of commands on Linux | Li Xuetao&#39;s Homepage</title>
+<title>Config SSH-KEY for GitLab/GitHub | Li Xuetao&#39;s Homepage</title>
 
 
 
@@ -111,11 +111,73 @@
             <div class="container">
     
     
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
 
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">How to completely clean the history of commands on Linux</h1>
+            <h1 class="post-title">Config SSH-KEY for GitLab/GitHub</h1>
             
                 <div class="post-meta">
                     
@@ -124,7 +186,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">July 28, 2019&nbsp;&nbsp;09:21:04</a>
+                        Date: <a href="#">August 5, 2019&nbsp;&nbsp;15:03:40</a>
                         </span>
                     
                     
@@ -140,15 +202,16 @@
         </header>
 
         <div class="post-content">
-            <ol>
-<li>remove the .bash_history file</li>
-</ol>
-<pre><code>rm -rf ~/.bash_history</code></pre><ol start="2">
-<li><p>clear command history</p>
-<pre><code>history -c</code></pre><p>done</p>
+            <h3 id="GitLab-Github配置添加SSH-Key"><a href="#GitLab-Github配置添加SSH-Key" class="headerlink" title="GitLab/Github配置添加SSH Key"></a>GitLab/Github配置添加SSH Key</h3><ol>
+<li><p>客户端配置生成SSH密钥对</p>
+<pre><code>ssh-keygen -t rsa -C &quot;YOUR EMAIL&quot;</code></pre><p> 完成后在 ~/.ssh/ (Windows是在user目录)会生成2个文件。id_rsa 和 id_rsa.pub。前者是私钥，注意保管，后者是公钥。</p>
+</li>
+<li><p>添加SSH Key到GitLab/Github</p>
+<p> 登录GitLab之后: Profile Settings =&gt; SSH Keys =&gt; Add SSH key</p>
+<p> 输入之前生成的公钥，标题自定义。</p>
+<p> 这样就行了。</p>
 </li>
 </ol>
-<p>Test passed on Linux Mint 19.1(Ubuntu 18.04)</p>
 
         </div>
 
@@ -159,7 +222,9 @@
                 <span class="tag">
                     
                     
-                        <a href="/tags/Linux/"># Linux</a>
+                        <a href="/tags/ssh/"># ssh</a>
+                    
+                        <a href="/tags/Git/"># Git</a>
                     
                         
                 </span>
@@ -172,10 +237,10 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2019/08/05/Config-SSH-KEY-for-GitLab-GitHub/">Config SSH-KEY for GitLab/GitHub</a>
+                <a class="prev" rel="prev" href="/2019/08/07/How-to-build-a-personal-blog-with-Hexo/">How to build a personal blog with Hexo</a>
             
             
-            <a class="next" rel="next" href="/2019/07/25/Build-OpenCV-on-Linux/">Build OpenCV on Linux</a>
+            <a class="next" rel="next" href="/2019/07/28/How-to-completely-clean-the-history-of-commands-on-Linux/">How to completely clean the history of commands on Linux</a>
             
         </section>
 

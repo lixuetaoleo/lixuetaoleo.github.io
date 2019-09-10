@@ -7,7 +7,7 @@
 
 
 
-<title>Archives | Li Xuetao&#39;s Homepage</title>
+<title>Install gcc &amp; g++ 7 on Ubuntu16.04 | Li Xuetao&#39;s Homepage</title>
 
 
 
@@ -108,76 +108,81 @@
     }
 </script>
         <div class="main">
-            <div class="post-wrap archive">
+            <div class="container">
     
     
-        
 
-        
-            <h3>2019</h3>
-        
-
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2019/09/10/Install-gcc-g-7-on-Ubuntu16-04/">Install gcc &amp; g++ 7 on Ubuntu16.04</a>
-            <span class="archive-item-date">September 10, 2019</span>
-        </article>
     
-        
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Install gcc &amp; g++ 7 on Ubuntu16.04</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Li Xuetao</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">September 10, 2019&nbsp;&nbsp;11:34:36</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Software-Development/">Software Development</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>Reference: <a href="https://gist.github.com/jlblancoc/99521194aba975286c80f93e47966dc5" target="_blank" rel="noopener">https://gist.github.com/jlblancoc/99521194aba975286c80f93e47966dc5</a></p>
+<p>Run the following in the terminal:</p>
+<p>Install the gcc-7 packages:</p>
+<pre><code>sudo apt-get install -y software-properties-common
+sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+sudo apt update
+sudo apt install g++-7 -y</code></pre><p>Set it up so the symbolic links gcc, g++ point to the newer version:</p>
+<pre><code>sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 60 --slave /usr/bin/g++ g++ /usr/bin/g++-7 
+sudo update-alternatives --config gcc
+gcc --version
+g++ --version</code></pre><p>Done!</p>
+
+        </div>
 
         
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Linux/"># Linux</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2019/08/07/How-to-build-a-personal-blog-with-Hexo/">How to build a personal blog with Hexo</a>
+            
+        </section>
 
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2019/08/07/How-to-build-a-personal-blog-with-Hexo/">How to build a personal blog with Hexo</a>
-            <span class="archive-item-date">August 7, 2019</span>
-        </article>
-    
-        
 
-        
-
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2019/08/05/Config-SSH-KEY-for-GitLab-GitHub/">Config SSH-KEY for GitLab/GitHub</a>
-            <span class="archive-item-date">August 5, 2019</span>
-        </article>
-    
-        
-
-        
-
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2019/07/28/How-to-completely-clean-the-history-of-commands-on-Linux/">How to completely clean the history of commands on Linux</a>
-            <span class="archive-item-date">July 28, 2019</span>
-        </article>
-    
-        
-
-        
-
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2019/07/25/Build-OpenCV-on-Linux/">Build OpenCV on Linux</a>
-            <span class="archive-item-date">July 25, 2019</span>
-        </article>
-    
-        
-
-        
-
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2019/07/25/Hello-World/">Hello World</a>
-            <span class="archive-item-date">July 25, 2019</span>
-        </article>
-    
-        
-
-        
-
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2019/07/12/Category-for-tech/">Category for tech</a>
-            <span class="archive-item-date">July 12, 2019</span>
-        </article>
-    
-    
+    </article>
 </div>
+
         </div>
         <footer id="footer" class="footer">
     <div class="copyright">
