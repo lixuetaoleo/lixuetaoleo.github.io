@@ -2,8 +2,6 @@
 title: Start to JavaScript--function
 categories:
   - Software Development
-  - Zen
-  - Tech
 date: 2019-09-18 20:11:20
 tags:
 ---
