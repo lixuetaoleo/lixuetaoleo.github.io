@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+
+<title>Effective-C++-1 | Li Xuetao&#39;s Homepage</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Home</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/categories/Software-Development">Software Development</a>
+                
+                    <a class="menu-item" href="/categories/Zen">Zen</a>
+                
+                    <a class="menu-item" href="/categories/Tech">Tech</a>
+                
+                    <a class="menu-item" href="/archives">Archives</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Home</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/categories/Software-Development">Software Development</a>
+                
+                    <a class="menu-item" href="/categories/Zen">Zen</a>
+                
+                    <a class="menu-item" href="/categories/Tech">Tech</a>
+                
+                    <a class="menu-item" href="/archives">Archives</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Effective-C++-1</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Li Xuetao</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">October 30, 2019&nbsp;&nbsp;23:03:35</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Software-Development/">Software Development</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="Item-1：视C-为一个语言联邦"><a href="#Item-1：视C-为一个语言联邦" class="headerlink" title="Item 1：视C++为一个语言联邦"></a>Item 1：视C++为一个语言联邦</h1><ol>
+<li>将C++视为由以下几部分组成的一个“语言联邦”：<ul>
+<li>C。区块(blocks), 语句，预处理器，内置数据类型，数组，指针等。</li>
+<li>Object-Oriented C++。classes（包括构造和析构），封装，继承，多态，虚函数（动态绑定）等。</li>
+<li>Template C++。泛型编程。</li>
+<li>STL。容器，迭代器，算法以及函数对象（Function Objects）。</li>
+</ul>
+</li>
+<li>请记住：<ul>
+<li>C++高效编程守则视状况变化，取决于使用C++哪部分。</li>
+</ul>
+</li>
+</ol>
+<h1 id="Item-2：尽量以const，enum，inline替换-define"><a href="#Item-2：尽量以const，enum，inline替换-define" class="headerlink" title="Item 2：尽量以const，enum，inline替换#define"></a>Item 2：尽量以const，enum，inline替换#define</h1><ol>
+<li><p>#define不被视为语言的一部分，#define从未被编译器看见，在编译器开始处理源码之前就已经被预处理器移走了。解决之道是以一个常量替换。比如把#define ASPECT_RATIO 1.653替换为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const double AspectRatio = 1.653</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>常量替换#define，两种特殊情况</p>
+<ul>
+<li>常量指针。因为常量定义式通常被放在头文件内，因此有必要将指针（不只是指针所指之物）声明为const。比如若要在头文件定义一个常量char*-based字符串，得这样写：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const char* const authorName = &quot;Li&quot;;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>这样写有些复杂。所以常用std::string代替：</p>
+<pre><code>const std::string authorName(&quot;Li&quot;);</code></pre><ul>
+<li>class专属常量。为将常量作用域限制在class内部，必须让其成为class的一个成员变量，而且为确保它至多有一份实体，必须让它成为一个static成员。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class Foo&#123;</span><br><span class="line">private:</span><br><span class="line">    static const int num = 5; //常量声明式</span><br><span class="line">    int scores[num];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>注意：上面的是声明式而不是定义式。通常C++都回要求任何东西提供一个定义式，但是如果它是一个class专属的static且为整数类型（int，char，bool），则进行特殊处理。只要不取它们地址，只有声明式没有定义式也是ok的。但是如果你要对某个class的专属常量取地址，或者如果你无定义式编译不通过，则按如下方法提供定义式：<br>const int Foo::num;它因为声明时获得了初值，因此定义式可以不再设初值。<br><code>无法用#define创建class专属常量，因为它不重视作用域</code>。</p>
+<p>如果编译器不允许“static整数型class常量”完成“in class初值设定”，可以用“enum hack”：即一个枚举类型的数值可被当作ints使用。例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class Foo&#123;</span><br><span class="line">private:</span><br><span class="line">    enum&#123;num = 5&#125;;</span><br><span class="line">    int scores[num];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>这样一来，num就只是成为了5的一个记号。</p>
+<p>enum hack从行为方面更像#define而不是const。它也具有实用主义。</p>
+</li>
+<li><p>请记住：</p>
+<ul>
+<li>对于单纯常量，用const对象或者enums替换#define。</li>
+</ul>
+</li>
+</ol>
+<h1 id="Item-3：尽可能使用const"><a href="#Item-3：尽可能使用const" class="headerlink" title="Item 3：尽可能使用const"></a>Item 3：尽可能使用const</h1><ol>
+<li>const摆放位置小结：<ul>
+<li>const出现在星号左侧，表示被指物是常量；如果出现在星号右边，则指针自身是常量；出现在星号两侧，被指物和指针两者都是常量。</li>
+</ul>
+</li>
+<li>令函数返回一个常量值，往往可以降低因客户错误而造成的意外，而又不至于放弃安全性和高效性。例子：重载了一个操作符<em>，但是客户调用的时候手滑，写成了if(a</em>b = c)，而其本意是判断，因此加上const可以避免无意义的动作。总之，除非有需要改动参数或者local对象，否则将函数声明为const。</li>
+<li>避免代码重复的安全做法–令non-const function调用const function。在C++中，函数可以仅通过const来进行重载，因此如果const版本的函数和非const版本的函数大部分内容都一样，可以令nonconst版本调用const版本。例子：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class TextBlock&#123;</span><br><span class="line">public:</span><br><span class="line">    ...</span><br><span class="line">    const char&amp; operator[](std::size_t position) const&#123;</span><br><span class="line">      ...</span><br><span class="line">      return text[position];</span><br><span class="line">    &#125;</span><br><span class="line">    char&amp; operator[](std::size_t position)&#123; //一共进行两次转型</span><br><span class="line">      return const_cast&lt;char&amp;&gt;( //将op[]返回值的const除去</span><br><span class="line">        static_cast&lt;const TextBlock&amp;&gt;(*this)[position] //为*this加上const以调用const op[]</span><br><span class="line">      );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>注意：const成员函数调用nonconst版本是错误的，因为对象有可能因此被改动。</p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/C/"># C++</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2019/10/25/CPP-knowledge/">CPP knowledge</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Li Xuetao | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>

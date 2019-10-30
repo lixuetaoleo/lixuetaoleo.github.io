@@ -7,7 +7,7 @@
 
 
 
-<title>Category for tech | Li Xuetao&#39;s Homepage</title>
+<title>const int *p vs int * const p | Li Xuetao&#39;s Homepage</title>
 
 
 
@@ -115,7 +115,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">Category for tech</h1>
+            <h1 class="post-title">const int *p vs int * const p</h1>
             
                 <div class="post-meta">
                     
@@ -124,14 +124,14 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">July 12, 2019&nbsp;&nbsp;16:17:11</a>
+                        Date: <a href="#">October 24, 2019&nbsp;&nbsp;20:29:08</a>
                         </span>
                     
                     
                         <span class="post-category">
                     Category:
                             
-                                <a href="/categories/Tech/">Tech</a>
+                                <a href="/categories/Software-Development/">Software Development</a>
                             
                         </span>
                     
@@ -140,8 +140,12 @@
         </header>
 
         <div class="post-content">
-            <p>Welcome !<br>Welcome!<br>welcome!</p>
-
+            <p>今天终于把这两者彻底弄懂了。。。</p>
+<p>其实非常简单</p>
+<p>const int *p 这里的const的是 *p，即 *p不能被修改</p>
+<p>而int * const p这里const的是p，即p不能再被用来指向其他变量了。</p>
+<p>e.g.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">int i = 0;</span><br><span class="line">const int *p = &amp;i;</span><br><span class="line">std::cout &lt;&lt; &quot;i: &quot; &lt;&lt; i &lt;&lt; &quot; *p: &quot; &lt;&lt; *p &lt;&lt; std::endl; //i: 0 *p: 0</span><br><span class="line">i = 2;</span><br><span class="line">std::cout &lt;&lt; &quot;i: &quot; &lt;&lt; i &lt;&lt; &quot; *p: &quot; &lt;&lt; *p &lt;&lt; std::endl; //i: 2 *p: 2</span><br><span class="line">*p = 3; //invalid</span><br><span class="line">int j = 4;</span><br><span class="line">p = &amp;j; // *p: 4</span><br><span class="line"></span><br><span class="line">int i = 0;</span><br><span class="line">int * const p = &amp;i;</span><br><span class="line">std::cout &lt;&lt; &quot;i: &quot; &lt;&lt; i &lt;&lt; &quot; *p: &quot; &lt;&lt; *p &lt;&lt; std::endl; //i: 0 *p: 0</span><br><span class="line">i = 2;</span><br><span class="line">std::cout &lt;&lt; &quot;i: &quot; &lt;&lt; i &lt;&lt; &quot; *p: &quot; &lt;&lt; *p &lt;&lt; std::endl; //i: 2 *p: 2</span><br><span class="line">*p = 3;</span><br><span class="line">std::cout &lt;&lt; &quot;i: &quot; &lt;&lt; i &lt;&lt; &quot; *p: &quot; &lt;&lt; *p &lt;&lt; std::endl; //i: 3 *p: 3</span><br><span class="line">int j = 4;</span><br><span class="line">p = &amp;j; //invalid</span><br></pre></td></tr></table></figure>
         </div>
 
         
@@ -160,8 +164,10 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2019/07/25/Hello-World/">Hello World</a>
+                <a class="prev" rel="prev" href="/2019/10/25/CPP-knowledge/">CPP knowledge</a>
             
+            
+            <a class="next" rel="next" href="/2019/10/18/How-to-fix-a-subdir-can-t-be-added-to-git/">How to fix a subdir can't be added to git</a>
             
         </section>
 
