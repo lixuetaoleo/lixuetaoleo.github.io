@@ -7,7 +7,7 @@
 
 
 
-<title>Effective-C++-2 | Li Xuetao&#39;s Homepage</title>
+<title>Effective C++ 3 | Li Xuetao&#39;s Homepage</title>
 
 
 
@@ -177,7 +177,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">Effective-C++-2</h1>
+            <h1 class="post-title">Effective C++ 3</h1>
             
                 <div class="post-meta">
                     
@@ -186,7 +186,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">November 4, 2019&nbsp;&nbsp;22:24:34</a>
+                        Date: <a href="#">November 4, 2019&nbsp;&nbsp;23:25:43</a>
                         </span>
                     
                     
@@ -202,30 +202,46 @@
         </header>
 
         <div class="post-content">
-            <h1 id="Item-4：确认对象被使用前已经先被初始化"><a href="#Item-4：确认对象被使用前已经先被初始化" class="headerlink" title="Item 4：确认对象被使用前已经先被初始化"></a>Item 4：确认对象被使用前已经先被初始化</h1><ol>
-<li>内置类型以外的任何其他东西，初始化的责任落在ctor上。规则很简单：确保每一个ctor都将对象里面的每一个成员初始化。</li>
-<li>注意：别混淆了赋值和初始化。C++规定，对象的成员变量其初始化动作发生在进入ctor本体之前，所以写构造函数时，应该用member initialization list来替换赋值动作。如果采用ctor函数体赋值，首先会调用default ctor然后再对成员变量进行赋值，这样一来default ctor的一切作为都浪费了，使得效率也比较低。</li>
-<li>在initialization list中列出所有的成员变量，这样就不用记住哪些成员变量无需初值。</li>
-<li>成员变量是const或者reference，它们就一定要初值，不能被赋值。</li>
-<li>有时候一个class有多个ctor，这时如果用member initialization list进行初始化，则会显得繁琐，此时则可以利用一个赋值函数(通常是private)，把那些“赋值表现得像初始化一样好”的变量(通常是内置类型)，放到这个函数中然后在构造函数中进行调用。<code>但是还是更推荐member initialization list</code>。</li>
-<li>member initialization list列出的成员变量，其排列顺序应该和它们在class中声明次序相同。</li>
+            <h1 id="Item-7：为多态基类声明virtual析构函数"><a href="#Item-7：为多态基类声明virtual析构函数" class="headerlink" title="Item 7：为多态基类声明virtual析构函数"></a>Item 7：为多态基类声明virtual析构函数</h1><ol>
+<li><p>C++明白指出，如果派生类的对象被一个基类指针指向然后删除，而该基类带着一个非虚析构函数，其结果未有定义——但实际执行时通常发生的是对象的derived成分没被销毁。这种“局部销毁”将造成资源泄露，败坏之数据结构（不太清楚这里什么意思）。</p>
+</li>
+<li><p>消除上述现象的做法就是给基类加一个virtual的析构函数，然后同样的删除一个基类指针指向的派生类对象时，就会销毁整个对象，包括整个派生类成分。</p>
+</li>
+<li><p><code>任何class只要带有virtual函数，那么几乎确定的是也应该有一个virtual析构函数！</code></p>
+</li>
+<li><p>如果一个类不含virtual函数，那么说明它并不意图被用作一个基类，如果一个类不被用作基类而令其析构函数为virtual，是一个馊主意！理由如下：</p>
+<p>假设一个类如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class Point&#123;</span><br><span class="line">public:</span><br><span class="line">   Point(...);</span><br><span class="line">   ~Point();</span><br><span class="line">private:</span><br><span class="line">   int x,y;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>假设int占用32位，那么该类的大小是64bits，但是如果此时将析构函数弄成virtual，形势发生了变化。</p>
+<p>要实现virtual函数，对象必须携带某些信息（具体是什么不重要），这份信息是由一个vptr(virtual table pointer)指针指向。vptr指向一个由函数指针构成的数组，称为vtbl(virtual table)；每一个带有virtual函数的class都有一个相应的vtbl。当对象调用virtual函数时，实际被调用的函数取决于该对象的vptr所指的那个vtbl–然后编译器在其中寻找适当的函数指针。</p>
+<p>所以如果将Point的析构弄为virtual，Point的大小将从64bits（两个int）增加至96bits（两个int加一个vptr）（在64位机器中占用更多！），造成对象增加50%~100%！使得原本point对象能塞进64bit的缓存器而不再能塞进去。</p>
+<p><code>心得</code>: 只有当class内至少含有一个virtual函数才为它声明virtual析构函数。</p>
+</li>
+<li><p>不要继承标准库的容器或带有non-virtual析构函数的class。</p>
+</li>
+<li><p>对于一个抽象类含有纯虚析构函数，必须为这个纯虚析构函数提供一份定义，防止链接警告！因为析构时自底向上，当该抽象类的析构函数被调用时，如果没有定义函数，就会有警告出现。</p>
+</li>
+<li><p>并非所有的基类其设计目的都是为了多态：</p>
+<ul>
+<li>标准string和STL容器都不被设计为基类使用，更不用提多态（这也是为什么不要继承标准库容器或string的原因）。</li>
+</ul>
+</li>
+<li><p>某些class的设计目的是作为基类使用，但不是为了多态用途：</p>
+<ul>
+<li>比如之前提到的uncopyable类，它们并非被设计用来“经由base class接口来处理derived class对象”，因此它们不需要virtual析构函数。</li>
+</ul>
+</li>
 </ol>
-<h1 id="Item-5：了解C-默默编写并调用哪些函数"><a href="#Item-5：了解C-默默编写并调用哪些函数" class="headerlink" title="Item 5：了解C++默默编写并调用哪些函数"></a>Item 5：了解C++默默编写并调用哪些函数</h1><ol>
-<li>写一个类，就算没写ctor，dctor，拷贝构造，拷贝赋值，编译器也会声明这几个default函数，并且它们是public和inline。</li>
-<li>除非这个类的基类有声明virtual的析构函数，否则编译器产出的析构函数是非虚的。</li>
-<li>如果打算在一个内含reference成员或const成员的class支持赋值操作，那么必须定义自己的拷贝赋值操作符，否则编译不通过。</li>
-<li>如果某个基类讲拷贝赋值操作符声明为private，编译器不会为派生类生成一个拷贝赋值操作符。因为派生类无权访问基类的private。</li>
+<h1 id="Item-8：别让异常逃离析构函数"><a href="#Item-8：别让异常逃离析构函数" class="headerlink" title="Item 8：别让异常逃离析构函数"></a>Item 8：别让异常逃离析构函数</h1><ol>
+<li>当有多个异常同时存在的情况下，程序将结束执行或者导致不明确行为。C++不喜欢析构函数吐出异常！</li>
+<li>如果一个被析构函数调用的函数可能抛出异常，析构函数应该捕捉任何异常，然后吞下它们或结束程序。</li>
+<li>如果客户需要对某个操作函数运行期间抛出的异常作出反应，那么class应该提供一个普通函数（而非在析构函数中）执行该操作。</li>
 </ol>
-<h1 id="Item-6：若不想使用编译器自动生成的函数，就该明确拒绝"><a href="#Item-6：若不想使用编译器自动生成的函数，就该明确拒绝" class="headerlink" title="Item 6：若不想使用编译器自动生成的函数，就该明确拒绝"></a>Item 6：若不想使用编译器自动生成的函数，就该明确拒绝</h1><ol>
-<li><p>可以将这些方法放在private里，这样就成功阻止它们被调用。</p>
-</li>
-<li><p>但是上面的做法不是100%安全，因为member函数和friend函数还是可以调用。因此可以将这些函数进行声明但是不定义，此时如果某些函数想调用它们，则会报链接错误。</p>
-</li>
-<li><p>如果想把链接错误转为编译错误，可以利用如下方法：</p>
-<p>设计一个把拷贝构造和拷贝赋值放进private里的基类(命名为Uncopyable)，然后派生类继承这个基类。</p>
-<p>tip: boost提供了一个noncopyable的class。</p>
-<p>这样一来，如果某个member函数或者friend函数想调用拷贝赋值或者拷贝构造，编译器报错。原因见Item5的第四条。</p>
-</li>
+<h1 id="Item-9：绝不在构造和析构过程中调用virtual函数"><a href="#Item-9：绝不在构造和析构过程中调用virtual函数" class="headerlink" title="Item 9：绝不在构造和析构过程中调用virtual函数"></a>Item 9：绝不在构造和析构过程中调用virtual函数</h1><ol>
+<li>假设一个基类在构造时调用了其一个纯虚方法，该纯虚方法在派生类进行了实现，然后其派生类在创建对象时，会出现错误。因为构造时是自顶向下，最开始调用的是基类构造，并且类型也是base class的类型，基类构造时调用那个纯虚方法将出错。</li>
+<li>也要警惕在基类构造调用了一个non-virtual方法，但是该non-virtual方法调用了一个virtual方法的陷阱。。。</li>
+<li>解决方法：<br>将原本在基类的那个virtual方法改为non-virtual，然后要求派生类构造必须传递必要信息给基类构造，然后那个构造函数就能安全的调用non-virtual函数了。<br>即“令派生类将必要的构造信息向上传递至基类构造函数”。</li>
 </ol>
 
         </div>
@@ -250,10 +266,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2019/11/04/Effective-C-3/">Effective C++ 3</a>
             
-            
-            <a class="next" rel="next" href="/2019/10/30/Effective-C-1/">Effective-C++-1</a>
+            <a class="next" rel="next" href="/2019/11/04/Effective-C-2/">Effective-C++-2</a>
             
         </section>
 
