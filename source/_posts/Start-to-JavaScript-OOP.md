@@ -4,6 +4,7 @@ categories:
   - Software Development
 date: 2019-09-18 21:04:18
 tags:
+  - JavaScript
 ---
 - JavaScript不区分类和实例的概念，而是通过原型（prototype）来实现面向对象编程。
   

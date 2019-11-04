@@ -4,6 +4,7 @@ categories:
   - Software Development
 date: 2019-09-17 21:30:04
 tags:
+  - JavaScript
 ---
 因为各种原因和需要，从今天开始，我将正式学习JavaScript(ES6)。
 

@@ -4,6 +4,7 @@ categories:
   - Software Development
 date: 2019-09-18 20:11:20
 tags:
+  - JavaScript
 ---
 继续JS的路
 

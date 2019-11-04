@@ -3,7 +3,8 @@ title: Useful Git Commands
 categories:
   - Software Development
 date: 2019-10-16 16:51:37
-tags: Git
+tags: 
+  - Git
 ---
 本教程是git的一些常用操作,不包括对git的介绍以及git的安装方式)，如果你对git一无所知，请先自行Google以对git有一定了解。
 

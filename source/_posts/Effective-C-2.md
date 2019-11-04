@@ -4,7 +4,7 @@ categories:
   - Software Development
 date: 2019-11-04 22:24:34
 tags:
- - C++
+  - C++
 ---
 # Item 4：确认对象被使用前已经先被初始化
 1. 内置类型以外的任何其他东西，初始化的责任落在ctor上。规则很简单：确保每一个ctor都将对象里面的每一个成员初始化。

@@ -3,7 +3,8 @@ title: How to fix a subdir can't be added to git
 categories:
   - Software Development
 date: 2019-10-18 17:03:28
-tags: git
+tags: 
+  - Git
 ---
 个人博客的git仓库一直有一个问题，就是git status显示themes/Chic文件夹是untracked，但是git add却无法将它add
 
