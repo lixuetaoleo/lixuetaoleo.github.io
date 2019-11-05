@@ -69,3 +69,36 @@ std::move()
    - 是一样的。不过区别是，如果T的构造函数标记了explicit，那么T a = b;会有语法错误
    - T a = b 就是 T a(b) 的语法糖, 区别就是 T a = b 要求不是 explicit.
    - 有 T a = b这样的语法 是因为C 的原因。
+
+---
+`2019/11/5 updated`
+
+6. C++中struct和class区别
+   
+   不同于C中的struct，在C++中，struct可以有成员方法，也可以继承
+因此在C++中，struct和class的最本质区别在于以下几条：
+    
+   - 默认的权限，如果没有指明权限，在struct中默认权限时public，而class是private
+   - 继承权限，struct默认是public，而class是private。`但是，public继承还是private继承，取决于子类而不是基类`。 struct可以继承class，同样class也可以继承struct，那么默认的继承访问权限是看子类到底是用的struct还是class。 
+   
+   还有以下“区别”：
+   - class可以作为模板参数，就像typename
+   
+   因此struct还是一般用来做数据结构，class作为类
+   
+   扩展：C ++ class与C struct有何不同?
+   
+   - 类也可以包含函数[称为方法]。 
+   - 成员变量和方法对外界是隐藏的，除非它们的声明遵循公共标签。
+   - 可以有一对特殊方法（构造函数和析构函数），它们在创建和销毁类[对象]的实例时自动运行。 
+   - 可以使用特殊方法[成员函数]来定义用于新数据类型的运算符。运算符重载
+   - 一个类可以用作定义另一种[继承性]的基础。
+   - 声明新类型的变量[类的实例；一个对象]仅需要类的名称-不需要关键字class。而struct要
+
+   The above has been inspired by the C++ Core Guideline (which is a great read by the way), in particular the following:
+
+   - Organize related data into structures (structs or classes) (把有一定联系的数据整合成一个结构(struct或class))
+   - Use class if the class has an invariant; use struct if the data members can vary independently（如果类具有不变性，则使用class；如果数据成员可以独立变化，则使用struct）
+   - Represent the distinction between an interface and an implementation using a class(用类来表现接口和实现之间的区别)
+   - Use class rather than struct if any member is non-public （如果有任一成员变量是非public的，用class）  
+---
