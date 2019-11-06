@@ -2,28 +2,32 @@
 title: About
 date: 2019-07-12 16:05:16
 ---
-### About Me
-- B.E. | [Xi'an University of Posts and Telecommunications(XUPT)](http://www.xupt.edu.cn/) | Electronic Engineering | 2014.9--2018.7
+### 关于我
+- 本科 | [西安邮电大学(XUPT)](http://www.xupt.edu.cn/) | 电子信息工程 | 2014.9--2018.7
   
-- M.S. | [Xidian University(XDU)](https://www.xidian.edu.cn/) | Software Engineering | 2018.9--2021.7
+- 硕士(在读) | [西安电子科技大学(XDU)](https://www.xidian.edu.cn/) | 软件工程 | 2018.9--2021.7
 
 ***
-### Contact Me
-email : lixuetaoleo@163.com or lixuetaoleo@gmail.com
+### 联系方式
+email : lixuetaoleo@163.com | lixuetaoleo@gmail.com
 ***
-### Hobbies 
-- Coding 💻
+### 兴趣？
   
-- Travel 🏃‍
+- 爱旅行，朝着踏遍全国34个省(级)再朝世界进军的目标奋斗着
   
-- Reading 📖
+- 爱读书，开拓自己的视野
   
-- Music 🎸
+- 爱音乐，爱摇滚，最爱许巍、朴树，也爱各Rocker；会一点🎸，想写歌
   
-- Football ⚽
+- 爱运动，爱足球，最爱巴萨 & 梅西，也爱多特 & 罗伊斯，阿根廷永远不会哭泣，但主队永远是中国队！
 
-- Ski 🏂
+- 爱运动，爱滑雪，喜欢吸食白色鸦片，想把单板学会。
   
-- Fascinating movies and TV series 🎬
-  
-- 🔵Nintendo Switch🔴
+- 爱宅，爱看各种自认为好看的电影&电视剧，爱玩Switch，塞尔达天下第一！！！谁吹塞尔达就能做朋友
+
+- 最后，爱我的家人和朋友，爱这个千疮百孔的世界
+***
+### 关注我
+[微博](https://weibo.com/u/1791741344)
+
+[Instagram](https://www.instagram.com/lixuetaoleo/)
