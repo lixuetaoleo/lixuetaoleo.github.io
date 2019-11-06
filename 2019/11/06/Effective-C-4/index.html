@@ -7,7 +7,7 @@
 
 
 
-<title>Build OpenCV on Linux | Li Xuetao&#39;s Homepage</title>
+<title>Effective C++ 4 | Li Xuetao&#39;s Homepage</title>
 
 
 
@@ -177,7 +177,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">Build OpenCV on Linux</h1>
+            <h1 class="post-title">Effective C++ 4</h1>
             
                 <div class="post-meta">
                     
@@ -186,7 +186,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">July 25, 2019&nbsp;&nbsp;20:51:03</a>
+                        Date: <a href="#">November 6, 2019&nbsp;&nbsp;20:46:03</a>
                         </span>
                     
                     
@@ -202,17 +202,30 @@
         </header>
 
         <div class="post-content">
-            <h3 id="input-these-commands-in-terminal"><a href="#input-these-commands-in-terminal" class="headerlink" title="input these commands in terminal"></a>input these commands in terminal</h3><ol>
-<li>sudo apt-get install build-essential</li>
-<li>sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev</li>
-<li>cd ~/opencv</li>
-<li>mkdir build</li>
-<li>cd build</li>
-<li>cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local ..</li>
-<li>make -j”n” # n represents the number of YOUR CPU threads</li>
-<li>sudo make install</li>
+            <h2 id="Item-10：令-operator-返回一个reference-to-this"><a href="#Item-10：令-operator-返回一个reference-to-this" class="headerlink" title="Item 10：令 operator= 返回一个reference to *this"></a>Item 10：令 operator= 返回一个reference to *this</h2><ol>
+<li>在重载”+=”和”=”操作符时，应遵循返回*this的reference的“协议”(无强制性)，以应对连等情况出现。</li>
 </ol>
-<p>done</p>
+<h2 id="Item-11：在-operator-中处理“自我赋值”"><a href="#Item-11：在-operator-中处理“自我赋值”" class="headerlink" title="Item 11：在 operator= 中处理“自我赋值”"></a>Item 11：在 operator= 中处理“自我赋值”</h2><ol>
+<li><p>注：自我赋值不但包括明显的自我赋值(如w = w)，还包括潜在的自我赋值(比如a[i] = a[j], *pi = *pj等).甚至一个指向子类对象的基类指针和子类对象指针也是自我赋值。</p>
+</li>
+<li><p>处理“自我赋值”的三种方案：</p>
+<ul>
+<li><p>传统做法：在operator=最前面加一个“证同测试(identity test)”检验：</p>
+<pre><code>fsa</code></pre><p>优点:</p>
+<p>缺点：</p>
+</li>
+<li><p>调整语句顺序：</p>
+<pre><code>f </code></pre><p>优点:</p>
+<p>缺点：</p>
+</li>
+<li><p>copy and swap技术：</p>
+<pre><code>ffff</code></pre><p>优点:</p>
+<p>缺点：</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="Item-12：复制对象时勿忘其每一个成分"><a href="#Item-12：复制对象时勿忘其每一个成分" class="headerlink" title="Item 12：复制对象时勿忘其每一个成分"></a>Item 12：复制对象时勿忘其每一个成分</h2><p>1. </p>
 
         </div>
 
@@ -223,9 +236,7 @@
                 <span class="tag">
                     
                     
-                        <a href="/tags/OpenCV/"># OpenCV</a>
-                    
-                        <a href="/tags/Linux/"># Linux</a>
+                        <a href="/tags/C/"># C++</a>
                     
                         
                 </span>
@@ -238,10 +249,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2019/07/28/How-to-completely-clean-the-history-of-commands-on-Linux/">How to completely clean the history of commands on Linux</a>
             
-            
-            <a class="next" rel="next" href="/2019/07/25/Hello-World/">Hello World</a>
+            <a class="next" rel="next" href="/2019/11/04/Effective-C-3/">Effective C++ 3</a>
             
         </section>
 
