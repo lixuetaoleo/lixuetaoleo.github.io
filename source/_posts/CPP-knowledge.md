@@ -102,3 +102,19 @@ std::move()
    - Represent the distinction between an interface and an implementation using a class(用类来表现接口和实现之间的区别)
    - Use class rather than struct if any member is non-public （如果有任一成员变量是非public的，用class）  
 ---
+`2019/11/09 updated`
+
+7. C++中获取元素数据类型的方法
+  
+    首先引入头文件#include<typeinfo>
+
+    方法:typeid(varname).name();
+
+    e.g.:
+    ```
+    int a;
+    typeid(a).name();   
+    int *a;
+    typeid(a).name();
+    ```
+    输出:上面i,下面Pi,但是显示的类型是根据编译器决定(以上代码在MingW测试)
