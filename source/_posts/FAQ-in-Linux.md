@@ -6,7 +6,7 @@ date: 2019-11-09 21:14:58
 tags:
   - Linux
 ---
-这篇文章总结了Linux系统下各种常见坑及其解决方法：
+这篇文章总结了我在折腾Linux系统时遇见的坑及其解决方法：
 
 开始吧
 
@@ -34,4 +34,36 @@ Linux/Unix/Mac把计算机硬件时间当作 UTC， 所以在Linux/Unix/Mac系�
   执行后重启Ubuntu，应该就没有问题了。
 
 参考来源：[知乎(作者：滑稽)](https://www.zhihu.com/question/46525639/answer/157272414)
-## 2.
+## 2. Linux搜狗输入法部分应用无法调用问题
+在CLion和deepin-wine中无法调用sougou输入法，在输入法设置中，安装fcitx，重启，然后在fcitx设置中，禁用除keyboard-chinese 和搜狗以外的输入法，解决。
+
+## 3. Linux下安装fcitx后中文字体为楷体的解决方案
+现象：安装完fcitx之后，系统所有中文字都变楷体了，及其恶心。
+
+解决方法：sudo apt install font-manager，在font manager中禁用所有楷体.
+
+## 3. Linux deep-wine 微信字体问题
+如果字体显示不正常(无图)，那么下载微软雅黑新版(6.21)字体
+
+## 4. 配置系统启动顺序
+/etc/default/grub
+
+用管理员权限打开（否则无法保存）
+
+GRUB_DEFAULT=0（默认选项,0开始）
+
+GRUB_TIMEOUT=3（选择时间）
+
+保存
+
+终端输入sudo update-grub
+
+重启生效
+
+## 5. LINUX 下【Qt】错误GL/gl.h: No such file or directory的解决方法（以及cannot find -lGL解决方法）
+参考：
+https://blog.csdn.net/u010168781/article/details/80896797
+
+## 6. Linux下安装wine以使用qq和微信等软件
+https://github.com/wszqkzqk/deepin-wine-ubuntu
+
