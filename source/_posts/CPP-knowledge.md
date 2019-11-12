@@ -2,10 +2,14 @@
 title: CPP knowledge
 categories:
   - Software Development
-date: 2019-10-25 15:01:54
+date: 2019-11-12 14:42:54
 tags:
   - C++
 ---
+First commit
+
+2019-10-25 15:01:54
+
 总结一下遇到的C++知识点
 
 1. 编译error: expected identifier before numeric constant
@@ -118,3 +122,18 @@ std::move()
     typeid(a).name();
     ```
     输出:上面i,下面Pi,但是显示的类型是根据编译器决定(以上代码在MingW测试)
+
+---
+updated 2019-11-12
+
+8. map vs unordered_map
+   
+    - 底层：红黑树 vs 哈希表
+    - 增删查效率：o(logn) vs o(1)(一旦buckets已满，rehash将耗费很多时间)
+    - 有序存储：是 vs 否
+    - 空间复杂度：较小 vs 较大
+    - 适用场景：(有序 & 对空间要求高) vs (增删查效率 & 对空间要求相对较低)
+    
+    注：
+    - 如果想在 map 中使用自定义的类，则必须为此类重载 < 运算符
+    - 如果想在 unordered_map 中使用自定义的类，则必须为此类提供一个哈希函数和重载 == 运算符）
