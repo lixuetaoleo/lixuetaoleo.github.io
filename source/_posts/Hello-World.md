@@ -1,7 +1,7 @@
 ---
 title: Hello World
 categories:
-  - Share
+  - Inspiration
 date: 2019-07-25 18:56:29
 tags:
 ---

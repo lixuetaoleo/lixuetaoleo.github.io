@@ -4,6 +4,6 @@ date: {{ date }}
 tags:
 categories:
 - Software Development
-- Share
+- Inspiration
 - Tech
 ---

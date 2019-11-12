@@ -2,8 +2,6 @@
 title: FAQ in Linux
 categories:
   - Software Development
-  - Zen
-  - Tech
 date: 2019-11-09 21:14:58
 tags:
   - Linux
