@@ -147,3 +147,5 @@ pD->mf(); //调用D::mf()
 原因：non-virtual函数是静态绑定，意思是由于pB被声明为一个pointer-to-B，通过pB调用的non-virtual函数永远是B所定义的版本，即使pB指向的是一个派生类的对象。
 
 但是virtual函数是动态绑定，如果mf是个virtual函数，无论通过pB或pD调用mf，都会导致调用D::mf,因为pB和pD真正指的都是一个类型为D的对象。
+
+# Item 37：绝不重新定义继承而来的缺省参数值
