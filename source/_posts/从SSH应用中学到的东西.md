@@ -44,7 +44,7 @@ e.g: ssh csi@192.168.1.100
 2: 查找输出信息中特定的字符串(以端口占用情况为例，查找ssh服务监听的22号端口)
          
 * Linux: sudo lsof -i:22 | grep ssh , 此时会把不含"ssh"输出行给过滤
-* Windows：netstat -an | findstr "22" , 效果与上面大致类似。
+* Windows：netstat -ano | findstr "22" , 效果与上面大致类似。
 
 
 
