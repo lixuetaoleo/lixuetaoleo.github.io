@@ -149,3 +149,66 @@ pD->mf(); //调用D::mf()
 但是virtual函数是动态绑定，如果mf是个virtual函数，无论通过pB或pD调用mf，都会导致调用D::mf,因为pB和pD真正指的都是一个类型为D的对象。
 
 # Item 37：绝不重新定义继承而来的缺省参数值
+1. virtual 函数是动态绑定，但是缺省参数值却是静态绑定。
+2. 有如下代码:
+   
+		class Shape{
+		public:
+			enum ShapeColor{Red, Green, Blue};
+			virtual void draw(ShapeColor color = Red) const = 0;
+			...
+		};
+
+		class Rectangle: public Shape{
+		public:
+			virtual void draw(ShapeColor color = Green) const;//this is disgusting
+		};
+
+		class Circle: public Shape{
+		public:
+			virtual void draw(ShapeColor color) const;
+			注意：这么写则当客户以对象调用该函数时，一定要指定参数值。因为静态绑定下这个函数并不从base继承缺省参数值。
+			但是若以指针(或者引用)调用此函数，则可以不指定参数值，因为动态绑定下这个函数从base继承缺省参数值。
+		};
+
+		Shape* ps;
+		Shape* pc = new Circle;
+		Shape* pr = new Rectangle;
+
+	这三个指针的静态类型都是Shape*，动态类型是它们所指的对象的类型。
+
+	Virtual函数由动态绑定而来，即调用一个virtual函数时，究竟调用哪一份代码，取决于发出调用的那个对象的动态类型。
+
+	但是，缺省参数值是静态绑定
+
+		pr->draw();  // 调用Rectangle::draw(Shape::Red)!
+
+	在此例中，pr动态类型是Rectangle*，调用rectangle的virtual函数，没问题；问题在于Rectangle::draw的缺省参数是GREEN，但是由于pr的静态类型是Shape*，所以在此处调用的缺省参数值来自shape而非rectangle。
+
+	以上问题不仅局限于指针，引用也是如此。
+
+3. C++采用这种方式运作的原因：运行期效率。为了程序的执行速度和编译器实现上的简易度，C++做出了这样的取舍。
+4. 如果提供给derived class与base class相同的缺省值，出现的问题是代码重复，因为如果base class缺省参数值变了，所有那些重复给值的class也必须改变。
+5. 解决上面问题的trick：
+
+		class Shape{
+		public:
+			enum ShapeColor{Red, Green, Blue};
+			void draw(ShapeColor color = red) const{
+				doDraw(color);
+			}
+			...
+		private:
+			virtual void doDraw(ShapeColor color) const = 0;
+			//真正的工作在这里完成
+		};
+
+		class Rectangle: public Shape{
+		public:
+		...
+		private:
+			virtual void doDraw(ShapeColor color) const;
+			//无需指定缺省参数值.
+		};
+	由于non-virtual函数不应该把派生类覆写，因此这个设计使得draw函数的color缺省参数总为Red.
+	
