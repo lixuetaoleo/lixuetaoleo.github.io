@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+
+<title>弹性盒子 | Li Xuetao&#39;s Homepage</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Home</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/categories/Software-Development">Software Development</a>
+                
+                    <a class="menu-item" href="/categories/Inspiration">Inspiration</a>
+                
+                    <a class="menu-item" href="/categories/Tech">Tech</a>
+                
+                    <a class="menu-item" href="/archives">Archives</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Home</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/categories/Software-Development">Software Development</a>
+                
+                    <a class="menu-item" href="/categories/Inspiration">Inspiration</a>
+                
+                    <a class="menu-item" href="/categories/Tech">Tech</a>
+                
+                    <a class="menu-item" href="/archives">Archives</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">弹性盒子</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Li Xuetao</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">December 12, 2019&nbsp;&nbsp;11:14:15</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Software-Development/">Software Development</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h3 id="容器-flex-container-的属性"><a href="#容器-flex-container-的属性" class="headerlink" title="容器(flex-container)的属性"></a>容器(flex-container)的属性</h3><p>项目在主轴上排列方向<br>flex-direction: row(-reverse) | column(-reverse);</p>
+<p>如果一条轴线排不下，如何换行<br>flex-wrap: nowrap | wrap | wrap-reverse;</p>
+<p>前两个属性的集合<br>flex-flow: <flex-direction> || <flex-wrap>;</flex-wrap></flex-direction></p>
+<p>item在主轴上的对齐方式<br>justify-content: flex-start | flex-end | center | space-between | space-around;</p>
+<ul>
+<li><p>flex-start（默认值）：左对齐</p>
+</li>
+<li><p>flex-end：右对齐</p>
+</li>
+<li><p>center： 居中</p>
+</li>
+<li><p>space-between：两端对齐，项目之间的间隔都相等。</p>
+</li>
+<li><p>space-around：每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍。</p>
+</li>
+</ul>
+<p>item在交叉轴的对齐方式<br>align-items: flex-start | flex-end | center | baseline | stretch;</p>
+<ul>
+<li><p>flex-start：交叉轴的起点对齐。</p>
+</li>
+<li><p>flex-end：交叉轴的终点对齐。</p>
+</li>
+<li><p>center：交叉轴的中点对齐。</p>
+</li>
+<li><p>baseline: 项目的第一行文字的基线对齐。</p>
+</li>
+<li><p>stretch（默认值）：如果项目未设置高度或设为auto，将占满整个容器的高度。</p>
+</li>
+</ul>
+<p>多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用<br>align-content: flex-start | flex-end | center | space-between | space-around | stretch;</p>
+<ul>
+<li><p>flex-start：与交叉轴的起点对齐。</p>
+</li>
+<li><p>flex-end：与交叉轴的终点对齐。</p>
+</li>
+<li><p>center：与交叉轴的中点对齐。</p>
+</li>
+<li><p>space-between：与交叉轴两端对齐，轴线之间的间隔平均分布。</p>
+</li>
+<li><p>space-around：每根轴线两侧的间隔都相等。所以，轴线之间的间隔比轴线与边框的间隔大一倍。</p>
+</li>
+<li><p>stretch（默认值）：轴线占满整个交叉轴。</p>
+</li>
+</ul>
+<h3 id="项目-flex-item-的属性"><a href="#项目-flex-item-的属性" class="headerlink" title="项目(flex-item)的属性"></a>项目(flex-item)的属性</h3><p>项目的排列顺序,数值越小，排列越靠前，默认为0,允许负数。<br>order: <integer>;</integer></p>
+<p>项目的放大比例，默认为0，即如果存在剩余空间，也不放大。如果所有项目的flex-grow属性都为1，则它们将等分剩余空间（如果有的话）。如果一个项目的flex-grow属性为2，其他项目都为1，则前者占据的剩余空间将比其他项多一倍。<br>flex-grow: <number>;</number></p>
+<p>项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。如果所有项目的flex-shrink属性都为1，当空间不足时，都将等比例缩小。如果一个项目的flex-shrink属性为0，其他项目都为1，则空间不足时，前者不缩小。不接受负值<br>flex-shrink: <number>;</number></p>
+<p>flex-basis属性定义了在分配多余空间之前，项目占据的主轴空间（main size）。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为auto，即项目的本来大小。<br>它可以设为跟width或height属性一样的值（比如350px），则项目将占据固定空间。<br>flex-basis: <length> | auto; /* default auto</length></p>
+<p>flex: none | [ &lt;’flex-grow’&gt; &lt;’flex-shrink’&gt;? || &lt;’flex-basis’&gt; ]<br>flex-grow, flex-shrink 和 flex-basis的简写，默认值为0 1 auto。后两个属性可选。<br>该属性有两个快捷值：auto (1 1 auto) 和 none (0 0 auto)。建议优先使用这个属性，而不是单独写三个分离的属性，因为浏览器会推算相关值。</p>
+<p>单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。默认值为auto，表示继承父元素的align-items属性，如果没有父元素，则等同于stretch。<br>6个值，除了auto，其他都与align-items属性完全一致。<br>align-self: auto | flex-start | flex-end | center | baseline | stretch;</p>
+<hr>
+<p>preference: <a href="http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html" target="_blank" rel="noopener">Flex布局教程(语法篇)–阮一峰</a></p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/前端开发/"># 前端开发</a>
+                    
+                        <a href="/tags/CSS/"># CSS</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2019/12/12/Effective-C-10/">Effective C++ 10</a>
+            
+            
+            <a class="next" rel="next" href="/2019/12/12/CSS居中的方式/">CSS居中的方式</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Li Xuetao | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>

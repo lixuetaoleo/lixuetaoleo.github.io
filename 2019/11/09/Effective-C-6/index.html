@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+
+<title>Effective C++ 6 | Li Xuetao&#39;s Homepage</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Home</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/categories/Software-Development">Software Development</a>
+                
+                    <a class="menu-item" href="/categories/Inspiration">Inspiration</a>
+                
+                    <a class="menu-item" href="/categories/Tech">Tech</a>
+                
+                    <a class="menu-item" href="/archives">Archives</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Home</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/categories/Software-Development">Software Development</a>
+                
+                    <a class="menu-item" href="/categories/Inspiration">Inspiration</a>
+                
+                    <a class="menu-item" href="/categories/Tech">Tech</a>
+                
+                    <a class="menu-item" href="/archives">Archives</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Effective C++ 6</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Li Xuetao</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">November 9, 2019&nbsp;&nbsp;19:28:31</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Software-Development/">Software Development</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="Item-18：让接口容易被正确使用，不易被误用"><a href="#Item-18：让接口容易被正确使用，不易被误用" class="headerlink" title="Item 18：让接口容易被正确使用，不易被误用"></a>Item 18：让接口容易被正确使用，不易被误用</h2><ol>
+<li>要保证这条原则，首要考虑客户可能做出什么样的错误。</li>
+<li>除非有更好的理由，否则应该尽量让自己写的type的行为与内置types一致。比如说a, b都是ints，那么对a*b不合法，所以自己写的type也应该如此。总之，如果遇到什么疑问，可以拿int来做范本。</li>
+<li>为了防止客户使用智能指针，可以先发制人，令要返回指针的函数就返回一个智能指针。</li>
+<li>同样的，为了防止客户利用delete来析构智能指针，可以在构造智能指针的时候传入一个删除器。</li>
+</ol>
+<h2 id="Item-19：设计class犹如设计type"><a href="#Item-19：设计class犹如设计type" class="headerlink" title="Item 19：设计class犹如设计type"></a>Item 19：设计class犹如设计type</h2><ol>
+<li><p>在设计一个class时，要按照设计type去考虑：</p>
+<ul>
+<li>新type对象如何被创建和销毁</li>
+<li>对象的初始化和对象的赋值该有什么样的差别</li>
+<li>新type的对象如果被passed by value，意味着什么</li>
+<li>什么是新type的“合法值”</li>
+<li>新type需要配合某个继承图系吗</li>
+<li>新type需要什么样的转换</li>
+<li>什么样的操作符和函数对此新type而言是合理的</li>
+<li>什么样的标准函数应驳回</li>
+<li>谁该用新type的成员</li>
+<li>什么是新type的“未声明接口”</li>
+<li>新type有多么一般化</li>
+<li>真的需要一个新type吗？因为如果只是定义新的派生类以便为既有的类添加机能，说不定单纯定义一个或多个非成员函数或者模板，更能达到目标。</li>
+</ul>
+</li>
+</ol>
+<h2 id="Item-20：以pass-by-reference-to-const替换pass-by-value"><a href="#Item-20：以pass-by-reference-to-const替换pass-by-value" class="headerlink" title="Item 20：以pass by reference to const替换pass by value"></a>Item 20：以pass by reference to const替换pass by value</h2><ol>
+<li><p>pass by value的两个问题：</p>
+<ul>
+<li><p>构造和析构的代价太大</p>
+<p>对于如下两个类：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">class Person&#123;</span><br><span class="line">public:</span><br><span class="line">    Person();</span><br><span class="line">    virtual ~Person();</span><br><span class="line">    ...</span><br><span class="line">private:</span><br><span class="line">    std::string name;</span><br><span class="line">    std::tring address;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class Student : public Person&#123;</span><br><span class="line">public:</span><br><span class="line">    Student();</span><br><span class="line">    ~Student();</span><br><span class="line">    ...</span><br><span class="line">private:</span><br><span class="line">    std::string schoolName;</span><br><span class="line">    std::string schoolAddress;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">bool validateStudent(Student s); //以pass by value方式接受参数</span><br><span class="line">Student Plato;</span><br><span class="line">bool isValidate = validateStudent(Plato);//调用函数</span><br></pre></td></tr></table></figure>
+
+<p>对于该例子，以pass by value方式传递一个Student对象会导致调用一次Student构造函数，一次Person构造函数，四次string的构造函数。当函数内的那个Student副本被销毁，又要调用每一个构造对应的析构，所以这次调用整体成本是“6次构造6次析构”</p>
+</li>
+<li><p>对象切割问题</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class Window&#123;</span><br><span class="line">public:</span><br><span class="line">    ...</span><br><span class="line">    std::string name() const;</span><br><span class="line">    virtual void display() const;    </span><br><span class="line">&#125;;</span><br><span class="line">class WindowWithScrollBars : Window&#123;</span><br><span class="line">public:</span><br><span class="line">    ...</span><br><span class="line">    virtual void display() const;    </span><br><span class="line">&#125;;  </span><br><span class="line"></span><br><span class="line">void printNameAndDisplay(Window w)&#123;</span><br><span class="line">  std::cout&lt;&lt;w.name()&lt;&lt;std::endl;</span><br><span class="line">  w.display();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">WindowWithScrollBars wwsb;</span><br><span class="line">printNameAndDisplay(wwsb);</span><br></pre></td></tr></table></figure>
+
+<p>以上操作会导致传入print…函数的w对象被构造为Window对象，无论传过来的对象原本是什么类型，所以进而调用window类里的display()。</p>
+<p>但是以by reference to const传递，就能解决这个问题，传过去什么对象就是什么对象。</p>
+</li>
+</ul>
+</li>
+<li><p>在C++底层，reference就是指针，因此pass by reference通常意味着真正传递的是指针，所以对于内置类型(以及STL迭代器和函数对象)，pass by value比reference效率要高一些。</p>
+</li>
+</ol>
+<h2 id="Item-21：必须返回对象时，别妄想返回其reference"><a href="#Item-21：必须返回对象时，别妄想返回其reference" class="headerlink" title="Item 21：必须返回对象时，别妄想返回其reference"></a>Item 21：必须返回对象时，别妄想返回其reference</h2><ol>
+<li><p>对于如下代码：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const Rational&amp; operator* (const Rational&amp; lhs, const Rational&amp; rhs)&#123;</span><br><span class="line">  Rational result(lhs.n * rhs.n, lhs.d * rhs.d)</span><br><span class="line">  return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 当函数返回一个reference(或者指针)指向result，但result是个local对象，而local对象在函数退出前就被销毁了！</p>
+</li>
+<li><p>一个“必须返回新对象”的正确写法：让函数返回一个新对象</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">inline const Rational operator* (const Rational&amp; lhs, const Rational&amp; rhs)&#123;      </span><br><span class="line">  return Rational(lhs.n * rhs.n, lhs.d * rhs.d);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 这样做需承担返回值构造和析构的成本，但是对于上面的错，这代价也是微乎其微了。</p>
+</li>
+</ol>
+<h2 id="Item-22：将成员变量声明为private"><a href="#Item-22：将成员变量声明为private" class="headerlink" title="Item 22：将成员变量声明为private"></a>Item 22：将成员变量声明为private</h2><p>原因：</p>
+<ol>
+<li>为了语法一致性。把成员都放入private，客户通过对象访问成员变量的方法就是成员函数了，就不用考虑访问变量还是函数，纠结要不要带括号的问题。</li>
+<li>对成员变量的处理有更精确的控制。可以写出禁止访问，只读，读写，甚至“只写”等权限。</li>
+<li>封装性。如果通过函数访问成员变量，那么今后可改以某个计算替换这个成员变量，而class的客户也不会知道class内部实现发生了变化。而对于protected，其封装性并不比public成员变量高，理由如下：假设成员变量放在public里，最终取消了它，所有使用它的客户代码都会被破坏，而那是一个不可知的大量。但是对于protected变量，最终取消了它，所有使用它的派生类都会被破坏，也是一个不可知的大量。因此protected封装性依旧缺乏。</li>
+</ol>
+<p>总结</p>
+<p>从封装的角度看，其实只有两种访问权限：private(提供封装)和其他(不提供封装)</p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/C/"># C++</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2019/11/09/The-art-of-command-line/">The art of command line</a>
+            
+            
+            <a class="next" rel="next" href="/2019/11/07/Effective-C-5/">Effective C++ 5</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Li Xuetao | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>

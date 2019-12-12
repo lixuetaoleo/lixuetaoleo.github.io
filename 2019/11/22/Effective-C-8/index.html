@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+
+<title>Effective C++ 8 | Li Xuetao&#39;s Homepage</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Home</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/categories/Software-Development">Software Development</a>
+                
+                    <a class="menu-item" href="/categories/Inspiration">Inspiration</a>
+                
+                    <a class="menu-item" href="/categories/Tech">Tech</a>
+                
+                    <a class="menu-item" href="/archives">Archives</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Home</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/categories/Software-Development">Software Development</a>
+                
+                    <a class="menu-item" href="/categories/Inspiration">Inspiration</a>
+                
+                    <a class="menu-item" href="/categories/Tech">Tech</a>
+                
+                    <a class="menu-item" href="/archives">Archives</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Effective C++ 8</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Li Xuetao</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">November 22, 2019&nbsp;&nbsp;19:07:26</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Software-Development/">Software Development</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="Item-26：尽可能延后变量定义式的出现时间"><a href="#Item-26：尽可能延后变量定义式的出现时间" class="headerlink" title="Item 26：尽可能延后变量定义式的出现时间"></a>Item 26：尽可能延后变量定义式的出现时间</h1><ol>
+<li>原因：<ul>
+<li>假设一开始就定义变量，会构造对象；</li>
+<li>但是如果在后续代码中没有用到这个变量的时候却发生异常退出了，那么又会析构对象；</li>
+<li>如果在类里没有自己写构造，还会产生default构造。</li>
+</ul>
+</li>
+<li>做法：不应该只延后变量的定义，直到非得使用该变量的前一刻为止，甚至应该尝试延后这份定义直到能够给他初值实参为止。</li>
+<li>变量在循环体外和循环体内定义的成本：<ul>
+<li>循环体外定义：1个构造 + 1个析构 + n个赋值</li>
+<li>循环体内定义：n构造 + n析构</li>
+<li>除非已经清楚赋值成本低于“构造+析构”，正在处理代码中效率高敏感度的部分，否则应该把变量在循环体内定义</li>
+</ul>
+</li>
+</ol>
+<h1 id="Item-27：尽量少做转型动作"><a href="#Item-27：尽量少做转型动作" class="headerlink" title="Item 27：尽量少做转型动作"></a>Item 27：尽量少做转型动作</h1><ol>
+<li>const_cast通常被用来将对象的常量性转除，也是唯一一个有此能力的C++-STYLE转型操作符。</li>
+<li>如果要在派生类中调用父类函数，以下做法是错误的：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">class Base&#123;</span><br><span class="line">  virtual void fun() &#123;...&#125;</span><br><span class="line">&#125;;</span><br><span class="line">class Derived : public Base&#123;</span><br><span class="line">  virtual void fun()&#123;</span><br><span class="line">      static_cast&lt;Base&gt;(*this).fun();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>原因是它不是当前对象在调用这个函数，而是一个对象的副本在调用。</p>
+<p>正确做法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">class Base&#123;</span><br><span class="line">  virtual void fun() &#123;...&#125;</span><br><span class="line">&#125;;</span><br><span class="line">class Derived : public Base&#123;</span><br><span class="line">  virtual void fun()&#123;</span><br><span class="line">      Base::fun();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><code>绝对要避免的</code>是一连串dynamic_cast(s)，因为这样产生出来的代码又大又慢，并且基础不稳，每次class继承体系有改变，这些转型代码都得检查是否需要修改。这样的代码总是以某些“基于virtual函数调用”的东西取代。</li>
+<li>总之，尽量避免转型，如果必须要转型，宁用新式转型，因为这样也好辨别。</li>
+</ol>
+<h1 id="Item-28：避免返回handles-包括reference，指针，迭代器-指向对象内部成分"><a href="#Item-28：避免返回handles-包括reference，指针，迭代器-指向对象内部成分" class="headerlink" title="Item 28：避免返回handles(包括reference，指针，迭代器)指向对象内部成分"></a>Item 28：避免返回handles(包括reference，指针，迭代器)指向对象内部成分</h1><ol>
+<li><p>原因：</p>
+<ul>
+<li><p>如果有如下函数：</p>
+<pre><code>ClassName&amp; foo() const{return anotherClass-&gt;member;}</code></pre><p>   这样将使得封装性被破坏。</p>
+<ul>
+<li>假设等号右边是一个返回对象的方法A，然后该返回对象调用其他方法B返回给等号左边的对象，这样使得当语句执行完后，等号左边的对象指向了空。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="Item-29：为“异常安全”而努力是值得的"><a href="#Item-29：为“异常安全”而努力是值得的" class="headerlink" title="Item 29：为“异常安全”而努力是值得的"></a>Item 29：为“异常安全”而努力是值得的</h1><p>这一块没怎么研究过，暂时略过</p>
+<h1 id="Item-30：透彻了解inlining的里里外外"><a href="#Item-30：透彻了解inlining的里里外外" class="headerlink" title="Item 30：透彻了解inlining的里里外外"></a>Item 30：透彻了解inlining的里里外外</h1><ol>
+<li>inline只是对编译器的一个申请，不是强制命令</li>
+<li>函数被定义在class定义式内，是一种隐喻inline方式</li>
+<li>由于friend函数也可定义在class内，这样一来friend函数也被隐喻声明为inline。</li>
+<li>表面看似inline的函数是否真inline，取决于构造的环境和编译器。</li>
+<li>将构造和析构写为inline是很糟糕的做法，因为假设一个派生类构造即使看着是“空”的，其内部会调用基类构造，然后调用基类成员变量的构造。</li>
+<li>一开始先不要将任何函数声明为inline，或至少将inline的施行范围局限在那些“一定成为inline”或“十分平淡无奇”的函数身上。</li>
+<li>将inline限制在小型，被频繁调用的函数身上，可使日后调试过程和二进制升级更加容易，也可使代码膨胀问题最小化，提升程序运行速度。</li>
+</ol>
+<h1 id="Item-31：将文件间的编译以存关系降至最低"><a href="#Item-31：将文件间的编译以存关系降至最低" class="headerlink" title="Item 31：将文件间的编译以存关系降至最低"></a>Item 31：将文件间的编译以存关系降至最低</h1><p>提升编译速度</p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/C/"># C++</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2019/11/22/Share/">Share</a>
+            
+            
+            <a class="next" rel="next" href="/2019/11/13/Effective-C-7/">Effective C++ 7</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Li Xuetao | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+
+<title>从SSH应用中学到的东西 | Li Xuetao&#39;s Homepage</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Home</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/categories/Software-Development">Software Development</a>
+                
+                    <a class="menu-item" href="/categories/Inspiration">Inspiration</a>
+                
+                    <a class="menu-item" href="/categories/Tech">Tech</a>
+                
+                    <a class="menu-item" href="/archives">Archives</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Home</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/categories/Software-Development">Software Development</a>
+                
+                    <a class="menu-item" href="/categories/Inspiration">Inspiration</a>
+                
+                    <a class="menu-item" href="/categories/Tech">Tech</a>
+                
+                    <a class="menu-item" href="/archives">Archives</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">从SSH应用中学到的东西</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Li Xuetao</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">December 9, 2019&nbsp;&nbsp;16:56:49</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Software-Development/">Software Development</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>今天由于实验需要，要用到ssh远程连接功能，虽然之前也用过ssh配置github，但是远程连接功能却是第一次用到，遇到了不少坑，但也算对ssh应用入门了。</p>
+<p>前提：如果机器没有公网IP，那么ssh client和server都需要在同一局域网下</p>
+<h2 id="ssh安装和运行"><a href="#ssh安装和运行" class="headerlink" title="ssh安装和运行"></a>ssh安装和运行</h2><ol>
+<li><p>ssh server</p>
+<ul>
+<li>Linux: sudo apt install openssh-server</li>
+<li>Windows: 设置–应用–可选功能–添加功能–点击”openssh服务器”安装；在任务管理器中选择”服务”标签页，点击底部的”打开服务”；在跳出来的新窗口中找到”OpenSSH SSH Server”，右键启动</li>
+<li><a href="#jump">点击我</a>查看ssh服务是否开启成功</li>
+</ul>
+</li>
+<li><p>ssh client</p>
+</li>
+</ol>
+<p>目前Linux和Win10都自带这个命令，终端输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh user_name@host</span><br><span class="line"></span><br><span class="line">e.g: ssh csi@192.168.1.100</span><br></pre></td></tr></table></figure>
+
+<p>之后出现一串提示字符，输入”yes”，敲回车，总之各种同意即可。</p>
+<h2 id="更方便的运用ssh-带UI的远程资源管理器"><a href="#更方便的运用ssh-带UI的远程资源管理器" class="headerlink" title="更方便的运用ssh(带UI的远程资源管理器)"></a>更方便的运用ssh(带UI的远程资源管理器)</h2><ul>
+<li>Linux : 资源管理器中，点击file – connect to server，然后填写相应信息即可。</li>
+<li>Windows : <a href="https://winscp.net/eng/index.php" target="_blank" rel="noopener">下载WinSCP</a>,进入软件后新建会话，填写相应信息即可。</li>
+</ul>
+<h2 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h2><p><span id="jump">1: Linux和Windows查看端口占用情况</span></p>
+<ul>
+<li>Linux：sudo lsof -i:PORT</li>
+<li>Windows: netstat -an</li>
+</ul>
+<p>2: 查找输出信息中特定的字符串(以端口占用情况为例，查找ssh服务监听的22号端口)</p>
+<ul>
+<li>Linux: sudo lsof -i:22 | grep ssh , 此时会把不含”ssh”输出行给过滤</li>
+<li>Windows：netstat -ano | findstr “22” , 效果与上面大致类似。</li>
+</ul>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Command-Line/"># Command Line</a>
+                    
+                        <a href="/tags/SSH/"># SSH</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2019/12/09/Effective-C-9/">Effective C++ 9</a>
+            
+            
+            <a class="next" rel="next" href="/2019/12/07/个人博客升级计划/">个人博客升级计划</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Li Xuetao | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
