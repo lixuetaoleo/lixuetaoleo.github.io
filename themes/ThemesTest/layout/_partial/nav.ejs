@@ -1,11 +1,14 @@
 <nav class="nav">
     <div class="jump">
-        <a href="../archives/index.html" title="BLOG">BLOG</a>
+        <!-- <a href="<%- url_for(theme.menu[2]) %>" title="BLOG">BLOG</a>
         <a href="../about/index.html" title="about me">ABOUT</a>
-        <a href="../contact/index.html" title="contact me">CONTACT</a>
+        <a href="../contact/index.html" title="contact me">CONTACT</a> -->
+        <% for (var i in theme.menu){ %>
+            <a href="<%- url_for(theme.menu[i]) %>" title="<%- url_for(theme.menu[i]) %>"><%= i %></a>
+        <% } %>
     </div>
     <div class="homepage">
-        <a href="../index.html" title="homepage">LI XUETAO</a>
+        <a href="<%- config.root %>" title="homepage">LI XUETAO</a>
     </div>
     <div class="socialmedia-nav">
         <a class="link-item link-item-nav" title="Twitter" href="https://twitter.com/lixuetaoleo">
