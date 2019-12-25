@@ -10,5 +10,5 @@ function changeImg(){
     console.log("changeimg")
     bgi.style.backgroundImage = 'url(./images/img'+nthimg+'.jpg)';
     bgi.style.transitionDuration = "1s"
-    nthimg = (++nthimg) % 3;
+    nthimg = (++nthimg) % 4;
 }
