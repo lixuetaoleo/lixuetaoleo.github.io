@@ -1,14 +1,34 @@
 .article-body{
   display: flex;
-  width: 100vw;
-  height: 100vh;
+  max-width: 100vw;
+  min-height: 100vh;
   margin: 0;
-  overflow: hidden;
+  overflow-x: hidden;
   flex-direction: column;
   align-items: center;
 }
 
-.aritcles{
-  margin: auto;
+.articlearticle{
+  margin:0 auto auto auto;
 }
 
+.title, .article-meta{
+  text-align: center;
+}
+
+.article-content{
+  width: 720px;
+}
+
+code{
+  font-family: 'Ubuntu Mono', monospace;
+  font-weight:bold;
+}
+.code{
+  font-family: 'Ubuntu Mono', monospace;
+  font-weight:bold;
+}
+
+.article-content li{
+  margin-top:10px;
+}
