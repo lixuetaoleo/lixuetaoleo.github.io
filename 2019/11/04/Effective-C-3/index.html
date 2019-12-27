@@ -1,12 +1,56 @@
-<article class="post">
-        <div class="post-title">
-          <h2 class="title">Effective C++ 3</h2>
-        </div>
-         <div class="post-meta">
-          <span class="post-time">2019-11-04</span>
-        </div>
-        <div class="post-content">
-          <h1 id="Item-7：为多态基类声明virtual析构函数"><a href="#Item-7：为多态基类声明virtual析构函数" class="headerlink" title="Item 7：为多态基类声明virtual析构函数"></a>Item 7：为多态基类声明virtual析构函数</h1><ol>
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <!-- <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"> -->
+    <!-- <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/> -->
+    <title>Li Xuetao&#39;s Homepage</title>
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body class="article-body">
+	<nav class="nav">
+    <div class="jump">
+        <!-- <a href="/" title="BLOG">BLOG</a>
+        <a href="../about/index.html" title="about me">ABOUT</a>
+        <a href="../contact/index.html" title="contact me">CONTACT</a> -->
+        
+            <a href="/archives" title="/archives">BLOG</a>
+        
+            <a href="/about" title="/about">ABOUT</a>
+        
+            <a href="/contact" title="/contact">CONTACT</a>
+        
+    </div>
+    <div class="homepage">
+        <a href="/" title="homepage">LI XUETAO</a>
+    </div>
+    <div class="socialmedia-nav">
+        <a class="link-item link-item-nav" title="Twitter" href="https://twitter.com/lixuetaoleo">
+            <i class="iconfont icon-twitter"></i>
+        </a>
+        <a class="link-item link-item-nav" title="Instagram" href="https://www.instagram.com/lixuetaoleo/">
+            <i class="iconfont icon-instagram"></i>
+        </a>
+        <a class="link-item link-item-nav" title="Weibo" href="https://weibo.com/u/1791741344">
+            <i class="iconfont icon-weibo"></i>
+        </a>
+        <a class="link-item link-item-nav" title="Github" href="https://github.com/lixuetaoleo">
+            <i class="iconfont icon-github"></i>
+        </a>
+    </div>
+</nav>
+	<article class="articlearticle">
+		<div class="article-title">
+			<h2 class="title">Effective C++ 3</h2>
+		</div>
+		<div class="article-meta">
+			<span class="article-time">2019-11-04</span>
+		</div>
+		<div class="article-content">
+			<h1 id="Item-7：为多态基类声明virtual析构函数"><a href="#Item-7：为多态基类声明virtual析构函数" class="headerlink" title="Item 7：为多态基类声明virtual析构函数"></a>Item 7：为多态基类声明virtual析构函数</h1><ol>
 <li><p>C++明白指出，如果派生类的对象被一个基类指针指向然后删除，而该基类带着一个非虚析构函数，其结果未有定义——但实际执行时通常发生的是对象的derived成分没被销毁。这种“局部销毁”将造成资源泄露，败坏之数据结构（不太清楚这里什么意思）。</p>
 </li>
 <li><p>消除上述现象的做法就是给基类加一个virtual的析构函数，然后同样的删除一个基类指针指向的派生类对象时，就会销毁整个对象，包括整个派生类成分。</p>
@@ -48,5 +92,11 @@
 <li>解决方法：<br>将原本在基类的那个virtual方法改为non-virtual，然后要求派生类构造必须传递必要信息给基类构造，然后那个构造函数就能安全的调用non-virtual函数了。<br>即“令派生类将必要的构造信息向上传递至基类构造函数”。</li>
 </ol>
 
-        </div>
-      </article>
+		</div>
+	</article>
+	<footer class="item-footer">
+    <p>© 2019-2077 Li Xuetao</p>
+</footer>
+</body>
+
+</html>

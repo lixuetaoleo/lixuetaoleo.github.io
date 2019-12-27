@@ -1,12 +1,56 @@
-<article class="post">
-        <div class="post-title">
-          <h2 class="title">Effective C++ 5</h2>
-        </div>
-         <div class="post-meta">
-          <span class="post-time">2019-11-07</span>
-        </div>
-        <div class="post-content">
-          <h2 id="Item13：以对象管理资源"><a href="#Item13：以对象管理资源" class="headerlink" title="Item13：以对象管理资源"></a>Item13：以对象管理资源</h2><ol>
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <!-- <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"> -->
+    <!-- <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/> -->
+    <title>Li Xuetao&#39;s Homepage</title>
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body class="article-body">
+	<nav class="nav">
+    <div class="jump">
+        <!-- <a href="/" title="BLOG">BLOG</a>
+        <a href="../about/index.html" title="about me">ABOUT</a>
+        <a href="../contact/index.html" title="contact me">CONTACT</a> -->
+        
+            <a href="/archives" title="/archives">BLOG</a>
+        
+            <a href="/about" title="/about">ABOUT</a>
+        
+            <a href="/contact" title="/contact">CONTACT</a>
+        
+    </div>
+    <div class="homepage">
+        <a href="/" title="homepage">LI XUETAO</a>
+    </div>
+    <div class="socialmedia-nav">
+        <a class="link-item link-item-nav" title="Twitter" href="https://twitter.com/lixuetaoleo">
+            <i class="iconfont icon-twitter"></i>
+        </a>
+        <a class="link-item link-item-nav" title="Instagram" href="https://www.instagram.com/lixuetaoleo/">
+            <i class="iconfont icon-instagram"></i>
+        </a>
+        <a class="link-item link-item-nav" title="Weibo" href="https://weibo.com/u/1791741344">
+            <i class="iconfont icon-weibo"></i>
+        </a>
+        <a class="link-item link-item-nav" title="Github" href="https://github.com/lixuetaoleo">
+            <i class="iconfont icon-github"></i>
+        </a>
+    </div>
+</nav>
+	<article class="articlearticle">
+		<div class="article-title">
+			<h2 class="title">Effective C++ 5</h2>
+		</div>
+		<div class="article-meta">
+			<span class="article-time">2019-11-07</span>
+		</div>
+		<div class="article-content">
+			<h2 id="Item13：以对象管理资源"><a href="#Item13：以对象管理资源" class="headerlink" title="Item13：以对象管理资源"></a>Item13：以对象管理资源</h2><ol>
 <li>对于常见的资源，如动态分配内存，文件描述符，互斥锁，图形界面中的字型和笔刷，数据库连接，sockets等，不再使用它们时，必须交还给系统。</li>
 <li>虽然可能考虑到了delete，如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">void f()&#123;</span><br><span class="line">  Investment *pInv = createInvestment();</span><br><span class="line">  ...</span><br><span class="line">  delete pInv;</span><br><span class="line">&#125;</span><br><span class="line">``` </span><br><span class="line">但是由于在...那里因为某些原因return了，将造成资源泄漏。</span><br><span class="line">因此需要将资源放进对象里，当控制流离开f，该对象的析构函数会自动释放那些资源。</span><br><span class="line"></span><br><span class="line">3. “以对象管理资源”的观念常被称为“资源取得时机便是初始化时机”(Resource Acquisition Is Initialization; RAII)</span><br><span class="line">4. 常用的RAII是shared_ptr，引用计数型智能指针，使用它，用户不用再考虑delete问题。</span><br><span class="line">5. shared_ptr内部使用的是delete而非delete[]，因此不要在shared_ptr上构造数组(但从c++17开始，shared_ptr也支持数组形式了)。</span><br><span class="line"></span><br><span class="line">## Item 14：在资源管理类中小心copying行为</span><br><span class="line">1. 在一个RAII对象尝试复制时，通常采取以下两种做法：</span><br><span class="line">   </span><br><span class="line">     - 禁止复制。如果复制动作对RAII class不合理(比如说mutex)，那么应该禁止它。具体做法：对象的类private继承Uncopyable类。</span><br><span class="line">     - 对底层资源祭出“引用计数法”。有时候我们希望保有资源，直到它的最后一个使用者（某对象）被销毁。这种情况下就是复制RAII对象时，将该资源的“被引用数”递增，shared_ptr就是这种做法。</span><br><span class="line"></span><br><span class="line">## Item 15：在资源管理类中提供对原始资源的访问</span><br><span class="line">1. 假设一个函数的参数是raw pointer，但是其实参却是一个智能指针(一个RAII对象)，这样是不行的。可以利用get()方法返回智能指针内部的原始指针(的复件)。</span><br><span class="line">2. 还可以用隐式方法返回原始资源(operator Classname() const&#123;return var;&#125;)，但是一般而言用显式方法比较安全。</span><br><span class="line"></span><br><span class="line">## Item 16：成对使用new和delete时要采取相同形式</span><br><span class="line">1. 即new -- delete, new[] -- delete[]</span><br><span class="line">2. 避免诸如typedef std::string AddressLines[4]然后std::string *p1 = new AddressLines; 但是delete p1的情况发生，最好尽量不要对数组形式采取typedef。</span><br><span class="line"></span><br><span class="line">## Item 17：以独立语句将newed对象置入智能指针</span><br><span class="line">假设如下函数：</span><br></pre></td></tr></table></figure>
 
@@ -23,5 +67,11 @@
 
 <p>std::shared_ptr<widget> pw(new Widget);<br>processWidget(pw, priority());  //这样就防止了资源泄漏问题<br>```</widget></p>
 
-        </div>
-      </article>
+		</div>
+	</article>
+	<footer class="item-footer">
+    <p>© 2019-2077 Li Xuetao</p>
+</footer>
+</body>
+
+</html>
