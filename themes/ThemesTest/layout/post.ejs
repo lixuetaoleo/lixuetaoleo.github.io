@@ -1,11 +1,21 @@
-<article class="post">
-	<div class="post-title">
-		<h2 class="title"><%= page.title %></h2>
-	</div>
-	<div class="post-meta">
-		<span class="post-time"><%- date(page.date, "YYYY-MM-DD") %></span>
-	</div>
-	<div class="post-content">
-		<%- page.content %>
-	</div>
-</article>
+<!DOCTYPE html>
+<html>
+<%- partial('_partial/head') %>
+
+<body class="article-body">
+	<%- partial('_partial/nav') %>
+	<article class="articles">
+		<div class="article-title">
+			<h2 class="title"><%= page.title %></h2>
+		</div>
+		<div class="article-meta">
+			<span class="article-time"><%- date(page.date, "YYYY-MM-DD") %></span>
+		</div>
+		<div class="article-content">
+			<%- page.content %>
+		</div>
+	</article>
+	<%- partial('_partial/footer') %>
+</body>
+
+</html>
