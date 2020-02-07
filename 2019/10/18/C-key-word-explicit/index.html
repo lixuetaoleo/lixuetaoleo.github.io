@@ -1,80 +1,66 @@
-<!DOCTYPE html>
-<html>
-<head><meta name="generator" content="Hexo 3.9.0">
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <!-- <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"> -->
-    <!-- <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/> -->
-    <title>Li Xuetao&#39;s Homepage</title>
-    <link href="https://fonts.googleapis.com/css?family=Amatic+SC&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css">
-</head>
-
-<body class="article-body">
-	<nav class="nav">
-    <div class="jump">
-        <!-- <a href="/" title="BLOG">BLOG</a>
-        <a href="../about/index.html" title="about me">ABOUT</a>
-        <a href="../contact/index.html" title="contact me">CONTACT</a> -->
-        
-            <a href="/archives" title="/archives">BLOG</a>
-        
-            <a href="/about" title="/about">ABOUT</a>
-        
-            <a href="/contact" title="/contact">CONTACT</a>
-        
-    </div>
-    <div class="homepage">
-        <a href="/" title="homepage">LI XUETAO</a>
-    </div>
-    <div class="socialmedia-nav">
-        <a class="link-item link-item-nav" title="Twitter" href="https://twitter.com/lixuetaoleo">
-            <i class="iconfont icon-twitter"></i>
-        </a>
-        <a class="link-item link-item-nav" title="Instagram" href="https://www.instagram.com/lixuetaoleo/">
-            <i class="iconfont icon-instagram"></i>
-        </a>
-        <a class="link-item link-item-nav" title="Weibo" href="https://weibo.com/u/1791741344">
-            <i class="iconfont icon-weibo"></i>
-        </a>
-        <a class="link-item link-item-nav" title="Github" href="https://github.com/lixuetaoleo">
-            <i class="iconfont icon-github"></i>
-        </a>
-    </div>
-</nav>
-	<article class="articlearticle">
-		<div class="article-title">
-			<h2 class="title">C++ keyword -- explicit</h2>
-		</div>
-		<div class="article-meta">
-			<span class="article-time">2019-10-18</span>
-		</div>
-		<div class="article-content">
-			<h2 id="1-作用"><a href="#1-作用" class="headerlink" title="1. 作用"></a>1. 作用</h2><p>指定构造函数或转换函数 (C++11 起)为显式，即它不能用于隐式转换和复制初始化。</p>
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.9.0"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta charset="UTF-8"><title>C++ keyword -- explicit | Li Xuetao</title><link rel="stylesheet" href="/css/temp.css"><link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+<link href="https://fonts.googleapis.com/css?family=Amatic+SC|Lato|Ubuntu+Mono&display=swap" rel="stylesheet"></head><body><div id="layout-page"><nav id="layout-menu"><div class="other-page"><a href="/about">About</a><a href="/archives">Archives</a></div><a id="mega-head" href="/">LI XUETAO</a><div class="layout-socialmedia"><a class="link-item main-link-item" title="Instagram" href="https://www.instagram.com/lixuetaoleo/"><i class="iconfont icon-instagram"></i></a><a class="link-item main-link-item" title="Twitter" href="https://twitter.com/lixuetaoleo"><i class="iconfont icon-twitter"></i></a><a class="link-item main-link-item" title="Weibo" href="https://weibo.com/u/1791741344"><i class="iconfont icon-weibo"></i></a><a class="link-item main-link-item" title="GitHub" href="https://github.com/lixuetaoleo"><i class="iconfont icon-github"></i></a></div></nav><div id="content"><article id="post"><h1>C++ keyword -- explicit</h1><time class="created-date" datetime="2019-10-18T08:44:55.000Z">2019-10-18</time><h2 id="1-作用"><a href="#1-作用" class="headerlink" title="1. 作用"></a>1. 作用</h2><p>指定构造函数或转换函数 (C++11 起)为显式，即它不能用于隐式转换和复制初始化。</p>
 <h3 id="隐式转换简单解释"><a href="#隐式转换简单解释" class="headerlink" title="- 隐式转换简单解释"></a>- 隐式转换简单解释</h3><p>C/C++中基本类型的自动类型转换是经常见到的情形， 例如下边的代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int i ;</span><br><span class="line">float j ;</span><br><span class="line">......</span><br><span class="line">j = i;</span><br></pre></td></tr></table></figure>
-
-<p>其实，这就是一种隐式类型转换。当把整形的 i 赋值给浮点型的 j 时，编译器自动完成了转换。 有了隐式类型转换，我们少写了很多代码，省去了不少麻烦。</p>
-<h3 id="复制初始化简单解释"><a href="#复制初始化简单解释" class="headerlink" title="- 复制初始化简单解释"></a>- 复制初始化简单解释</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">T object = other;	(1)	</span><br><span class="line">T object = &#123;other&#125; ;	(2)	(C++11 前)</span><br><span class="line">f(other)	(3)	</span><br><span class="line">return other;	(4)	</span><br><span class="line">throw object;</span><br><span class="line">catch (T object)   (5)	</span><br><span class="line">T array[N] = &#123;other&#125;;	(6)</span><br></pre></td></tr></table></figure>
-
-<p>以上都属于复制初始化</p>
+<pre><code>int i ;
+float j ;
+......
+j = i;</code></pre><p>其实，这就是一种隐式类型转换。当把整形的 i 赋值给浮点型的 j 时，编译器自动完成了转换。 有了隐式类型转换，我们少写了很多代码，省去了不少麻烦。</p>
+<h3 id="复制初始化简单解释"><a href="#复制初始化简单解释" class="headerlink" title="- 复制初始化简单解释"></a>- 复制初始化简单解释</h3><pre><code>T object = other;    (1)    
+T object = {other} ;    (2)    (C++11 前)
+f(other)    (3)    
+return other;    (4)    
+throw object;
+catch (T object)   (5)    
+T array[N] = {other};    (6)    </code></pre><p>以上都属于复制初始化</p>
 <h2 id="2-隐式转换带来的隐患"><a href="#2-隐式转换带来的隐患" class="headerlink" title="2. 隐式转换带来的隐患"></a>2. 隐式转换带来的隐患</h2><p>C++的类可以看作一种用户自定义的数据类型。既然和基本数据类型一样，C++类也是一种数据类型，那么让C++类支持隐式类型转换就成了一种自然而然的想法。</p>
 <p>在C++规则中, 可以调用单个实参的构造函数定义了从形参类型到该类类型的一个隐式转换。<br>例如下边的代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class Student</span><br><span class="line">&#123;</span><br><span class="line">public: </span><br><span class="line">    Student() &#123; &#125;</span><br><span class="line">    Student(int age) &#123; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class Teacher</span><br><span class="line">&#123;</span><br><span class="line">public:</span><br><span class="line">    Teacher() &#123; &#125;</span><br><span class="line">    Teacher(int age, string name=&quot;unkown&quot;) &#123; &#125;  </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<pre><code>class Student
+{
+public: 
+    Student() { }
+    Student(int age) { }
+};
 
-<p>Student类的构造函数仅需要一个实参就能构造对象。Teacher类的构造函数有两个参数，但是由于第二个参数提供了默认值，也可以通过一个参数构造对象。因此，按照C++规则，这两个类的构造函数都实现了隐式转换功能。<br>所以下边的代码也就完全可以编译通过了：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Student foo;</span><br><span class="line">Teacher bar;</span><br><span class="line"></span><br><span class="line">foo = 12;    //隐式转换</span><br><span class="line">bar = 40;    //隐式转换</span><br></pre></td></tr></table></figure>
+class Teacher
+{
+public:
+    Teacher() { }
+    Teacher(int age, string name=&quot;unkown&quot;) { }  
+};</code></pre><p>Student类的构造函数仅需要一个实参就能构造对象。Teacher类的构造函数有两个参数，但是由于第二个参数提供了默认值，也可以通过一个参数构造对象。因此，按照C++规则，这两个类的构造函数都实现了隐式转换功能。<br>所以下边的代码也就完全可以编译通过了：</p>
+<pre><code>Student foo;
+Teacher bar;
 
-<p>上述的隐式类型转换同样由编译器完成，编译器通过构造函数构造出一个临时对象，并将其复制为foo和bar。</p>
+foo = 12;    //隐式转换
+bar = 40;    //隐式转换</code></pre><p>上述的隐式类型转换同样由编译器完成，编译器通过构造函数构造出一个临时对象，并将其复制为foo和bar。</p>
 <p>这样用起来似乎和基本类型的自动转换一样的爽快， 省去了好多代码。然而，凡事总是有两面性，越是便利性的东西，往往越容易犯错。你怎么能够总是保证编译器帮你构造出来的代码就是你想要实现的逻辑呢？一旦出现代码拼写错误，代码实现和自己的逻辑不符，而编译器又不报错，Debug时将加倍地费时费力。</p>
 <p>关于隐式类类型转换的缺点，网上流传比较广泛的是如下的两个例子：</p>
-<h3 id="1-拼写错误"><a href="#1-拼写错误" class="headerlink" title="1. 拼写错误"></a>1. 拼写错误</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Array&lt;int&gt; a[10];</span><br><span class="line">Array&lt;init&gt;b[10];</span><br><span class="line">for(int i=0;i&lt;10;i++) &#123;</span><br><span class="line">     if(a==b[i]) &#123;        //原意是a[i],现在出现了错误</span><br><span class="line">                              //发生点什么</span><br><span class="line">      &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这个例子中省略了一部分代码，原文请参阅参考文档[1].</p>
+<h3 id="1-拼写错误"><a href="#1-拼写错误" class="headerlink" title="1. 拼写错误"></a>1. 拼写错误</h3><pre><code>Array&lt;int&gt; a[10];
+Array&lt;init&gt;b[10];
+for(int i=0;i&lt;10;i++) {
+     if(a==b[i]) {        //原意是a[i],现在出现了错误
+                              //发生点什么
+      }
+}</code></pre><p>这个例子中省略了一部分代码，原文请参阅参考文档[1].</p>
 <p>简单讲，由于Array类中定义了一个可以只接收一个整形参数的构造函数， 因此在if(a==b[i])发生拼写错误的情况下， 编译器并不会报错，而是自动的从b[i]隐式转换出一个Array类型的临时对象，并同a进行比较。</p>
-<h3 id="2-逻辑错误"><a href="#2-逻辑错误" class="headerlink" title="2. 逻辑错误"></a>2. 逻辑错误</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">// A simple class</span><br><span class="line">class A &#123;&#125;;</span><br><span class="line"></span><br><span class="line">// Another simple class with a single-argument constructor for class A</span><br><span class="line">class B</span><br><span class="line">&#123;</span><br><span class="line">public:</span><br><span class="line">    B() &#123;&#125;</span><br><span class="line">    B(A const&amp;) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// A function that expects a &apos;B&apos;</span><br><span class="line">void f(B const&amp;) &#123;&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    A obj;</span><br><span class="line">    f(obj); // Spot the deliberate mistake</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-逻辑错误"><a href="#2-逻辑错误" class="headerlink" title="2. 逻辑错误"></a>2. 逻辑错误</h3><pre><code>// A simple class
+class A {};
 
-<p>这个例子说逻辑错误似乎有点牵强，因为有人会讲，我本来的逻辑就是要通过A类的对象构造出来一个B类的对象，然后给f()函数使用。好吧，如果是这样，我们至少可以说逻辑不够严谨吧。至少大部分读代码的人会感到诧异，我们要让f()函数要处理的是一个B类对象，但是却给了它一个A类的对象作为参数，而且代码编译是完全没有问题的。</p>
+// Another simple class with a single-argument constructor for class A
+class B
+{
+public:
+    B() {}
+    B(A const&amp;) {}
+};
+
+// A function that expects a &#39;B&#39;
+void f(B const&amp;) {}
+
+int main()
+{
+    A obj;
+    f(obj); // Spot the deliberate mistake
+}</code></pre><p>这个例子说逻辑错误似乎有点牵强，因为有人会讲，我本来的逻辑就是要通过A类的对象构造出来一个B类的对象，然后给f()函数使用。好吧，如果是这样，我们至少可以说逻辑不够严谨吧。至少大部分读代码的人会感到诧异，我们要让f()函数要处理的是一个B类对象，但是却给了它一个A类的对象作为参数，而且代码编译是完全没有问题的。</p>
 <p>之所以代码编译不出问题是因为B类包含了一个可以接受A类对象引用值作为参数的构造函数，满足了隐式转换规则。所以当我们把A类对象obj作为参数送给f()函数时，编译器调用了隐式转换规则，生成了一个临时的B类对象并传递给f()函数。上述例子的完整表述，可以参阅参考文档[2].</p>
 <p>你可能会想，隐式转换也太强大了吧，问题是，你是否能够保证每次都是你有意写出的代码，而不是无心插柳？</p>
 <h2 id="3-Tips-from-Google"><a href="#3-Tips-from-Google" class="headerlink" title="3. Tips from Google"></a>3. Tips from Google</h2><p>关于隐式类型转换的优缺点，Google C++编程规范有详细的描述。 其优点就是语法简洁，省事儿。缺点就比较多了：</p>
@@ -86,21 +72,24 @@
 </ul>
 <p>Google的结论就是<code>可接收单个参数的构造函数必需要加上explicit标记，禁止隐式类类型转换 (复制和移动构造函数除外，因为这两者不执行类型转换）。</code></p>
 <p>按照Google编程规范，上述例子中可接收单个参数的构造函数都应该声明为如下形式。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class Student</span><br><span class="line">&#123;</span><br><span class="line">public: </span><br><span class="line">    Student() &#123; &#125;</span><br><span class="line">    explicit Student(int age) &#123; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class Teacher</span><br><span class="line">&#123;</span><br><span class="line">public:</span><br><span class="line">    Teacher() &#123; &#125;</span><br><span class="line">    explicit Teacher(int age, string name=&quot;unkown&quot;) &#123; &#125; </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<pre><code>class Student
+{
+public: 
+    Student() { }
+    explicit Student(int age) { }
+};
 
-<p>这样将会禁止类类型的隐式转换，编译器在编译类似代码时会直接报错，提醒开发人员检查自己的代码是否符合逻辑。</p>
+class Teacher
+{
+public:
+    Teacher() { }
+    explicit Teacher(int age, string name=&quot;unkown&quot;) { } 
+};</code></pre><p>这样将会禁止类类型的隐式转换，编译器在编译类似代码时会直接报错，提醒开发人员检查自己的代码是否符合逻辑。</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
 <li><p><a href="https://zh.cppreference.com/w/cpp/language/explicit" target="_blank" rel="noopener">cppreference</a></p>
 </li>
 <li><p><a href="https://www.jianshu.com/p/2e0fcb444cb4" target="_blank" rel="noopener">VinceZeng的简书文章</a></p>
 </li>
 </ol>
-
-		</div>
-	</article>
-	<footer class="item-footer">
-    <p>© 2019-2077 Li Xuetao</p>
-</footer>
-</body>
-
-</html>
+</article><div id="paginator"></div></div><footer id="bottom"><span>Created By </span><a href="https://lixuetaoleo.github.io">Li Xuetao</a><span> | </span><a href="http://hexo.io"><span>HEXO</span></a></footer></div><script src="/js/temp.js"></script><script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script></body></html>

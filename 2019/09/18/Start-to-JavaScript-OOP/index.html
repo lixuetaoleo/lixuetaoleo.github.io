@@ -1,101 +1,50 @@
-<!DOCTYPE html>
-<html>
-<head><meta name="generator" content="Hexo 3.9.0">
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <!-- <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"> -->
-    <!-- <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/> -->
-    <title>Li Xuetao&#39;s Homepage</title>
-    <link href="https://fonts.googleapis.com/css?family=Amatic+SC&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css">
-</head>
-
-<body class="article-body">
-	<nav class="nav">
-    <div class="jump">
-        <!-- <a href="/" title="BLOG">BLOG</a>
-        <a href="../about/index.html" title="about me">ABOUT</a>
-        <a href="../contact/index.html" title="contact me">CONTACT</a> -->
-        
-            <a href="/archives" title="/archives">BLOG</a>
-        
-            <a href="/about" title="/about">ABOUT</a>
-        
-            <a href="/contact" title="/contact">CONTACT</a>
-        
-    </div>
-    <div class="homepage">
-        <a href="/" title="homepage">LI XUETAO</a>
-    </div>
-    <div class="socialmedia-nav">
-        <a class="link-item link-item-nav" title="Twitter" href="https://twitter.com/lixuetaoleo">
-            <i class="iconfont icon-twitter"></i>
-        </a>
-        <a class="link-item link-item-nav" title="Instagram" href="https://www.instagram.com/lixuetaoleo/">
-            <i class="iconfont icon-instagram"></i>
-        </a>
-        <a class="link-item link-item-nav" title="Weibo" href="https://weibo.com/u/1791741344">
-            <i class="iconfont icon-weibo"></i>
-        </a>
-        <a class="link-item link-item-nav" title="Github" href="https://github.com/lixuetaoleo">
-            <i class="iconfont icon-github"></i>
-        </a>
-    </div>
-</nav>
-	<article class="articlearticle">
-		<div class="article-title">
-			<h2 class="title">Start to JavaScript--OOP</h2>
-		</div>
-		<div class="article-meta">
-			<span class="article-time">2019-09-18</span>
-		</div>
-		<div class="article-content">
-			<ul>
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.9.0"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta charset="UTF-8"><title>Start to JavaScript--OOP | Li Xuetao</title><link rel="stylesheet" href="/css/temp.css"><link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+<link href="https://fonts.googleapis.com/css?family=Amatic+SC|Lato|Ubuntu+Mono&display=swap" rel="stylesheet"></head><body><div id="layout-page"><nav id="layout-menu"><div class="other-page"><a href="/about">About</a><a href="/archives">Archives</a></div><a id="mega-head" href="/">LI XUETAO</a><div class="layout-socialmedia"><a class="link-item main-link-item" title="Instagram" href="https://www.instagram.com/lixuetaoleo/"><i class="iconfont icon-instagram"></i></a><a class="link-item main-link-item" title="Twitter" href="https://twitter.com/lixuetaoleo"><i class="iconfont icon-twitter"></i></a><a class="link-item main-link-item" title="Weibo" href="https://weibo.com/u/1791741344"><i class="iconfont icon-weibo"></i></a><a class="link-item main-link-item" title="GitHub" href="https://github.com/lixuetaoleo"><i class="iconfont icon-github"></i></a></div></nav><div id="content"><article id="post"><h1>Start to JavaScript--OOP</h1><time class="created-date" datetime="2019-09-18T13:04:18.000Z">2019-09-18</time><ul>
 <li><p>JavaScript不区分类和实例的概念，而是通过原型（prototype）来实现面向对象编程。</p>
 <p>原型是指当我们想要创建xiaoming这个具体的学生时，我们并没有一个Student类型可用。那怎么办？恰好有这么一个现成的对象：</p>
 <pre><code>var robot = {
-  name: &apos;Robot&apos;,
+  name: &#39;Robot&#39;,
   height: 1.6,
   run: function () {
-    console.log(this.name + &apos; is running...&apos;);
+    console.log(this.name + &#39; is running...&#39;);
   }
 };</code></pre><p>我们看这个robot对象有名字，有身高，还会跑，有点像小明，干脆就根据它来“创建”小明得了！<br>于是我们把它改名为Student，然后创建出xiaoming：</p>
-<pre><code>var Student = {
-name: &apos;Robot&apos;,
-height: 1.2,
-run: function () {
-    console.log(this.name + &apos; is running...&apos;);
-}
-};
+<pre><code>  var Student = {
+  name: &#39;Robot&#39;,
+  height: 1.2,
+  run: function () {
+      console.log(this.name + &#39; is running...&#39;);
+  }
+  };
 
-var xiaoming = {
-    name: &apos;小明&apos;
-};
+  var xiaoming = {
+      name: &#39;小明&#39;
+  };
 
-xiaoming.__proto__ = Student;</code></pre></li>
+  xiaoming.__proto__ = Student;</code></pre></li>
 <li><p>JavaScript的原型链和Java的Class区别就在，它没有“Class”的概念，所有对象都是实例，所谓继承关系不过是把一个对象的原型指向另一个对象而已。</p>
 </li>
 <li><p>在编写JavaScript代码时，不要直接用obj.<strong>__proto</strong>去改变一个对象的原型，并且，低版本的IE也无法使用<strong>proto__</strong>。Object.create()方法可以传入一个原型对象，并创建一个基于该原型的新对象，但是新对象什么属性都没有，因此，我们可以编写一个函数来创建xiaoming：</p>
-<pre><code>// 原型对象:
-var Student = {
-    name: &apos;Robot&apos;,
-    height: 1.2,
-    run: function () {
-        console.log(this.name + &apos; is running...&apos;);
-    }
-};
+<pre><code>  // 原型对象:
+  var Student = {
+      name: &#39;Robot&#39;,
+      height: 1.2,
+      run: function () {
+          console.log(this.name + &#39; is running...&#39;);
+      }
+  };
 
-function createStudent(name){
-    // 基于Student原型创建一个新对象:
-   var s = Object.create(Student);
-    // 初始化新对象:
-    s.name = name;
-    return s;
-}
+  function createStudent(name){
+      // 基于Student原型创建一个新对象:
+     var s = Object.create(Student);
+      // 初始化新对象:
+      s.name = name;
+      return s;
+  }
 
-var xiaoming = createStudent(&apos;小明&apos;);
-xiaoming.run(); // 小明 is running...
-xiaoming.__proto__ === Student; // true</code></pre></li>
+  var xiaoming = createStudent(&#39;小明&#39;);
+  xiaoming.run(); // 小明 is running...
+  xiaoming.__proto__ === Student; // true</code></pre></li>
 <li><p>原型继承暂时没有看。。感觉略过于复杂。。。</p>
 </li>
 <li><p>关键字class从ES6开始正式被引入到JavaScript中。class的目的就是让定义类更简单。继承用extends</p>
@@ -103,12 +52,5 @@ xiaoming.__proto__ === Student; // true</code></pre></li>
 <li><p>因为不是所有的主流浏览器都支持ES6的class。如果一定要现在就用上，就需要一个工具把class代码转换为传统的prototype代码，可以试试Babel这个工具。</p>
 </li>
 </ul>
-
-		</div>
-	</article>
-	<footer class="item-footer">
-    <p>© 2019-2077 Li Xuetao</p>
-</footer>
-</body>
-
-</html>
+</article><div id="paginator"></div></div><footer id="bottom"><span>Created By </span><a href="https://lixuetaoleo.github.io">Li Xuetao</a><span> | </span><a href="http://hexo.io"><span>HEXO</span></a></footer></div><script src="/js/temp.js"></script><script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script></body></html>

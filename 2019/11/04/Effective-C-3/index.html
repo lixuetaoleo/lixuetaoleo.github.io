@@ -1,56 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head><meta name="generator" content="Hexo 3.9.0">
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <!-- <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"> -->
-    <!-- <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/> -->
-    <title>Li Xuetao&#39;s Homepage</title>
-    <link href="https://fonts.googleapis.com/css?family=Amatic+SC&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css">
-</head>
-
-<body class="article-body">
-	<nav class="nav">
-    <div class="jump">
-        <!-- <a href="/" title="BLOG">BLOG</a>
-        <a href="../about/index.html" title="about me">ABOUT</a>
-        <a href="../contact/index.html" title="contact me">CONTACT</a> -->
-        
-            <a href="/archives" title="/archives">BLOG</a>
-        
-            <a href="/about" title="/about">ABOUT</a>
-        
-            <a href="/contact" title="/contact">CONTACT</a>
-        
-    </div>
-    <div class="homepage">
-        <a href="/" title="homepage">LI XUETAO</a>
-    </div>
-    <div class="socialmedia-nav">
-        <a class="link-item link-item-nav" title="Twitter" href="https://twitter.com/lixuetaoleo">
-            <i class="iconfont icon-twitter"></i>
-        </a>
-        <a class="link-item link-item-nav" title="Instagram" href="https://www.instagram.com/lixuetaoleo/">
-            <i class="iconfont icon-instagram"></i>
-        </a>
-        <a class="link-item link-item-nav" title="Weibo" href="https://weibo.com/u/1791741344">
-            <i class="iconfont icon-weibo"></i>
-        </a>
-        <a class="link-item link-item-nav" title="Github" href="https://github.com/lixuetaoleo">
-            <i class="iconfont icon-github"></i>
-        </a>
-    </div>
-</nav>
-	<article class="articlearticle">
-		<div class="article-title">
-			<h2 class="title">Effective C++ 3</h2>
-		</div>
-		<div class="article-meta">
-			<span class="article-time">2019-11-04</span>
-		</div>
-		<div class="article-content">
-			<h1 id="Item-7：为多态基类声明virtual析构函数"><a href="#Item-7：为多态基类声明virtual析构函数" class="headerlink" title="Item 7：为多态基类声明virtual析构函数"></a>Item 7：为多态基类声明virtual析构函数</h1><ol>
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.9.0"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta charset="UTF-8"><title>Effective C++ 3 | Li Xuetao</title><link rel="stylesheet" href="/css/temp.css"><link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+<link href="https://fonts.googleapis.com/css?family=Amatic+SC|Lato|Ubuntu+Mono&display=swap" rel="stylesheet"></head><body><div id="layout-page"><nav id="layout-menu"><div class="other-page"><a href="/about">About</a><a href="/archives">Archives</a></div><a id="mega-head" href="/">LI XUETAO</a><div class="layout-socialmedia"><a class="link-item main-link-item" title="Instagram" href="https://www.instagram.com/lixuetaoleo/"><i class="iconfont icon-instagram"></i></a><a class="link-item main-link-item" title="Twitter" href="https://twitter.com/lixuetaoleo"><i class="iconfont icon-twitter"></i></a><a class="link-item main-link-item" title="Weibo" href="https://weibo.com/u/1791741344"><i class="iconfont icon-weibo"></i></a><a class="link-item main-link-item" title="GitHub" href="https://github.com/lixuetaoleo"><i class="iconfont icon-github"></i></a></div></nav><div id="content"><article id="post"><h1>Effective C++ 3</h1><time class="created-date" datetime="2019-11-04T15:25:43.000Z">2019-11-04</time><h1 id="Item-7：为多态基类声明virtual析构函数"><a href="#Item-7：为多态基类声明virtual析构函数" class="headerlink" title="Item 7：为多态基类声明virtual析构函数"></a>Item 7：为多态基类声明virtual析构函数</h1><ol>
 <li><p>C++明白指出，如果派生类的对象被一个基类指针指向然后删除，而该基类带着一个非虚析构函数，其结果未有定义——但实际执行时通常发生的是对象的derived成分没被销毁。这种“局部销毁”将造成资源泄露，败坏之数据结构（不太清楚这里什么意思）。</p>
 </li>
 <li><p>消除上述现象的做法就是给基类加一个virtual的析构函数，然后同样的删除一个基类指针指向的派生类对象时，就会销毁整个对象，包括整个派生类成分。</p>
@@ -59,9 +8,13 @@
 </li>
 <li><p>如果一个类不含virtual函数，那么说明它并不意图被用作一个基类，如果一个类不被用作基类而令其析构函数为virtual，是一个馊主意！理由如下：</p>
 <p>假设一个类如下所示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class Point&#123;</span><br><span class="line">public:</span><br><span class="line">   Point(...);</span><br><span class="line">   ~Point();</span><br><span class="line">private:</span><br><span class="line">   int x,y;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>假设int占用32位，那么该类的大小是64bits，但是如果此时将析构函数弄成virtual，形势发生了变化。</p>
+<pre><code>class Point{
+public:
+   Point(...);
+   ~Point();
+private:
+   int x,y;
+};</code></pre><p>假设int占用32位，那么该类的大小是64bits，但是如果此时将析构函数弄成virtual，形势发生了变化。</p>
 <p>要实现virtual函数，对象必须携带某些信息（具体是什么不重要），这份信息是由一个vptr(virtual table pointer)指针指向。vptr指向一个由函数指针构成的数组，称为vtbl(virtual table)；每一个带有virtual函数的class都有一个相应的vtbl。当对象调用virtual函数时，实际被调用的函数取决于该对象的vptr所指的那个vtbl–然后编译器在其中寻找适当的函数指针。</p>
 <p>所以如果将Point的析构弄为virtual，Point的大小将从64bits（两个int）增加至96bits（两个int加一个vptr）（在64位机器中占用更多！），造成对象增加50%~100%！使得原本point对象能塞进64bit的缓存器而不再能塞进去。</p>
 <p><code>心得</code>: 只有当class内至少含有一个virtual函数才为它声明virtual析构函数。</p>
@@ -91,12 +44,5 @@
 <li>也要警惕在基类构造调用了一个non-virtual方法，但是该non-virtual方法调用了一个virtual方法的陷阱。。。</li>
 <li>解决方法：<br>将原本在基类的那个virtual方法改为non-virtual，然后要求派生类构造必须传递必要信息给基类构造，然后那个构造函数就能安全的调用non-virtual函数了。<br>即“令派生类将必要的构造信息向上传递至基类构造函数”。</li>
 </ol>
-
-		</div>
-	</article>
-	<footer class="item-footer">
-    <p>© 2019-2077 Li Xuetao</p>
-</footer>
-</body>
-
-</html>
+</article><div id="paginator"></div></div><footer id="bottom"><span>Created By </span><a href="https://lixuetaoleo.github.io">Li Xuetao</a><span> | </span><a href="http://hexo.io"><span>HEXO</span></a></footer></div><script src="/js/temp.js"></script><script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script></body></html>

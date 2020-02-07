@@ -1,76 +1,34 @@
-<!DOCTYPE html>
-<html>
-<head><meta name="generator" content="Hexo 3.9.0">
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <!-- <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"> -->
-    <!-- <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/> -->
-    <title>Li Xuetao&#39;s Homepage</title>
-    <link href="https://fonts.googleapis.com/css?family=Amatic+SC&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css">
-</head>
-
-<body class="article-body">
-	<nav class="nav">
-    <div class="jump">
-        <!-- <a href="/" title="BLOG">BLOG</a>
-        <a href="../about/index.html" title="about me">ABOUT</a>
-        <a href="../contact/index.html" title="contact me">CONTACT</a> -->
-        
-            <a href="/archives" title="/archives">BLOG</a>
-        
-            <a href="/about" title="/about">ABOUT</a>
-        
-            <a href="/contact" title="/contact">CONTACT</a>
-        
-    </div>
-    <div class="homepage">
-        <a href="/" title="homepage">LI XUETAO</a>
-    </div>
-    <div class="socialmedia-nav">
-        <a class="link-item link-item-nav" title="Twitter" href="https://twitter.com/lixuetaoleo">
-            <i class="iconfont icon-twitter"></i>
-        </a>
-        <a class="link-item link-item-nav" title="Instagram" href="https://www.instagram.com/lixuetaoleo/">
-            <i class="iconfont icon-instagram"></i>
-        </a>
-        <a class="link-item link-item-nav" title="Weibo" href="https://weibo.com/u/1791741344">
-            <i class="iconfont icon-weibo"></i>
-        </a>
-        <a class="link-item link-item-nav" title="Github" href="https://github.com/lixuetaoleo">
-            <i class="iconfont icon-github"></i>
-        </a>
-    </div>
-</nav>
-	<article class="articlearticle">
-		<div class="article-title">
-			<h2 class="title">CPP knowledge</h2>
-		</div>
-		<div class="article-meta">
-			<span class="article-time">2019-11-12</span>
-		</div>
-		<div class="article-content">
-			<p>First commit</p>
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.9.0"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta charset="UTF-8"><title>CPP knowledge | Li Xuetao</title><link rel="stylesheet" href="/css/temp.css"><link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+<link href="https://fonts.googleapis.com/css?family=Amatic+SC|Lato|Ubuntu+Mono&display=swap" rel="stylesheet"></head><body><div id="layout-page"><nav id="layout-menu"><div class="other-page"><a href="/about">About</a><a href="/archives">Archives</a></div><a id="mega-head" href="/">LI XUETAO</a><div class="layout-socialmedia"><a class="link-item main-link-item" title="Instagram" href="https://www.instagram.com/lixuetaoleo/"><i class="iconfont icon-instagram"></i></a><a class="link-item main-link-item" title="Twitter" href="https://twitter.com/lixuetaoleo"><i class="iconfont icon-twitter"></i></a><a class="link-item main-link-item" title="Weibo" href="https://weibo.com/u/1791741344"><i class="iconfont icon-weibo"></i></a><a class="link-item main-link-item" title="GitHub" href="https://github.com/lixuetaoleo"><i class="iconfont icon-github"></i></a></div></nav><div id="content"><article id="post"><h1>CPP knowledge</h1><time class="created-date" datetime="2019-11-12T06:42:54.000Z">2019-11-12</time><p>First commit</p>
 <p>2019-10-25 15:01:54</p>
 <p>总结一下遇到的C++知识点</p>
 <ol>
 <li><p>编译error: expected identifier before numeric constant</p>
 <p>原因：c++的类体中，方法以外的区域可以初始化，只是不能用括号初始化，要用赋值初始化！</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class A&#123;</span><br><span class="line">  std::vector&lt;std::string&gt; v(9);  //error,expected identifier before numeric constant</span><br><span class="line">  std::vector&lt;std::string&gt; v = std::vector&lt;std::string&gt;(5); //OK, it&apos;s a private member.</span><br><span class="line">public:</span><br><span class="line">  void test()&#123;&#125; //just a demo for representing out of function.</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>但是在C++11以前，需要先声明变量，然后再初始化他们（比如在ctor中）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class Foo &#123;</span><br><span class="line"> vector&lt;string&gt; name;</span><br><span class="line"> vector&lt;int&gt; val;</span><br><span class="line">public:</span><br><span class="line"> Foo() : name(5), val(5,0) &#123;&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-</li>
+<pre><code>class A{
+  std::vector&lt;std::string&gt; v(9);  //error,expected identifier before numeric constant
+  std::vector&lt;std::string&gt; v = std::vector&lt;std::string&gt;(5); //OK, it&#39;s a private member.
+public:
+  void test(){} //just a demo for representing out of function.
+};</code></pre><p>但是在C++11以前，需要先声明变量，然后再初始化他们（比如在ctor中）</p>
+<pre><code>class Foo {
+ vector&lt;string&gt; name;
+ vector&lt;int&gt; val;
+public:
+ Foo() : name(5), val(5,0) {}
+};</code></pre></li>
 <li><p>vector的emplace_back()不能传入{1,2,3}这样的initializer list，push_back可以。</p>
 <p> emplace_back的形参是可变参数。</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">template&lt; class... Args &gt;</span><br><span class="line">reference emplace_back( Args&amp;&amp;... args );</span><br></pre></td></tr></table></figure>
-
-<p> 因此当emplace_back({1,2,3})这样调用时，等于是只传入了一个参数，而Args无法推导出{1,2,3}的类型(C++中没有这种类型的数据)，它是一个用大括号括起来的init-list，可以在某些类型的初始化中使用，但都需要知道初始化的类型。<br> 所以诸如std::vector temp = {1,2};然后传入emplace_back这样是ok的，因为vector的构造可以匹配得到这种init-list，但是如果是自己写的一个类，并且该类的构造没有匹配这种init-list，这样也是不行的。</p>
+<pre><code> template&lt; class... Args &gt;
+ reference emplace_back( Args&amp;&amp;... args );</code></pre><p> 因此当emplace_back({1,2,3})这样调用时，等于是只传入了一个参数，而Args无法推导出{1,2,3}的类型(C++中没有这种类型的数据)，它是一个用大括号括起来的init-list，可以在某些类型的初始化中使用，但都需要知道初始化的类型。<br> 所以诸如std::vector temp = {1,2};然后传入emplace_back这样是ok的，因为vector的构造可以匹配得到这种init-list，但是如果是自己写的一个类，并且该类的构造没有匹配这种init-list，这样也是不行的。</p>
 <p> 虽然上面std::vector temp = {1,2}然后传入emplace_back这样是ok的，但是不建议这样做，因为如果这样用emplace_back的话，效果和直接用push_back是一样的了，即创建了一个临时变量然后再使用移动构造，这和push_back的思想是一样的。而emplace_back比push_back效率高的原因就是因为emplace_back是把传入的元素就地构造，只调用一次构造函数，而push_back是先把传入的元素构造出一个临时变量，然后再调用移动构造把这个临时变量赋到原先的vector。</p>
 </li>
 <li><p>如果你已经知道，某个变量在之后就不会在用到了，这时候可以选择显式的移动，可以使用<br>static_cast&lt;X&amp;&amp;&gt;<br>将对应变量转换为右值，或者通过调用<br>std::move()<br>函数来做这件事：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">X x1;</span><br><span class="line"></span><br><span class="line">X x2=std::move(x1);</span><br><span class="line"></span><br><span class="line">X x3=static_cast&lt;X&amp;&amp;&gt;(x2);</span><br></pre></td></tr></table></figure>
-</li>
+<pre><code>X x1;
+
+X x2=std::move(x1);
+
+X x3=static_cast&lt;X&amp;&amp;&gt;(x2);</code></pre></li>
 <li><p>C++的三种访问权限与三种继承方式</p>
 <p>三种访问权限：</p>
 <ol>
@@ -132,9 +90,10 @@
 <p> 首先引入头文件#include<typeinfo></typeinfo></p>
 <p> 方法:typeid(varname).name();</p>
 <p> e.g.:</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int a;</span><br><span class="line">typeid(a).name();   </span><br><span class="line">int *a;</span><br><span class="line">typeid(a).name();</span><br></pre></td></tr></table></figure>
-
-<p> 输出:上面i,下面Pi,但是显示的类型是根据编译器决定(以上代码在MingW测试)</p>
+<pre><code> int a;
+ typeid(a).name();   
+ int *a;
+ typeid(a).name();</code></pre><p> 输出:上面i,下面Pi,但是显示的类型是根据编译器决定(以上代码在MingW测试)</p>
 </li>
 </ol>
 <hr>
@@ -160,12 +119,5 @@
 </ul>
 </li>
 </ol>
-
-		</div>
-	</article>
-	<footer class="item-footer">
-    <p>© 2019-2077 Li Xuetao</p>
-</footer>
-</body>
-
-</html>
+</article><div id="paginator"></div></div><footer id="bottom"><span>Created By </span><a href="https://lixuetaoleo.github.io">Li Xuetao</a><span> | </span><a href="http://hexo.io"><span>HEXO</span></a></footer></div><script src="/js/temp.js"></script><script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script></body></html>

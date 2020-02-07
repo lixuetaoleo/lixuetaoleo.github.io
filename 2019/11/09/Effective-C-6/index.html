@@ -1,56 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head><meta name="generator" content="Hexo 3.9.0">
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <!-- <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"> -->
-    <!-- <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/> -->
-    <title>Li Xuetao&#39;s Homepage</title>
-    <link href="https://fonts.googleapis.com/css?family=Amatic+SC&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css">
-</head>
-
-<body class="article-body">
-	<nav class="nav">
-    <div class="jump">
-        <!-- <a href="/" title="BLOG">BLOG</a>
-        <a href="../about/index.html" title="about me">ABOUT</a>
-        <a href="../contact/index.html" title="contact me">CONTACT</a> -->
-        
-            <a href="/archives" title="/archives">BLOG</a>
-        
-            <a href="/about" title="/about">ABOUT</a>
-        
-            <a href="/contact" title="/contact">CONTACT</a>
-        
-    </div>
-    <div class="homepage">
-        <a href="/" title="homepage">LI XUETAO</a>
-    </div>
-    <div class="socialmedia-nav">
-        <a class="link-item link-item-nav" title="Twitter" href="https://twitter.com/lixuetaoleo">
-            <i class="iconfont icon-twitter"></i>
-        </a>
-        <a class="link-item link-item-nav" title="Instagram" href="https://www.instagram.com/lixuetaoleo/">
-            <i class="iconfont icon-instagram"></i>
-        </a>
-        <a class="link-item link-item-nav" title="Weibo" href="https://weibo.com/u/1791741344">
-            <i class="iconfont icon-weibo"></i>
-        </a>
-        <a class="link-item link-item-nav" title="Github" href="https://github.com/lixuetaoleo">
-            <i class="iconfont icon-github"></i>
-        </a>
-    </div>
-</nav>
-	<article class="articlearticle">
-		<div class="article-title">
-			<h2 class="title">Effective C++ 6</h2>
-		</div>
-		<div class="article-meta">
-			<span class="article-time">2019-11-09</span>
-		</div>
-		<div class="article-content">
-			<h2 id="Item-18：让接口容易被正确使用，不易被误用"><a href="#Item-18：让接口容易被正确使用，不易被误用" class="headerlink" title="Item 18：让接口容易被正确使用，不易被误用"></a>Item 18：让接口容易被正确使用，不易被误用</h2><ol>
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.9.0"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta charset="UTF-8"><title>Effective C++ 6 | Li Xuetao</title><link rel="stylesheet" href="/css/temp.css"><link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+<link href="https://fonts.googleapis.com/css?family=Amatic+SC|Lato|Ubuntu+Mono&display=swap" rel="stylesheet"></head><body><div id="layout-page"><nav id="layout-menu"><div class="other-page"><a href="/about">About</a><a href="/archives">Archives</a></div><a id="mega-head" href="/">LI XUETAO</a><div class="layout-socialmedia"><a class="link-item main-link-item" title="Instagram" href="https://www.instagram.com/lixuetaoleo/"><i class="iconfont icon-instagram"></i></a><a class="link-item main-link-item" title="Twitter" href="https://twitter.com/lixuetaoleo"><i class="iconfont icon-twitter"></i></a><a class="link-item main-link-item" title="Weibo" href="https://weibo.com/u/1791741344"><i class="iconfont icon-weibo"></i></a><a class="link-item main-link-item" title="GitHub" href="https://github.com/lixuetaoleo"><i class="iconfont icon-github"></i></a></div></nav><div id="content"><article id="post"><h1>Effective C++ 6</h1><time class="created-date" datetime="2019-11-09T11:28:31.000Z">2019-11-09</time><h2 id="Item-18：让接口容易被正确使用，不易被误用"><a href="#Item-18：让接口容易被正确使用，不易被误用" class="headerlink" title="Item 18：让接口容易被正确使用，不易被误用"></a>Item 18：让接口容易被正确使用，不易被误用</h2><ol>
 <li>要保证这条原则，首要考虑客户可能做出什么样的错误。</li>
 <li>除非有更好的理由，否则应该尽量让自己写的type的行为与内置types一致。比如说a, b都是ints，那么对a*b不合法，所以自己写的type也应该如此。总之，如果遇到什么疑问，可以拿int来做范本。</li>
 <li>为了防止客户使用智能指针，可以先发制人，令要返回指针的函数就返回一个智能指针。</li>
@@ -79,14 +28,50 @@
 <ul>
 <li><p>构造和析构的代价太大</p>
 <p>对于如下两个类：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">class Person&#123;</span><br><span class="line">public:</span><br><span class="line">    Person();</span><br><span class="line">    virtual ~Person();</span><br><span class="line">    ...</span><br><span class="line">private:</span><br><span class="line">    std::string name;</span><br><span class="line">    std::tring address;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class Student : public Person&#123;</span><br><span class="line">public:</span><br><span class="line">    Student();</span><br><span class="line">    ~Student();</span><br><span class="line">    ...</span><br><span class="line">private:</span><br><span class="line">    std::string schoolName;</span><br><span class="line">    std::string schoolAddress;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">bool validateStudent(Student s); //以pass by value方式接受参数</span><br><span class="line">Student Plato;</span><br><span class="line">bool isValidate = validateStudent(Plato);//调用函数</span><br></pre></td></tr></table></figure>
+<pre><code>class Person{
+public:
+    Person();
+    virtual ~Person();
+    ...
+private:
+    std::string name;
+    std::tring address;
+};
 
-<p>对于该例子，以pass by value方式传递一个Student对象会导致调用一次Student构造函数，一次Person构造函数，四次string的构造函数。当函数内的那个Student副本被销毁，又要调用每一个构造对应的析构，所以这次调用整体成本是“6次构造6次析构”</p>
+class Student : public Person{
+public:
+    Student();
+    ~Student();
+    ...
+private:
+    std::string schoolName;
+    std::string schoolAddress;
+};
+
+bool validateStudent(Student s); //以pass by value方式接受参数
+Student Plato;
+bool isValidate = validateStudent(Plato);//调用函数</code></pre><p>对于该例子，以pass by value方式传递一个Student对象会导致调用一次Student构造函数，一次Person构造函数，四次string的构造函数。当函数内的那个Student副本被销毁，又要调用每一个构造对应的析构，所以这次调用整体成本是“6次构造6次析构”</p>
 </li>
 <li><p>对象切割问题</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class Window&#123;</span><br><span class="line">public:</span><br><span class="line">    ...</span><br><span class="line">    std::string name() const;</span><br><span class="line">    virtual void display() const;    </span><br><span class="line">&#125;;</span><br><span class="line">class WindowWithScrollBars : Window&#123;</span><br><span class="line">public:</span><br><span class="line">    ...</span><br><span class="line">    virtual void display() const;    </span><br><span class="line">&#125;;  </span><br><span class="line"></span><br><span class="line">void printNameAndDisplay(Window w)&#123;</span><br><span class="line">  std::cout&lt;&lt;w.name()&lt;&lt;std::endl;</span><br><span class="line">  w.display();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">WindowWithScrollBars wwsb;</span><br><span class="line">printNameAndDisplay(wwsb);</span><br></pre></td></tr></table></figure>
+<pre><code>class Window{
+public:
+    ...
+    std::string name() const;
+    virtual void display() const;    
+};
+class WindowWithScrollBars : Window{
+public:
+    ...
+    virtual void display() const;    
+};  
 
-<p>以上操作会导致传入print…函数的w对象被构造为Window对象，无论传过来的对象原本是什么类型，所以进而调用window类里的display()。</p>
+void printNameAndDisplay(Window w){
+  std::cout&lt;&lt;w.name()&lt;&lt;std::endl;
+  w.display();
+}
+
+WindowWithScrollBars wwsb;
+printNameAndDisplay(wwsb);</code></pre><p>以上操作会导致传入print…函数的w对象被构造为Window对象，无论传过来的对象原本是什么类型，所以进而调用window类里的display()。</p>
 <p>但是以by reference to const传递，就能解决这个问题，传过去什么对象就是什么对象。</p>
 </li>
 </ul>
@@ -95,16 +80,13 @@
 </li>
 </ol>
 <h2 id="Item-21：必须返回对象时，别妄想返回其reference"><a href="#Item-21：必须返回对象时，别妄想返回其reference" class="headerlink" title="Item 21：必须返回对象时，别妄想返回其reference"></a>Item 21：必须返回对象时，别妄想返回其reference</h2><ol>
-<li><p>对于如下代码：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const Rational&amp; operator* (const Rational&amp; lhs, const Rational&amp; rhs)&#123;</span><br><span class="line">  Rational result(lhs.n * rhs.n, lhs.d * rhs.d)</span><br><span class="line">  return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 当函数返回一个reference(或者指针)指向result，但result是个local对象，而local对象在函数退出前就被销毁了！</p>
-</li>
-<li><p>一个“必须返回新对象”的正确写法：让函数返回一个新对象</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">inline const Rational operator* (const Rational&amp; lhs, const Rational&amp; rhs)&#123;      </span><br><span class="line">  return Rational(lhs.n * rhs.n, lhs.d * rhs.d);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 这样做需承担返回值构造和析构的成本，但是对于上面的错，这代价也是微乎其微了。</p>
-</li>
+<li>对于如下代码：<pre><code> const Rational&amp; operator* (const Rational&amp; lhs, const Rational&amp; rhs){
+   Rational result(lhs.n * rhs.n, lhs.d * rhs.d)
+   return result;
+ }</code></pre> 当函数返回一个reference(或者指针)指向result，但result是个local对象，而local对象在函数退出前就被销毁了！</li>
+<li>一个“必须返回新对象”的正确写法：让函数返回一个新对象<pre><code> inline const Rational operator* (const Rational&amp; lhs, const Rational&amp; rhs){      
+   return Rational(lhs.n * rhs.n, lhs.d * rhs.d);
+ }</code></pre> 这样做需承担返回值构造和析构的成本，但是对于上面的错，这代价也是微乎其微了。</li>
 </ol>
 <h2 id="Item-22：将成员变量声明为private"><a href="#Item-22：将成员变量声明为private" class="headerlink" title="Item 22：将成员变量声明为private"></a>Item 22：将成员变量声明为private</h2><p>原因：</p>
 <ol>
@@ -114,12 +96,5 @@
 </ol>
 <p>总结</p>
 <p>从封装的角度看，其实只有两种访问权限：private(提供封装)和其他(不提供封装)</p>
-
-		</div>
-	</article>
-	<footer class="item-footer">
-    <p>© 2019-2077 Li Xuetao</p>
-</footer>
-</body>
-
-</html>
+</article><div id="paginator"></div></div><footer id="bottom"><span>Created By </span><a href="https://lixuetaoleo.github.io">Li Xuetao</a><span> | </span><a href="http://hexo.io"><span>HEXO</span></a></footer></div><script src="/js/temp.js"></script><script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script></body></html>

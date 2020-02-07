@@ -1,90 +1,51 @@
-<!DOCTYPE html>
-<html>
-<head><meta name="generator" content="Hexo 3.9.0">
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <!-- <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"> -->
-    <!-- <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/> -->
-    <title>Li Xuetao&#39;s Homepage</title>
-    <link href="https://fonts.googleapis.com/css?family=Amatic+SC&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css">
-</head>
-
-<body class="article-body">
-	<nav class="nav">
-    <div class="jump">
-        <!-- <a href="/" title="BLOG">BLOG</a>
-        <a href="../about/index.html" title="about me">ABOUT</a>
-        <a href="../contact/index.html" title="contact me">CONTACT</a> -->
-        
-            <a href="/archives" title="/archives">BLOG</a>
-        
-            <a href="/about" title="/about">ABOUT</a>
-        
-            <a href="/contact" title="/contact">CONTACT</a>
-        
-    </div>
-    <div class="homepage">
-        <a href="/" title="homepage">LI XUETAO</a>
-    </div>
-    <div class="socialmedia-nav">
-        <a class="link-item link-item-nav" title="Twitter" href="https://twitter.com/lixuetaoleo">
-            <i class="iconfont icon-twitter"></i>
-        </a>
-        <a class="link-item link-item-nav" title="Instagram" href="https://www.instagram.com/lixuetaoleo/">
-            <i class="iconfont icon-instagram"></i>
-        </a>
-        <a class="link-item link-item-nav" title="Weibo" href="https://weibo.com/u/1791741344">
-            <i class="iconfont icon-weibo"></i>
-        </a>
-        <a class="link-item link-item-nav" title="Github" href="https://github.com/lixuetaoleo">
-            <i class="iconfont icon-github"></i>
-        </a>
-    </div>
-</nav>
-	<article class="articlearticle">
-		<div class="article-title">
-			<h2 class="title">Effective C++ 7</h2>
-		</div>
-		<div class="article-meta">
-			<span class="article-time">2019-11-13</span>
-		</div>
-		<div class="article-content">
-			<h2 id="Item-23：宁以non-member、non-friend替换member函数"><a href="#Item-23：宁以non-member、non-friend替换member函数" class="headerlink" title="Item 23：宁以non-member、non-friend替换member函数"></a>Item 23：宁以non-member、non-friend替换member函数</h2><ol>
-<li><p>封装性的“粗糙测量”：愈多函数可访问对象内的数据，数据的封装性就愈低</p>
-</li>
-<li><p>由上一条，member函数的封装性比non-member函数低。</p>
-</li>
-<li><p>友元函数对class private成员的访问权力与member函数相同，因此两者对封装的冲击力度也相同。</p>
-</li>
-<li><p>只因在意封装性而让函数“成为class的non-member”并不意味它“不可以是另一个class的member”。可以令这些函数称为一个工具类的static member函数，只要它不是其类的一部分（或者friend），就不会印象该类private成员的封装性。</p>
-</li>
-<li><p>更一般地做法是把这些non-member函数与它需要的那个类放在同一个namespace下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">namespace WebBrowserStuff&#123;</span><br><span class="line">	class WebBrowser&#123;...&#125;;</span><br><span class="line">	void clearBrowser(WebBrowser &amp;wb);</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>将所有便利函数放在多个头文件内但隶属于同一个namespace，意味着可以轻松扩展这一组便利函数。比如STL做法就是这样。</p>
-</li>
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.9.0"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta charset="UTF-8"><title>Effective C++ 7 | Li Xuetao</title><link rel="stylesheet" href="/css/temp.css"><link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+<link href="https://fonts.googleapis.com/css?family=Amatic+SC|Lato|Ubuntu+Mono&display=swap" rel="stylesheet"></head><body><div id="layout-page"><nav id="layout-menu"><div class="other-page"><a href="/about">About</a><a href="/archives">Archives</a></div><a id="mega-head" href="/">LI XUETAO</a><div class="layout-socialmedia"><a class="link-item main-link-item" title="Instagram" href="https://www.instagram.com/lixuetaoleo/"><i class="iconfont icon-instagram"></i></a><a class="link-item main-link-item" title="Twitter" href="https://twitter.com/lixuetaoleo"><i class="iconfont icon-twitter"></i></a><a class="link-item main-link-item" title="Weibo" href="https://weibo.com/u/1791741344"><i class="iconfont icon-weibo"></i></a><a class="link-item main-link-item" title="GitHub" href="https://github.com/lixuetaoleo"><i class="iconfont icon-github"></i></a></div></nav><div id="content"><article id="post"><h1>Effective C++ 7</h1><time class="created-date" datetime="2019-11-13T11:58:14.000Z">2019-11-13</time><h2 id="Item-23：宁以non-member、non-friend替换member函数"><a href="#Item-23：宁以non-member、non-friend替换member函数" class="headerlink" title="Item 23：宁以non-member、non-friend替换member函数"></a>Item 23：宁以non-member、non-friend替换member函数</h2><ol>
+<li>封装性的“粗糙测量”：愈多函数可访问对象内的数据，数据的封装性就愈低</li>
+<li>由上一条，member函数的封装性比non-member函数低。</li>
+<li>友元函数对class private成员的访问权力与member函数相同，因此两者对封装的冲击力度也相同。</li>
+<li>只因在意封装性而让函数“成为class的non-member”并不意味它“不可以是另一个class的member”。可以令这些函数称为一个工具类的static member函数，只要它不是其类的一部分（或者friend），就不会印象该类private成员的封装性。</li>
+<li>更一般地做法是把这些non-member函数与它需要的那个类放在同一个namespace下<pre><code> namespace WebBrowserStuff{
+     class WebBrowser{...};
+     void clearBrowser(WebBrowser &amp;wb);
+     ...
+ }</code></pre></li>
+<li>将所有便利函数放在多个头文件内但隶属于同一个namespace，意味着可以轻松扩展这一组便利函数。比如STL做法就是这样。</li>
 </ol>
 <h1 id="Item-24：若所有参数皆需类型转换，请为此采用non-member函数"><a href="#Item-24：若所有参数皆需类型转换，请为此采用non-member函数" class="headerlink" title="Item 24：若所有参数皆需类型转换，请为此采用non-member函数"></a>Item 24：若所有参数皆需类型转换，请为此采用non-member函数</h1><p>假如有一个表示有理数的类，并且其对operator*进行了重载，如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class Rational&#123;</span><br><span class="line">public:</span><br><span class="line">	Rational(int numerator = 0, int denominator = 1); //构造函数可以不为explicit，以允许int to Rational隐式转换。</span><br><span class="line">	int numerator() const;</span><br><span class="line">	int denominator() const;</span><br><span class="line">	const Rational operator* (const Rational&amp; rhs) const;</span><br><span class="line">private:</span><br><span class="line">	...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>这样设计对两个Rational对象是没问题的。</p>
+<pre><code>class Rational{
+public:
+    Rational(int numerator = 0, int denominator = 1); //构造函数可以不为explicit，以允许int to Rational隐式转换。
+    int numerator() const;
+    int denominator() const;
+    const Rational operator* (const Rational&amp; rhs) const;
+private:
+    ...
+};</code></pre><p>这样设计对两个Rational对象是没问题的。</p>
 <p>但是如果要支持混合运算，即将ints和Rationals相乘</p>
 <p>result = objOFRational * 2; //work</p>
 <p>result = 2 * objOFRational; //wrong!</p>
 <p>错误的原因是因为2没有对应的类，也没有对应的operator<em>，此时编译器查找non-member operator</em>，也没有一个接受int和Rational作为参数的non-member operator*，因此失败。</p>
 <p>前面那一行正确的原因是因为发生了隐式转换。</p>
 <p>因此只要设计一个non-member，non-friend(non-friend的原因是因为这个函数只需要public接口)的operator*即可。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const Rational operator*(const Rational&amp; lhs, const Rational&amp; rhs)&#123;</span><br><span class="line">	return Rational(lhs.numerator()*rhs.numerator(), lhs.denominator() * rhs.denominator());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ol>
+<pre><code>const Rational operator*(const Rational&amp; lhs, const Rational&amp; rhs){
+    return Rational(lhs.numerator()*rhs.numerator(), lhs.denominator() * rhs.denominator());
+}</code></pre><ol>
 <li>一个重要的观察：member函数的反面是non-member函数，而非friend函数。</li>
 <li>无论何时如果可以避免friend函数就应该避免，就像在真实世界中，朋友带来的麻烦多于价值(hah)。</li>
 </ol>
 <h1 id="Item-25：考虑写出一个不抛异常的swap函数"><a href="#Item-25：考虑写出一个不抛异常的swap函数" class="headerlink" title="Item 25：考虑写出一个不抛异常的swap函数"></a>Item 25：考虑写出一个不抛异常的swap函数</h1><p>假设你有一个“pimpl(pointer to implementation)手法”写的对象，如下所示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class Widget&#123;</span><br><span class="line">public:</span><br><span class="line">	Widget(const Widget&amp; rhs);</span><br><span class="line">	Widget&amp; operator=(const Widget&amp; rhs)&#123;</span><br><span class="line">		...</span><br><span class="line">		*pImpl = *(rhs.pImpl);</span><br><span class="line">		...</span><br><span class="line">	&#125;</span><br><span class="line">	...</span><br><span class="line">private:</span><br><span class="line">	WidgetImpl* pImpl; //指针，所指对象内含Widget数据。</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>对于该类，要交换两个Widget对象的值，做法是交换pImpl指针，但是std::swap的做法是平淡的(即利用tmp来进行置换)，因此一种做法是针对Widget将std::swap特化。</p>
+<pre><code>class Widget{
+public:
+    Widget(const Widget&amp; rhs);
+    Widget&amp; operator=(const Widget&amp; rhs){
+        ...
+        *pImpl = *(rhs.pImpl);
+        ...
+    }
+    ...
+private:
+    WidgetImpl* pImpl; //指针，所指对象内含Widget数据。
+};</code></pre><p>对于该类，要交换两个Widget对象的值，做法是交换pImpl指针，但是std::swap的做法是平淡的(即利用tmp来进行置换)，因此一种做法是针对Widget将std::swap特化。</p>
 <p>步骤：</p>
 <ol>
 <li>提供一个public swap成员函数，让其高效的置换类型的两个对象值，并且这个函数<code>绝不该抛出异常</code></li>
@@ -93,12 +54,5 @@
 <li>最后，如果你调用swap，请确定包含一个using声明符，以便让std::swap在你的函数内曝光可见，然后不加任何namespace修饰符，赤裸裸地调用swap。</li>
 </ol>
 <p>注：C++只允许对class模板偏特化，函数模板不能。</p>
-
-		</div>
-	</article>
-	<footer class="item-footer">
-    <p>© 2019-2077 Li Xuetao</p>
-</footer>
-</body>
-
-</html>
+</article><div id="paginator"></div></div><footer id="bottom"><span>Created By </span><a href="https://lixuetaoleo.github.io">Li Xuetao</a><span> | </span><a href="http://hexo.io"><span>HEXO</span></a></footer></div><script src="/js/temp.js"></script><script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script></body></html>

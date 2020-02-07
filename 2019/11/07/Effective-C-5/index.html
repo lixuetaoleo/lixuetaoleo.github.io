@@ -1,77 +1,61 @@
-<!DOCTYPE html>
-<html>
-<head><meta name="generator" content="Hexo 3.9.0">
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <!-- <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"> -->
-    <!-- <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/> -->
-    <title>Li Xuetao&#39;s Homepage</title>
-    <link href="https://fonts.googleapis.com/css?family=Amatic+SC&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css">
-</head>
-
-<body class="article-body">
-	<nav class="nav">
-    <div class="jump">
-        <!-- <a href="/" title="BLOG">BLOG</a>
-        <a href="../about/index.html" title="about me">ABOUT</a>
-        <a href="../contact/index.html" title="contact me">CONTACT</a> -->
-        
-            <a href="/archives" title="/archives">BLOG</a>
-        
-            <a href="/about" title="/about">ABOUT</a>
-        
-            <a href="/contact" title="/contact">CONTACT</a>
-        
-    </div>
-    <div class="homepage">
-        <a href="/" title="homepage">LI XUETAO</a>
-    </div>
-    <div class="socialmedia-nav">
-        <a class="link-item link-item-nav" title="Twitter" href="https://twitter.com/lixuetaoleo">
-            <i class="iconfont icon-twitter"></i>
-        </a>
-        <a class="link-item link-item-nav" title="Instagram" href="https://www.instagram.com/lixuetaoleo/">
-            <i class="iconfont icon-instagram"></i>
-        </a>
-        <a class="link-item link-item-nav" title="Weibo" href="https://weibo.com/u/1791741344">
-            <i class="iconfont icon-weibo"></i>
-        </a>
-        <a class="link-item link-item-nav" title="Github" href="https://github.com/lixuetaoleo">
-            <i class="iconfont icon-github"></i>
-        </a>
-    </div>
-</nav>
-	<article class="articlearticle">
-		<div class="article-title">
-			<h2 class="title">Effective C++ 5</h2>
-		</div>
-		<div class="article-meta">
-			<span class="article-time">2019-11-07</span>
-		</div>
-		<div class="article-content">
-			<h2 id="Item13：以对象管理资源"><a href="#Item13：以对象管理资源" class="headerlink" title="Item13：以对象管理资源"></a>Item13：以对象管理资源</h2><ol>
-<li>对于常见的资源，如动态分配内存，文件描述符，互斥锁，图形界面中的字型和笔刷，数据库连接，sockets等，不再使用它们时，必须交还给系统。</li>
-<li>虽然可能考虑到了delete，如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">void f()&#123;</span><br><span class="line">  Investment *pInv = createInvestment();</span><br><span class="line">  ...</span><br><span class="line">  delete pInv;</span><br><span class="line">&#125;</span><br><span class="line">``` </span><br><span class="line">但是由于在...那里因为某些原因return了，将造成资源泄漏。</span><br><span class="line">因此需要将资源放进对象里，当控制流离开f，该对象的析构函数会自动释放那些资源。</span><br><span class="line"></span><br><span class="line">3. “以对象管理资源”的观念常被称为“资源取得时机便是初始化时机”(Resource Acquisition Is Initialization; RAII)</span><br><span class="line">4. 常用的RAII是shared_ptr，引用计数型智能指针，使用它，用户不用再考虑delete问题。</span><br><span class="line">5. shared_ptr内部使用的是delete而非delete[]，因此不要在shared_ptr上构造数组(但从c++17开始，shared_ptr也支持数组形式了)。</span><br><span class="line"></span><br><span class="line">## Item 14：在资源管理类中小心copying行为</span><br><span class="line">1. 在一个RAII对象尝试复制时，通常采取以下两种做法：</span><br><span class="line">   </span><br><span class="line">     - 禁止复制。如果复制动作对RAII class不合理(比如说mutex)，那么应该禁止它。具体做法：对象的类private继承Uncopyable类。</span><br><span class="line">     - 对底层资源祭出“引用计数法”。有时候我们希望保有资源，直到它的最后一个使用者（某对象）被销毁。这种情况下就是复制RAII对象时，将该资源的“被引用数”递增，shared_ptr就是这种做法。</span><br><span class="line"></span><br><span class="line">## Item 15：在资源管理类中提供对原始资源的访问</span><br><span class="line">1. 假设一个函数的参数是raw pointer，但是其实参却是一个智能指针(一个RAII对象)，这样是不行的。可以利用get()方法返回智能指针内部的原始指针(的复件)。</span><br><span class="line">2. 还可以用隐式方法返回原始资源(operator Classname() const&#123;return var;&#125;)，但是一般而言用显式方法比较安全。</span><br><span class="line"></span><br><span class="line">## Item 16：成对使用new和delete时要采取相同形式</span><br><span class="line">1. 即new -- delete, new[] -- delete[]</span><br><span class="line">2. 避免诸如typedef std::string AddressLines[4]然后std::string *p1 = new AddressLines; 但是delete p1的情况发生，最好尽量不要对数组形式采取typedef。</span><br><span class="line"></span><br><span class="line">## Item 17：以独立语句将newed对象置入智能指针</span><br><span class="line">假设如下函数：</span><br></pre></td></tr></table></figure>
-
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.9.0"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta charset="UTF-8"><title>Effective C++ 5 | Li Xuetao</title><link rel="stylesheet" href="/css/temp.css"><link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+<link href="https://fonts.googleapis.com/css?family=Amatic+SC|Lato|Ubuntu+Mono&display=swap" rel="stylesheet"></head><body><div id="layout-page"><nav id="layout-menu"><div class="other-page"><a href="/about">About</a><a href="/archives">Archives</a></div><a id="mega-head" href="/">LI XUETAO</a><div class="layout-socialmedia"><a class="link-item main-link-item" title="Instagram" href="https://www.instagram.com/lixuetaoleo/"><i class="iconfont icon-instagram"></i></a><a class="link-item main-link-item" title="Twitter" href="https://twitter.com/lixuetaoleo"><i class="iconfont icon-twitter"></i></a><a class="link-item main-link-item" title="Weibo" href="https://weibo.com/u/1791741344"><i class="iconfont icon-weibo"></i></a><a class="link-item main-link-item" title="GitHub" href="https://github.com/lixuetaoleo"><i class="iconfont icon-github"></i></a></div></nav><div id="content"><article id="post"><h1>Effective C++ 5</h1><time class="created-date" datetime="2019-11-07T11:39:33.000Z">2019-11-07</time><h2 id="Item13：以对象管理资源"><a href="#Item13：以对象管理资源" class="headerlink" title="Item13：以对象管理资源"></a>Item13：以对象管理资源</h2><ol>
+<li><p>对于常见的资源，如动态分配内存，文件描述符，互斥锁，图形界面中的字型和笔刷，数据库连接，sockets等，不再使用它们时，必须交还给系统。</p>
+</li>
+<li><p>虽然可能考虑到了delete，如下：</p>
+<pre><code>void f(){
+Investment *pInv = createInvestment();
+...
+delete pInv;
+}</code></pre><p>但是由于在…那里因为某些原因return了，将造成资源泄漏。<br>因此需要将资源放进对象里，当控制流离开f，该对象的析构函数会自动释放那些资源。</p>
+</li>
+<li><p>“以对象管理资源”的观念常被称为“资源取得时机便是初始化时机”(Resource Acquisition Is Initialization; RAII)</p>
+</li>
+<li><p>常用的RAII是shared_ptr，引用计数型智能指针，使用它，用户不用再考虑delete问题。</p>
+</li>
+<li><p>shared_ptr内部使用的是delete而非delete[]，因此不要在shared_ptr上构造数组(但从c++17开始，shared_ptr也支持数组形式了)。</p>
 </li>
 </ol>
-<p>int priority();<br>void processWidget(std::shared_ptr<widget> pw, int priority);</widget></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果调用它时采用了</span><br></pre></td></tr></table></figure>
-
-<p>processWidget(new Widget, priority());</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这种形式，无法通过编译。因为shared_ptr构造时需要的一个raw pointer是explicit构造函数，不支持复制初始化，所以调用应该按如下形式：</span><br></pre></td></tr></table></figure>
-
-<p>processWidget(std::shared_ptr<widget>(new Widget), priority());</widget></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">但是按上面的形式写，可能导致资源泄漏。</span><br><span class="line"></span><br><span class="line">分析：</span><br><span class="line">上述的调用函数，在调用之前，编译器必须创建代码，做以下三件事：</span><br><span class="line"></span><br><span class="line">1. 调用priority</span><br><span class="line">2. 执行“new Widget”</span><br><span class="line">3. 调用shared_ptr构造函数</span><br><span class="line"></span><br><span class="line">但是在编译时，C++执行次序弹性很大（与C#和Java有很大不同），因此可能出现以下的次序（虽然new widget肯定是在shared_ptr的ctor之前调用）：</span><br><span class="line"></span><br><span class="line">1. 执行“new Widget”</span><br><span class="line">2. 调用priority</span><br><span class="line">4. 调用shared_ptr构造函数</span><br><span class="line"></span><br><span class="line">万一在调用priority时发生了异常，在此情况下new widget返回的指针将会遗失，造成资源泄漏。</span><br><span class="line"></span><br><span class="line">为避免这类问题，使用分离语句：</span><br><span class="line"></span><br><span class="line">1. 创建widget</span><br><span class="line">2. 将它置入一个智能指针内</span><br><span class="line">3. 将智能指针传入processWidget</span><br></pre></td></tr></table></figure>
-
-<p>std::shared_ptr<widget> pw(new Widget);<br>processWidget(pw, priority());  //这样就防止了资源泄漏问题<br>```</widget></p>
-
-		</div>
-	</article>
-	<footer class="item-footer">
-    <p>© 2019-2077 Li Xuetao</p>
-</footer>
-</body>
-
-</html>
+<h2 id="Item-14：在资源管理类中小心copying行为"><a href="#Item-14：在资源管理类中小心copying行为" class="headerlink" title="Item 14：在资源管理类中小心copying行为"></a>Item 14：在资源管理类中小心copying行为</h2><ol>
+<li><p>在一个RAII对象尝试复制时，通常采取以下两种做法：</p>
+<ul>
+<li>禁止复制。如果复制动作对RAII class不合理(比如说mutex)，那么应该禁止它。具体做法：对象的类private继承Uncopyable类。</li>
+<li>对底层资源祭出“引用计数法”。有时候我们希望保有资源，直到它的最后一个使用者（某对象）被销毁。这种情况下就是复制RAII对象时，将该资源的“被引用数”递增，shared_ptr就是这种做法。</li>
+</ul>
+</li>
+</ol>
+<h2 id="Item-15：在资源管理类中提供对原始资源的访问"><a href="#Item-15：在资源管理类中提供对原始资源的访问" class="headerlink" title="Item 15：在资源管理类中提供对原始资源的访问"></a>Item 15：在资源管理类中提供对原始资源的访问</h2><ol>
+<li>假设一个函数的参数是raw pointer，但是其实参却是一个智能指针(一个RAII对象)，这样是不行的。可以利用get()方法返回智能指针内部的原始指针(的复件)。</li>
+<li>还可以用隐式方法返回原始资源(operator Classname() const{return var;})，但是一般而言用显式方法比较安全。</li>
+</ol>
+<h2 id="Item-16：成对使用new和delete时要采取相同形式"><a href="#Item-16：成对使用new和delete时要采取相同形式" class="headerlink" title="Item 16：成对使用new和delete时要采取相同形式"></a>Item 16：成对使用new和delete时要采取相同形式</h2><ol>
+<li>即new – delete, new[] – delete[]</li>
+<li>避免诸如typedef std::string AddressLines[4]然后std::string *p1 = new AddressLines; 但是delete p1的情况发生，最好尽量不要对数组形式采取typedef。</li>
+</ol>
+<h2 id="Item-17：以独立语句将newed对象置入智能指针"><a href="#Item-17：以独立语句将newed对象置入智能指针" class="headerlink" title="Item 17：以独立语句将newed对象置入智能指针"></a>Item 17：以独立语句将newed对象置入智能指针</h2><p>假设如下函数：</p>
+<pre><code>int priority();
+void processWidget(std::shared_ptr&lt;Widget&gt; pw, int priority);</code></pre><p>如果调用它时采用了</p>
+<pre><code>processWidget(new Widget, priority());</code></pre><p>这种形式，无法通过编译。因为shared_ptr构造时需要的一个raw pointer是explicit构造函数，不支持复制初始化，所以调用应该按如下形式：</p>
+<pre><code>processWidget(std::shared_ptr&lt;Widget&gt;(new Widget), priority());</code></pre><p>但是按上面的形式写，可能导致资源泄漏。</p>
+<p>分析：<br>上述的调用函数，在调用之前，编译器必须创建代码，做以下三件事：</p>
+<ol>
+<li>调用priority</li>
+<li>执行“new Widget”</li>
+<li>调用shared_ptr构造函数</li>
+</ol>
+<p>但是在编译时，C++执行次序弹性很大（与C#和Java有很大不同），因此可能出现以下的次序（虽然new widget肯定是在shared_ptr的ctor之前调用）：</p>
+<ol>
+<li>执行“new Widget”</li>
+<li>调用priority</li>
+<li>调用shared_ptr构造函数</li>
+</ol>
+<p>万一在调用priority时发生了异常，在此情况下new widget返回的指针将会遗失，造成资源泄漏。</p>
+<p>为避免这类问题，使用分离语句：</p>
+<ol>
+<li>创建widget</li>
+<li>将它置入一个智能指针内</li>
+<li>将智能指针传入processWidget</li>
+</ol>
+<pre><code>std::shared_ptr&lt;Widget&gt; pw(new Widget);
+processWidget(pw, priority());  //这样就防止了资源泄漏问题</code></pre></article><div id="paginator"></div></div><footer id="bottom"><span>Created By </span><a href="https://lixuetaoleo.github.io">Li Xuetao</a><span> | </span><a href="http://hexo.io"><span>HEXO</span></a></footer></div><script src="/js/temp.js"></script><script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script></body></html>

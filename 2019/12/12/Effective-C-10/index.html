@@ -1,56 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head><meta name="generator" content="Hexo 3.9.0">
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <!-- <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"> -->
-    <!-- <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/> -->
-    <title>Li Xuetao&#39;s Homepage</title>
-    <link href="https://fonts.googleapis.com/css?family=Amatic+SC&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css">
-</head>
-
-<body class="article-body">
-	<nav class="nav">
-    <div class="jump">
-        <!-- <a href="/" title="BLOG">BLOG</a>
-        <a href="../about/index.html" title="about me">ABOUT</a>
-        <a href="../contact/index.html" title="contact me">CONTACT</a> -->
-        
-            <a href="/archives" title="/archives">BLOG</a>
-        
-            <a href="/about" title="/about">ABOUT</a>
-        
-            <a href="/contact" title="/contact">CONTACT</a>
-        
-    </div>
-    <div class="homepage">
-        <a href="/" title="homepage">LI XUETAO</a>
-    </div>
-    <div class="socialmedia-nav">
-        <a class="link-item link-item-nav" title="Twitter" href="https://twitter.com/lixuetaoleo">
-            <i class="iconfont icon-twitter"></i>
-        </a>
-        <a class="link-item link-item-nav" title="Instagram" href="https://www.instagram.com/lixuetaoleo/">
-            <i class="iconfont icon-instagram"></i>
-        </a>
-        <a class="link-item link-item-nav" title="Weibo" href="https://weibo.com/u/1791741344">
-            <i class="iconfont icon-weibo"></i>
-        </a>
-        <a class="link-item link-item-nav" title="Github" href="https://github.com/lixuetaoleo">
-            <i class="iconfont icon-github"></i>
-        </a>
-    </div>
-</nav>
-	<article class="articlearticle">
-		<div class="article-title">
-			<h2 class="title">Effective C++ 10</h2>
-		</div>
-		<div class="article-meta">
-			<span class="article-time">2019-12-12</span>
-		</div>
-		<div class="article-content">
-			<h1 id="Item-38：通过复合塑造出has-a或”根据某物实现出”"><a href="#Item-38：通过复合塑造出has-a或”根据某物实现出”" class="headerlink" title="Item 38：通过复合塑造出has-a或”根据某物实现出”"></a>Item 38：通过复合塑造出has-a或”根据某物实现出”</h1><ol>
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.9.0"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta charset="UTF-8"><title>Effective C++ 10 | Li Xuetao</title><link rel="stylesheet" href="/css/temp.css"><link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+<link href="https://fonts.googleapis.com/css?family=Amatic+SC|Lato|Ubuntu+Mono&display=swap" rel="stylesheet"></head><body><div id="layout-page"><nav id="layout-menu"><div class="other-page"><a href="/about">About</a><a href="/archives">Archives</a></div><a id="mega-head" href="/">LI XUETAO</a><div class="layout-socialmedia"><a class="link-item main-link-item" title="Instagram" href="https://www.instagram.com/lixuetaoleo/"><i class="iconfont icon-instagram"></i></a><a class="link-item main-link-item" title="Twitter" href="https://twitter.com/lixuetaoleo"><i class="iconfont icon-twitter"></i></a><a class="link-item main-link-item" title="Weibo" href="https://weibo.com/u/1791741344"><i class="iconfont icon-weibo"></i></a><a class="link-item main-link-item" title="GitHub" href="https://github.com/lixuetaoleo"><i class="iconfont icon-github"></i></a></div></nav><div id="content"><article id="post"><h1>Effective C++ 10</h1><time class="created-date" datetime="2019-12-12T15:18:31.000Z">2019-12-12</time><h1 id="Item-38：通过复合塑造出has-a或”根据某物实现出”"><a href="#Item-38：通过复合塑造出has-a或”根据某物实现出”" class="headerlink" title="Item 38：通过复合塑造出has-a或”根据某物实现出”"></a>Item 38：通过复合塑造出has-a或”根据某物实现出”</h1><ol>
 <li>composition有许多同义词：layering(分层)，containment(内含)，aggregation(聚合)和embedding(内嵌)</li>
 <li>复合意味着has-a或者is-implemented-in-terms-of。</li>
 <li>比如你因为std::set空间复杂度大想自己写一个Set，决定用list当底层，但是Set肯定是不能继承list的，因为list允许重复元素而Set不允许，它们不是is-a的关系。此时应该用Set里private定义一个list。</li>
@@ -65,27 +14,27 @@
 <li><p>private继承纯粹只是一种实现技术；它意味着implemented-in-terms-of，与复合的意义一样，但是<code>尽可能使用复合，必要时才使用private继承</code></p>
 </li>
 <li><p>C++中模拟JAVA final的方法：</p>
-<pre><code>class Widget{
-private:
-    class WidgetTimer: public Timer{
-    public:
-        virtual void onTick() const;
-        ...
-    };
-    WidgetTimer timer;
-    ...
-};</code></pre><p> 这样一来，widget的子类将无法取用widgettimer，因此无法继承它或者重新定义它的virtual函数</p>
+<pre><code> class Widget{
+ private:
+     class WidgetTimer: public Timer{
+     public:
+         virtual void onTick() const;
+         ...
+     };
+     WidgetTimer timer;
+     ...
+ };</code></pre><p> 这样一来，widget的子类将无法取用widgettimer，因此无法继承它或者重新定义它的virtual函数</p>
 </li>
 <li><p>private继承主要用于“当一个意欲成为子类想访问一个意欲成为父类的protected成分，或为了重新定义一个或者多个virtual函数”</p>
 </li>
 <li><p>有一种“激进”的情况涉及空间最优化，可能会促使选择“private”继承而不是继承加复合：</p>
-<pre><code>class Empty{}
+<pre><code> class Empty{}
 
-class A{
-private:
-    int i;
-    Empty e;
-};</code></pre><p> 在上面的代码中，Empty由于没有成员变量，其大小理论上为0，A类的大小也等于int的4个字节。但是实际上sizeof(A) &gt; sizeof(int)。原因：面对大小为0的独立对象，C++通常会安插一个char到空对象内，使得空对象大小为1；然后由于内存对齐，可能使得复合了这个空对象的对象不止获得一个char大小。</p>
+ class A{
+ private:
+     int i;
+     Empty e;
+ };</code></pre><p> 在上面的代码中，Empty由于没有成员变量，其大小理论上为0，A类的大小也等于int的4个字节。但是实际上sizeof(A) &gt; sizeof(int)。原因：面对大小为0的独立对象，C++通常会安插一个char到空对象内，使得空对象大小为1；然后由于内存对齐，可能使得复合了这个空对象的对象不止获得一个char大小。</p>
 <p> 如果A private继承Empty，sizeof(A) == sizeof(int)。<br> 这就是所谓的EBO(empty base optimization，空白基类最优化)。</p>
 <p> 但是在现实情况中，大多数class并非empty，因此EBO很少成为private继承的正当理由。大多数继承相当于is-a，这里指的是public继承而非private继承。而且复合和private继承意义一样，但是好理解，因此应该用复合。</p>
 </li>
@@ -95,12 +44,5 @@ private:
 <li>virtual继承会增加大小，速度和初始化(及赋值)复杂度等成本。如果virtual base class不带任何数据，将是最具实用价值的情况</li>
 <li>多重继承的确有正当用途。其中一个情节涉及“public继承某个接口类”和“private继承某个协助实现的class”的两相组合。</li>
 </ol>
-
-		</div>
-	</article>
-	<footer class="item-footer">
-    <p>© 2019-2077 Li Xuetao</p>
-</footer>
-</body>
-
-</html>
+</article><div id="paginator"></div></div><footer id="bottom"><span>Created By </span><a href="https://lixuetaoleo.github.io">Li Xuetao</a><span> | </span><a href="http://hexo.io"><span>HEXO</span></a></footer></div><script src="/js/temp.js"></script><script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script></body></html>

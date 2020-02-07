@@ -1,56 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head><meta name="generator" content="Hexo 3.9.0">
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <!-- <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"> -->
-    <!-- <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/> -->
-    <title>Li Xuetao&#39;s Homepage</title>
-    <link href="https://fonts.googleapis.com/css?family=Amatic+SC&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css">
-</head>
-
-<body class="article-body">
-	<nav class="nav">
-    <div class="jump">
-        <!-- <a href="/" title="BLOG">BLOG</a>
-        <a href="../about/index.html" title="about me">ABOUT</a>
-        <a href="../contact/index.html" title="contact me">CONTACT</a> -->
-        
-            <a href="/archives" title="/archives">BLOG</a>
-        
-            <a href="/about" title="/about">ABOUT</a>
-        
-            <a href="/contact" title="/contact">CONTACT</a>
-        
-    </div>
-    <div class="homepage">
-        <a href="/" title="homepage">LI XUETAO</a>
-    </div>
-    <div class="socialmedia-nav">
-        <a class="link-item link-item-nav" title="Twitter" href="https://twitter.com/lixuetaoleo">
-            <i class="iconfont icon-twitter"></i>
-        </a>
-        <a class="link-item link-item-nav" title="Instagram" href="https://www.instagram.com/lixuetaoleo/">
-            <i class="iconfont icon-instagram"></i>
-        </a>
-        <a class="link-item link-item-nav" title="Weibo" href="https://weibo.com/u/1791741344">
-            <i class="iconfont icon-weibo"></i>
-        </a>
-        <a class="link-item link-item-nav" title="Github" href="https://github.com/lixuetaoleo">
-            <i class="iconfont icon-github"></i>
-        </a>
-    </div>
-</nav>
-	<article class="articlearticle">
-		<div class="article-title">
-			<h2 class="title">Effective C++ 8</h2>
-		</div>
-		<div class="article-meta">
-			<span class="article-time">2019-11-22</span>
-		</div>
-		<div class="article-content">
-			<h1 id="Item-26：尽可能延后变量定义式的出现时间"><a href="#Item-26：尽可能延后变量定义式的出现时间" class="headerlink" title="Item 26：尽可能延后变量定义式的出现时间"></a>Item 26：尽可能延后变量定义式的出现时间</h1><ol>
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.9.0"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta charset="UTF-8"><title>Effective C++ 8 | Li Xuetao</title><link rel="stylesheet" href="/css/temp.css"><link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+<link href="https://fonts.googleapis.com/css?family=Amatic+SC|Lato|Ubuntu+Mono&display=swap" rel="stylesheet"></head><body><div id="layout-page"><nav id="layout-menu"><div class="other-page"><a href="/about">About</a><a href="/archives">Archives</a></div><a id="mega-head" href="/">LI XUETAO</a><div class="layout-socialmedia"><a class="link-item main-link-item" title="Instagram" href="https://www.instagram.com/lixuetaoleo/"><i class="iconfont icon-instagram"></i></a><a class="link-item main-link-item" title="Twitter" href="https://twitter.com/lixuetaoleo"><i class="iconfont icon-twitter"></i></a><a class="link-item main-link-item" title="Weibo" href="https://weibo.com/u/1791741344"><i class="iconfont icon-weibo"></i></a><a class="link-item main-link-item" title="GitHub" href="https://github.com/lixuetaoleo"><i class="iconfont icon-github"></i></a></div></nav><div id="content"><article id="post"><h1>Effective C++ 8</h1><time class="created-date" datetime="2019-11-22T11:07:26.000Z">2019-11-22</time><h1 id="Item-26：尽可能延后变量定义式的出现时间"><a href="#Item-26：尽可能延后变量定义式的出现时间" class="headerlink" title="Item 26：尽可能延后变量定义式的出现时间"></a>Item 26：尽可能延后变量定义式的出现时间</h1><ol>
 <li>原因：<ul>
 <li>假设一开始就定义变量，会构造对象；</li>
 <li>但是如果在后续代码中没有用到这个变量的时候却发生异常退出了，那么又会析构对象；</li>
@@ -67,15 +16,24 @@
 </ol>
 <h1 id="Item-27：尽量少做转型动作"><a href="#Item-27：尽量少做转型动作" class="headerlink" title="Item 27：尽量少做转型动作"></a>Item 27：尽量少做转型动作</h1><ol>
 <li>const_cast通常被用来将对象的常量性转除，也是唯一一个有此能力的C++-STYLE转型操作符。</li>
-<li>如果要在派生类中调用父类函数，以下做法是错误的：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">class Base&#123;</span><br><span class="line">  virtual void fun() &#123;...&#125;</span><br><span class="line">&#125;;</span><br><span class="line">class Derived : public Base&#123;</span><br><span class="line">  virtual void fun()&#123;</span><br><span class="line">      static_cast&lt;Base&gt;(*this).fun();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-</li>
+<li>如果要在派生类中调用父类函数，以下做法是错误的：<pre><code>class Base{
+virtual void fun() {...}
+};
+class Derived : public Base{
+virtual void fun(){
+   static_cast&lt;Base&gt;(*this).fun();
+}
+}; </code></pre>原因是它不是当前对象在调用这个函数，而是一个对象的副本在调用。</li>
 </ol>
-<p>原因是它不是当前对象在调用这个函数，而是一个对象的副本在调用。</p>
 <p>正确做法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">class Base&#123;</span><br><span class="line">  virtual void fun() &#123;...&#125;</span><br><span class="line">&#125;;</span><br><span class="line">class Derived : public Base&#123;</span><br><span class="line">  virtual void fun()&#123;</span><br><span class="line">      Base::fun();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<ol start="3">
+<pre><code>class Base{
+  virtual void fun() {...}
+};
+class Derived : public Base{
+  virtual void fun(){
+      Base::fun();
+  }
+}; </code></pre><ol start="3">
 <li><code>绝对要避免的</code>是一连串dynamic_cast(s)，因为这样产生出来的代码又大又慢，并且基础不稳，每次class继承体系有改变，这些转型代码都得检查是否需要修改。这样的代码总是以某些“基于virtual函数调用”的东西取代。</li>
 <li>总之，尽量避免转型，如果必须要转型，宁用新式转型，因为这样也好辨别。</li>
 </ol>
@@ -83,7 +41,7 @@
 <li><p>原因：</p>
 <ul>
 <li><p>如果有如下函数：</p>
-<pre><code>ClassName&amp; foo() const{return anotherClass-&gt;member;}</code></pre><p>   这样将使得封装性被破坏。</p>
+<pre><code>   ClassName&amp; foo() const{return anotherClass-&gt;member;}</code></pre><p>   这样将使得封装性被破坏。</p>
 <ul>
 <li>假设等号右边是一个返回对象的方法A，然后该返回对象调用其他方法B返回给等号左边的对象，这样使得当语句执行完后，等号左边的对象指向了空。</li>
 </ul>
@@ -102,12 +60,5 @@
 <li>将inline限制在小型，被频繁调用的函数身上，可使日后调试过程和二进制升级更加容易，也可使代码膨胀问题最小化，提升程序运行速度。</li>
 </ol>
 <h1 id="Item-31：将文件间的编译以存关系降至最低"><a href="#Item-31：将文件间的编译以存关系降至最低" class="headerlink" title="Item 31：将文件间的编译以存关系降至最低"></a>Item 31：将文件间的编译以存关系降至最低</h1><p>提升编译速度</p>
-
-		</div>
-	</article>
-	<footer class="item-footer">
-    <p>© 2019-2077 Li Xuetao</p>
-</footer>
-</body>
-
-</html>
+</article><div id="paginator"></div></div><footer id="bottom"><span>Created By </span><a href="https://lixuetaoleo.github.io">Li Xuetao</a><span> | </span><a href="http://hexo.io"><span>HEXO</span></a></footer></div><script src="/js/temp.js"></script><script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script></body></html>

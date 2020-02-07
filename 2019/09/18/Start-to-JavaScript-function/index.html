@@ -1,56 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head><meta name="generator" content="Hexo 3.9.0">
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <!-- <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"> -->
-    <!-- <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/> -->
-    <title>Li Xuetao&#39;s Homepage</title>
-    <link href="https://fonts.googleapis.com/css?family=Amatic+SC&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css">
-</head>
-
-<body class="article-body">
-	<nav class="nav">
-    <div class="jump">
-        <!-- <a href="/" title="BLOG">BLOG</a>
-        <a href="../about/index.html" title="about me">ABOUT</a>
-        <a href="../contact/index.html" title="contact me">CONTACT</a> -->
-        
-            <a href="/archives" title="/archives">BLOG</a>
-        
-            <a href="/about" title="/about">ABOUT</a>
-        
-            <a href="/contact" title="/contact">CONTACT</a>
-        
-    </div>
-    <div class="homepage">
-        <a href="/" title="homepage">LI XUETAO</a>
-    </div>
-    <div class="socialmedia-nav">
-        <a class="link-item link-item-nav" title="Twitter" href="https://twitter.com/lixuetaoleo">
-            <i class="iconfont icon-twitter"></i>
-        </a>
-        <a class="link-item link-item-nav" title="Instagram" href="https://www.instagram.com/lixuetaoleo/">
-            <i class="iconfont icon-instagram"></i>
-        </a>
-        <a class="link-item link-item-nav" title="Weibo" href="https://weibo.com/u/1791741344">
-            <i class="iconfont icon-weibo"></i>
-        </a>
-        <a class="link-item link-item-nav" title="Github" href="https://github.com/lixuetaoleo">
-            <i class="iconfont icon-github"></i>
-        </a>
-    </div>
-</nav>
-	<article class="articlearticle">
-		<div class="article-title">
-			<h2 class="title">Start to JavaScript--function</h2>
-		</div>
-		<div class="article-meta">
-			<span class="article-time">2019-09-18</span>
-		</div>
-		<div class="article-content">
-			<p>继续JS的路</p>
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.9.0"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta charset="UTF-8"><title>Start to JavaScript--function | Li Xuetao</title><link rel="stylesheet" href="/css/temp.css"><link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+<link href="https://fonts.googleapis.com/css?family=Amatic+SC|Lato|Ubuntu+Mono&display=swap" rel="stylesheet"></head><body><div id="layout-page"><nav id="layout-menu"><div class="other-page"><a href="/about">About</a><a href="/archives">Archives</a></div><a id="mega-head" href="/">LI XUETAO</a><div class="layout-socialmedia"><a class="link-item main-link-item" title="Instagram" href="https://www.instagram.com/lixuetaoleo/"><i class="iconfont icon-instagram"></i></a><a class="link-item main-link-item" title="Twitter" href="https://twitter.com/lixuetaoleo"><i class="iconfont icon-twitter"></i></a><a class="link-item main-link-item" title="Weibo" href="https://weibo.com/u/1791741344"><i class="iconfont icon-weibo"></i></a><a class="link-item main-link-item" title="GitHub" href="https://github.com/lixuetaoleo"><i class="iconfont icon-github"></i></a></div></nav><div id="content"><article id="post"><h1>Start to JavaScript--function</h1><time class="created-date" datetime="2019-09-18T12:11:20.000Z">2019-09-18</time><p>继续JS的路</p>
 <p>今天是JS中的函数</p>
 <ul>
 <li><p>JS函数定义方法：</p>
@@ -63,44 +12,44 @@
 <li><p>关键字arguments与rest</p>
 <ol>
 <li><p>利用arguments，你可以获得调用者传入的所有参数。也就是说，即使函数不定义任何参数，还是可以拿到参数的值：</p>
-<pre><code>function abs() {
-if (arguments.length === 0) {
-    return 0;
- }
-var x = arguments[0];
-return x &gt;= 0 ? x : -x;
-}</code></pre></li>
+<pre><code> function abs() {
+ if (arguments.length === 0) {
+     return 0;
+  }
+ var x = arguments[0];
+ return x &gt;= 0 ? x : -x;
+ }</code></pre></li>
 <li><p>ES6标准引入了rest参数</p>
-<pre><code>function foo(a, b, ...rest) {
-  console.log(&apos;a = &apos; + a);
-  console.log(&apos;b = &apos; + b);
-  console.log(rest);
-}
-foo(1, 2, 3, 4, 5);
-// 结果:
-// a = 1
-// b = 2
-// Array [ 3, 4, 5 ]
-foo(1);
-// 结果:
-// a = 1
-// b = undefined
-// Array []</code></pre><p> rest参数只能写在最后，前面用…标识，从运行结果可知，传入的参数先绑定a、b，多余的参数以数组形式交给变量rest，所以，不再需要arguments我们就获取了全部参数。<br> 如果传入的参数连正常定义的参数都没填满，也不要紧，rest参数会接收一个空数组（注意不是undefined）。</p>
+<pre><code> function foo(a, b, ...rest) {
+   console.log(&#39;a = &#39; + a);
+   console.log(&#39;b = &#39; + b);
+   console.log(rest);
+ }
+ foo(1, 2, 3, 4, 5);
+ // 结果:
+ // a = 1
+ // b = 2
+ // Array [ 3, 4, 5 ]
+ foo(1);
+ // 结果:
+ // a = 1
+ // b = undefined
+ // Array []</code></pre><p> rest参数只能写在最后，前面用…标识，从运行结果可知，传入的参数先绑定a、b，多余的参数以数组形式交给变量rest，所以，不再需要arguments我们就获取了全部参数。<br> 如果传入的参数连正常定义的参数都没填满，也不要紧，rest参数会接收一个空数组（注意不是undefined）。</p>
 </li>
 </ol>
 </li>
 <li><p>JS中有一种变量提升的特性，即函数体的语句会首先被全部扫描，将所有声明的变量“提升”至函数的开头处，而不赋值，比如说：</p>
-<pre><code>function foo() {
-  var x = &apos;Hello, &apos; + y;
-  console.log(x);
-  var y = &apos;Bob&apos;;
-}
-foo();</code></pre><p>不报错，它相当于：</p>
+<pre><code>  function foo() {
+    var x = &#39;Hello, &#39; + y;
+    console.log(x);
+    var y = &#39;Bob&#39;;
+  }
+  foo();</code></pre><p>不报错，它相当于：</p>
 <pre><code>function foo() {
   var y; // 提升变量y的申明，此时y为undefined
-  var x = &apos;Hello, &apos; + y;
+  var x = &#39;Hello, &#39; + y;
   console.log(x);
-  y = &apos;Bob&apos;;
+  y = &#39;Bob&#39;;
 }</code></pre><p>因此在函数内部定义变量时，请严格遵守“在函数内部首先申明所有变量”这一规则。最常见的做法是用一个var申明函数内部用到的所有变量</p>
 </li>
 <li><p>由于JavaScript的变量作用域实际上是函数内部，我们在for循环等语句块中是无法定义具有局部作用域的变量的，为了解决块级作用域，ES6引入了新的关键字let，用let替代var可以申明一个块级作用域的变量。(const定义的常量也是具有块级作用域)</p>
@@ -110,10 +59,10 @@ foo();</code></pre><p>不报错，它相当于：</p>
 <li><p>map，批量处理array的元素：arr.map(func);</p>
 </li>
 <li><p>reduce, Array的reduce()把一个函数作用在这个Array的[x1, x2, x3…]上，这个函数必须接收两个参数，reduce()把结果继续和序列的下一个元素做累积计算：[x1, x2, x3, x4].reduce(f) = f(f(f(x1, x2), x3), x4)。比方说对一个Array求和，就可以用reduce实现：</p>
-<pre><code>var arr = [1, 3, 5, 7, 9];
-arr.reduce(function (x, y){
-    return x + y;
-}); // 25</code></pre></li>
+<pre><code> var arr = [1, 3, 5, 7, 9];
+ arr.reduce(function (x, y){
+     return x + y;
+ }); // 25</code></pre></li>
 </ol>
 </li>
 <li><p>filter函数，用法和map类似，只是filter()把传入的函数依次作用于每个元素，然后根据返回值是true还是false决定保留还是丢弃该元素。例如，在一个Array中，删掉偶数，只保留奇数，可以这么写：</p>
@@ -122,9 +71,9 @@ var r = arr.filter(function (x) {
     return x % 2 !== 0;
 });
 r; // [1, 5, 9, 15]</code></pre><p>filter()接收的回调函数，其实可以有多个参数。通常我们仅使用第一个参数，表示Array的某个元素。回调函数还可以接收另外两个参数，表示元素的位置和数组本身：</p>
-<pre><code>var arr = [&apos;A&apos;, &apos;B&apos;, &apos;C&apos;];
+<pre><code>var arr = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];
 var r = arr.filter(function (element, index, self) {
-    console.log(element); // 依次打印&apos;A&apos;, &apos;B&apos;, &apos;C&apos;
+    console.log(element); // 依次打印&#39;A&#39;, &#39;B&#39;, &#39;C&#39;
     console.log(index); // 依次打印0, 1, 2
     console.log(self); // self就是变量arr
     return true;
@@ -142,12 +91,5 @@ var r = arr.filter(function (element, index, self) {
 <li><p>箭头函数：x =&gt; x * x<br>相当于：function (x) {return x * x;}</p>
 </li>
 </ul>
-
-		</div>
-	</article>
-	<footer class="item-footer">
-    <p>© 2019-2077 Li Xuetao</p>
-</footer>
-</body>
-
-</html>
+</article><div id="paginator"></div></div><footer id="bottom"><span>Created By </span><a href="https://lixuetaoleo.github.io">Li Xuetao</a><span> | </span><a href="http://hexo.io"><span>HEXO</span></a></footer></div><script src="/js/temp.js"></script><script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script></body></html>
