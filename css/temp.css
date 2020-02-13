@@ -101,6 +101,7 @@
   box-sizing: border-box;
   margin: 20px auto;
   width: 50%;
+  font-size: 0.95rem;
 }
 #content ul {
   list-style: circle;
@@ -145,7 +146,7 @@
   text-align: right;
 }
 #post {
-  line-height: 2;
+  line-height: 1.5;
 }
 #post h1,
 #post .created-date {
@@ -160,12 +161,29 @@
 #post h6 {
   line-height: 2;
 }
+#post h2,
+#post h3,
+#post h4,
+#post h5,
+#post h6,
+#post ol,
+#post ul,
+#post p {
+  margin-top: 10px;
+}
+#post ul {
+  margin-top: 0.4rem;
+  padding-left: 0.8rem;
+}
+#post ul li {
+  margin: 0;
+}
 .sidebar-toc {
   position: relative;
   float: right;
 }
 code {
-  font-family: 'Ubuntu Mono', monospace;
+  font-family: 'Source Sans Pro', sans-serif;
   width: 100%;
   box-sizing: border-box;
   background: #d3d3d3;

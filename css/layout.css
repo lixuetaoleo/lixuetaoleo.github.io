@@ -39,6 +39,7 @@
   box-sizing: border-box;
   margin: 20px auto;
   width: 50%;
+  font-size: 0.95rem;
 }
 #content ul {
   list-style: circle;
