@@ -2,6 +2,15 @@
 title: About Me
 layout: page
 ---
+什么都会，什么都不会
+
+没有什么擅长的前C++用户
+
+熟悉:
+JavaScript, React(with Redux), Node.js/Express, C++, Git, Visual Studio Code
+
+会用:
+Linux(Mint), Pug(Jade), Stylus
 
 ## 关于我
 本科 | [西安邮电大学(XUPT)](http://www.xupt.edu.cn/) | 电子信息工程 | 2014.9–2018.7
@@ -11,17 +20,8 @@ layout: page
 ## 联系方式
 E-Mail: lixuetaoleo@163.com || lixuetaoleo@gmail.com
 
-## 兴趣
-爱旅行，西至敦煌东至东极岛，南达三亚北只及北京hhh
+Github: [lixuetaoleo](https://github.com/lixuetaoleo)
 
-爱读书，任何类型的书
+---
 
-爱音乐，爱摇滚，最爱许巍、朴树，也爱痛仰, 新裤子, Coldplay, U2, Oasis；会一点吉他，想写歌
-
-爱运动，爱足球，最爱巴萨梅西阿根廷，也爱多特罗伊斯，但主队永远是中国队！
-
-爱运动，爱滑雪，吸食白色鸦片，想学单板。
-
-爱宅，爱看各种自认为好看的电影&剧，爱玩Switch(塞尔达天下第一！！！只要你吹塞尔达我们就能做朋友)
-
-最后，爱小鱼，爱我的家人和朋友，爱这个千疮百孔的世界
+爱小鱼，爱我的家人和朋友，爱这个千疮百孔的世界
