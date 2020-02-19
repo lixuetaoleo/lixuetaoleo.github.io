@@ -1,0 +1,43 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.9.0"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta charset="UTF-8"><title>JavaScript中new的原理及手动模拟实现 | Li Xuetao</title><link rel="stylesheet" href="/css/temp.css"><link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+<link href="https://fonts.googleapis.com/css?family=Amatic+SC|Lato|Source+Sans+Pro&display=swap" rel="stylesheet"></head><body><div id="layout-page"><nav id="layout-menu"><div class="other-page"><a href="/about">About</a><a href="/archives">Archives</a></div><a id="mega-head" href="/">LI XUETAO</a><div class="layout-socialmedia"><a class="link-item main-link-item" title="Instagram" href="https://www.instagram.com/lixuetaoleo/"><i class="iconfont icon-instagram"></i></a><a class="link-item main-link-item" title="Twitter" href="https://twitter.com/lixuetaoleo"><i class="iconfont icon-twitter"></i></a><a class="link-item main-link-item" title="Weibo" href="https://weibo.com/u/1791741344"><i class="iconfont icon-weibo"></i></a><a class="link-item main-link-item" title="GitHub" href="https://github.com/lixuetaoleo"><i class="iconfont icon-github"></i></a></div></nav><div id="content"><article id="post"><h1>JavaScript中new的原理及手动模拟实现</h1><time class="created-date" datetime="2020-02-18T08:23:28.000Z">2020-02-18</time><p>js中使用new创造的实例可以：</p>
+<ol>
+<li>访问到构造函数里的属性</li>
+<li>访问到构造函数prototype里的属性</li>
+</ol>
+<p>得到手动模拟实现new的代码：</p>
+<pre><code class="js">function objectFactory(){
+    const argument = [...arguments];
+    let obj = new Object();
+    let Constructor = argument.shift();
+    obj.__proto__ = Constructor.prototype;
+    Constructor.apply(obj, argument);
+}</code></pre>
+<p>但是有一个问题，就是假如构造函数有返回值，如下例子：</p>
+<pre><code class="js">function Otaku (name, age) {
+    this.strength = 60;
+    this.age = age;
+
+    return {
+        name: name,
+        habit: &#39;Games&#39;
+    }
+}
+
+var person = new Otaku(&#39;Kevin&#39;, &#39;18&#39;);
+
+console.log(person.name) // Kevin
+console.log(person.habit) // Games
+console.log(person.strength) // undefined
+console.log(person.age) // undefined</code></pre>
+<p>在这个例子中，构造函数返回了一个对象，在实例 person 中只能访问返回的对象中的属性。<br>如果构造函数返回的只是一个基本类型的值，则没有影响(相当于没有返回值)</p>
+<p>所以，对上面模拟new代码进行优化，返回的时候判断类型</p>
+<pre><code class="js">function objectFactory(){
+    const argument = [...arguments];
+    let obj = new Object();
+    let Constructor = argument.shift();
+    obj.__proto__ = Constructor.prototype;
+    let ret = Constructor.apply(obj, argument);
+    return typeof ret === &#39;object&#39; ? ret:obj;
+}</code></pre>
+</article><div id="paginator"></div></div><footer id="bottom"><span>Created By </span><a href="https://lixuetaoleo.github.io">Li Xuetao</a><span> | </span><a href="http://hexo.io"><span>HEXO</span></a></footer></div><script src="/js/temp.js"></script><script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script></body></html>

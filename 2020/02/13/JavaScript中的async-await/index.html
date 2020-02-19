@@ -1,0 +1,109 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.9.0"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta charset="UTF-8"><title>JavaScript中的async/await | Li Xuetao</title><link rel="stylesheet" href="/css/temp.css"><link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+<link href="https://fonts.googleapis.com/css?family=Amatic+SC|Lato|Source+Sans+Pro&display=swap" rel="stylesheet"></head><body><div id="layout-page"><nav id="layout-menu"><div class="other-page"><a href="/about">About</a><a href="/archives">Archives</a></div><a id="mega-head" href="/">LI XUETAO</a><div class="layout-socialmedia"><a class="link-item main-link-item" title="Instagram" href="https://www.instagram.com/lixuetaoleo/"><i class="iconfont icon-instagram"></i></a><a class="link-item main-link-item" title="Twitter" href="https://twitter.com/lixuetaoleo"><i class="iconfont icon-twitter"></i></a><a class="link-item main-link-item" title="Weibo" href="https://weibo.com/u/1791741344"><i class="iconfont icon-weibo"></i></a><a class="link-item main-link-item" title="GitHub" href="https://github.com/lixuetaoleo"><i class="iconfont icon-github"></i></a></div></nav><div id="content"><article id="post"><h1>JavaScript中的async/await</h1><time class="created-date" datetime="2020-02-13T01:02:50.000Z">2020-02-13</time><p>参考:<a href="https://developer.mozilla.org/zh-CN/docs/learn/JavaScript/%E5%BC%82%E6%AD%A5/Async_await" target="_blank" rel="noopener">MDN-async和await:让异步编程更简单</a></p>
+<ol>
+<li>它们是ES2017加入的关键字，充当Promise的语法糖。</li>
+<li>async关键字放在函数声明之前，它将任何函数转化为Promise，使得该函数返回后可以用then()方法。<pre><code class="js">//写法1
+async function hello() { return &quot;Hello&quot; };
+//写法2
+let hello = async function() { return &quot;Hello&quot; };
+//写法3
+let hello = async () =&gt; { return &quot;Hello&quot; };
+console.log(hello()); // Promise { &#39;hello&#39; }
+hello().then((result)=&gt;console.log(result)); // hello</code></pre>
+</li>
+</ol>
+<p>通过仅在函数声明为异步时添加必要的处理，JavaScript引擎可以优化程序。</p>
+<ol start="3">
+<li>await可以放在任何基于异步声明的函数之前，只能在异步函数内部工作暂停代码在该行上，直到promise完成，然后返回结果值。与此同时，可能正在等待执行机会的其他代码也会这样做。可以在调用任何返回Promise的函数时使用await，包括Web API函数。</li>
+</ol>
+<p>有如下基于Promise的代码：</p>
+<pre><code class="js">fetch(&#39;coffee.jpg&#39;)
+.then(response =&gt; response.blob())
+.then(myBlob =&gt; {
+    let objectURL = URL.createObjectURL(myBlob);
+    let image = document.createElement(&#39;img&#39;);
+    image.src = objectURL;
+    document.body.appendChild(image);
+})
+.catch(e=&gt;{
+    console.log(&#39;there has been a problem with your fetch operation: &#39; + e.message);
+});</code></pre>
+<p>利用async和await进行优化</p>
+<pre><code class="js">async function myFetch(){
+    let response = await fetch(&#39;coffee.jpg&#39;);
+    let myBlob = await response.blob();
+    let objectURL = URL.createObjectURL(myBlob);
+    let image = document.createElement(&#39;img&#39;);
+    image.src = objectURL;
+    document.body.appendChild(image);
+}
+myFetch();</code></pre>
+<p>或者可以把async/await和Promise进行混合搭配:</p>
+<pre><code class="js">async function myFetch() {
+  let response = await fetch(&#39;coffee.jpg&#39;);
+  return await response.blob();
+}
+
+myFetch().then((blob) =&gt; {
+  let objectURL = URL.createObjectURL(blob);
+  let image = document.createElement(&#39;img&#39;);
+  image.src = objectURL;
+  document.body.appendChild(image);
+});</code></pre>
+<p>async/await也可以try…catch</p>
+<pre><code class="js">async function myFetch() {
+  try {
+    let response = await fetch(&#39;coffee.jpg&#39;);
+    let myBlob = await response.blob();
+
+    let objectURL = URL.createObjectURL(myBlob);
+    let image = document.createElement(&#39;img&#39;);
+    image.src = objectURL;
+    document.body.appendChild(image);
+  } catch(e) {
+    console.log(e);
+  }}
+myFetch();</code></pre>
+<hr>
+<h3 id="async-await的一个缺点"><a href="#async-await的一个缺点" class="headerlink" title="async/await的一个缺点"></a>async/await的一个缺点</h3><p>await关键字阻止执行所有代码，直到promise完成，就像执行同步操作一样。它允许其他任务在此期间继续运行，但自己的代码被阻止。</p>
+<p>这意味着代码可能会因为大量等待的promises相继发生而变慢。<code>每个await将等待前一个完成</code>，而实际上我们想要的是promises同时开始处理（就像我们没有使用async/await时那样）。</p>
+<p>有一种模式可以缓解这个问题 ––通过关闭所有promise进程将Promise对象存储在变量中，然后等待触发它们。</p>
+<p>如下段代码：</p>
+<pre><code class="js">function timeoutPromise(interval) {
+        return new Promise((resolve, reject) =&gt; {
+          setTimeout(function(){
+            resolve(&quot;done&quot;);
+          }, interval);
+        });
+      };
+ /*主要是这段
+async function timeTest() {
+        await timeoutPromise(3000);
+        await timeoutPromise(3000);
+        await timeoutPromise(3000);
+}
+*/
+      let startTime = Date.now();
+      timeTest().then(() =&gt; {
+        let finishTime = Date.now();
+        let timeTaken = finishTime - startTime;
+        console.log(&#39;finish&#39; + Date.now());
+        alert(&quot;Time taken in milliseconds: &quot; + timeTaken);
+      })
+      console.log(&#39;start&#39;+Date.now());</code></pre>
+<p>上面注释那一段会等待所有三个timeoutPromise()调用，使每个调用3秒钟。后续的每一个都被迫等到最后一个完成，导致最后总用时9s。</p>
+<p>对上面那段优化：</p>
+<pre><code class="js">async function timeTest() {
+  const timeoutPromise1 = timeoutPromise(3000);
+  const timeoutPromise2 = timeoutPromise(3000);
+  const timeoutPromise3 = timeoutPromise(3000);
+
+  await timeoutPromise1;
+  await timeoutPromise2;
+  await timeoutPromise3;
+}</code></pre>
+<p>在这里，将三个Promise对象存储在变量中，这样可以同时启动它们关联的进程。接下来，等待他们的结果 - 因为promise都在基本上同时开始处理，promise将同时完成;</p>
+<p>第二个示例警报框报告总运行时间刚刚过3秒！</p>
+<p><code>对于使用async/await造成的性能问题，必须仔细测试代码，并在性能开始受损时牢记这一点。</code></p>
+</article><div id="paginator"></div></div><footer id="bottom"><span>Created By </span><a href="https://lixuetaoleo.github.io">Li Xuetao</a><span> | </span><a href="http://hexo.io"><span>HEXO</span></a></footer></div><script src="/js/temp.js"></script><script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script></body></html>

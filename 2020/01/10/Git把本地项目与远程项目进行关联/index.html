@@ -1,0 +1,14 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.9.0"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta charset="UTF-8"><title>Git把本地项目与远程项目进行关联 | Li Xuetao</title><link rel="stylesheet" href="/css/temp.css"><link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+<link href="https://fonts.googleapis.com/css?family=Amatic+SC|Lato|Source+Sans+Pro&display=swap" rel="stylesheet"></head><body><div id="layout-page"><nav id="layout-menu"><div class="other-page"><a href="/about">About</a><a href="/archives">Archives</a></div><a id="mega-head" href="/">LI XUETAO</a><div class="layout-socialmedia"><a class="link-item main-link-item" title="Instagram" href="https://www.instagram.com/lixuetaoleo/"><i class="iconfont icon-instagram"></i></a><a class="link-item main-link-item" title="Twitter" href="https://twitter.com/lixuetaoleo"><i class="iconfont icon-twitter"></i></a><a class="link-item main-link-item" title="Weibo" href="https://weibo.com/u/1791741344"><i class="iconfont icon-weibo"></i></a><a class="link-item main-link-item" title="GitHub" href="https://github.com/lixuetaoleo"><i class="iconfont icon-github"></i></a></div></nav><div id="content"><article id="post"><h1>Git把本地项目与远程项目进行关联</h1><time class="created-date" datetime="2020-01-10T07:06:23.000Z">2020-01-10</time><p>有时候会遇见这种情况</p>
+<p>本地新建了一个Git项目但是在GitHub却没有建立一个仓库，所以导致本地的项目无法推送到GitHub上</p>
+<p>所以在很长一段时间内，我都是现在GitHub新建一个仓库后clone下来再新建项目</p>
+<p>后来针对这个问题进行了探索，方法呈现如下：</p>
+<p>1.在本地项目添加origin，修改对应域名、用户名和项目名：</p>
+<pre><code class="bash">git remote add origin git@github.com:your_username/your_project.git</code></pre>
+<p>2.将远程项目先拉取并合并，允许不相关历史合并</p>
+<pre><code class="bash">git pull origin master --allow-unrelated-histories</code></pre>
+<p>3.合并后推送到远程，-u参数把本地的master分支和远程的master分支关联起来：</p>
+<pre><code class="bash">git push -u origin master</code></pre>
+<p>done</p>
+</article><div id="paginator"></div></div><footer id="bottom"><span>Created By </span><a href="https://lixuetaoleo.github.io">Li Xuetao</a><span> | </span><a href="http://hexo.io"><span>HEXO</span></a></footer></div><script src="/js/temp.js"></script><script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script></body></html>
