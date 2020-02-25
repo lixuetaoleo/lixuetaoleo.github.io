@@ -24,11 +24,13 @@ html(lang=config.language)
         div.other-page
           each url, label in theme.menu
             a(href=url)= label
-        a#mega-head(href='/')= config.author
+        div#mega-head
+          a(href='/')= config.author
         div.layout-socialmedia
           each url,label in config.socialmedia
             a(class='link-item main-link-item' title=label href=url)
               i(class='iconfont icon-'+theme.social_icons[label])
+        div.responsive-bar= '\u2261'
       #content
         if body
           div!= body
