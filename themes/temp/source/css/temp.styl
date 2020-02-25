@@ -1,11 +1,11 @@
-/* http//meyerweb.com/eric/tools/css/reset/
-   v2.0 | 20110126
-   License none (public domain)
-*/
 @import "index.styl"
-@import "layout.styl"
+@media (min-width 768px)
+  @import "layout.styl"
+  @import "archive.styl"
+@media (max-width 767px)
+  @import "layout-smallscreen.styl"
+  @import "archive-smallscreen.styl"
 @import "post.styl"
-@import "archive.styl"
 @import "page.styl"
 
 html, body, div, span, applet, object, iframe,
