@@ -92,9 +92,23 @@
       color: gray 
 // .layout-socialmedia, .other-page
 //     display: none
+.layout-socialmedia, .other-page
+    animation: showmenu 1s linear
+    @keyframes showmenu
+        from
+            opacity: 0
+        to
+            opacity: 1
 .layout-socialmedia.hide, .other-page.hide
     display: none
 .responsive-bar
+    box-sizing: border-box
+    font-size: 2rem
+    text-align: right
+    padding-right: 5px
+    height: 2rem
+
+.responsive-bar.show
     box-sizing: border-box
     font-size: 2rem
     text-align: right
@@ -105,4 +119,4 @@
         from
             transform: rotate(0)
         to
-            transform: rotate(360deg) 
+            transform: rotate(360deg)
