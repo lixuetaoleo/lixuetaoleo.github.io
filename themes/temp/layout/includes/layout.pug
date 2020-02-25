@@ -21,16 +21,17 @@ html(lang=config.language)
   body
     #layout-page
       nav#layout-menu
-        div.other-page
+        div.other-page.hide
           each url, label in theme.menu
             a(href=url)= label
+        div.responsive-pad
         div#mega-head
           a(href='/')= config.author
-        div.layout-socialmedia
+        div.layout-socialmedia.hide
           each url,label in config.socialmedia
             a(class='link-item main-link-item' title=label href=url)
               i(class='iconfont icon-'+theme.social_icons[label])
-        div.responsive-bar= '\u2261'
+        div(class='responsive-bar', onclick='toggle(this)')= '\u2261'
       #content
         if body
           div!= body
