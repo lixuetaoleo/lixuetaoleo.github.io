@@ -1,0 +1,84 @@
+#layout-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+  font-family: 'Lato', sans-serif;
+}
+#layout-menu {
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0px;
+  background-color: #fff;
+}
+#layout-menu a,
+#layout-menu div {
+  flex: 1;
+}
+#layout-menu .other-page a {
+  margin: 0 10px;
+  text-decoration: none;
+  font-size: 1.125em;
+  color: #000;
+}
+#layout-menu .other-page a:visited {
+  color: #000;
+}
+#layout-menu .other-page a:hover {
+  color: #808080;
+}
+#content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  box-sizing: border-box;
+  margin: 20px auto;
+  width: 70%;
+  font-size: 0.95rem;
+}
+#content ul {
+  list-style: circle;
+}
+#content ol {
+  list-style: decimal;
+}
+#content a {
+  text-decoration: none;
+  color: #337ab7;
+}
+#content a:hover {
+  border-bottom: 1px solid;
+}
+#content blockquote {
+  background: #f8f8f8;
+  width: 100%;
+  box-sizing: border-box;
+  border-left: 10px solid #d3d3d3;
+}
+#paginator {
+  text-align: center;
+  margin-bottom: 0;
+}
+#paginator .page-number {
+  margin: 0 5px;
+}
+#mega-head {
+  text-align: center;
+  text-decoration: none;
+  font-family: 'Amatic SC', cursive;
+  font-size: 2em;
+  color: #000;
+}
+#mega-head a:visited {
+  color: #000;
+}
+#mega-head a:hover {
+  color: #808080;
+}
+.layout-socialmedia {
+  text-align: right;
+}
