@@ -141,10 +141,12 @@
   }
   #mega-head {
     text-align: center;
-    text-decoration: none;
     font-family: 'Amatic SC', cursive;
     font-size: 3em;
     color: #000;
+  }
+  #mega-head a {
+    text-decoration: none;
   }
   #mega-head a:visited {
     color: #000;
@@ -154,6 +156,25 @@
   }
   .layout-socialmedia {
     text-align: right;
+  }
+  .responsive-bar,
+  .responsive-pad {
+    display: none;
+  }
+  .archive {
+    text-align: center;
+    flex: 1;
+  }
+  .archive-list-item {
+    height: 24px;
+    line-height: 24px;
+    margin-top: 15px;
+  }
+  .archive-list-item .archive-article-title {
+    float: left;
+  }
+  .archive-list-item .archive-article-time {
+    float: right;
   }
 }
 @media (max-width: 767px) {
@@ -173,22 +194,6 @@
     position: sticky;
     top: 0px;
     background-color: #fff;
-  }
-  #layout-menu a,
-  #layout-menu div {
-    flex: 1;
-  }
-  #layout-menu .other-page a {
-    margin: 0 10px;
-    text-decoration: none;
-    font-size: 1.125em;
-    color: #000;
-  }
-  #layout-menu .other-page a:visited {
-    color: #000;
-  }
-  #layout-menu .other-page a:hover {
-    color: #808080;
   }
   #content {
     display: flex;
@@ -221,16 +226,25 @@
   #paginator {
     text-align: center;
     margin-bottom: 0;
+    margin-top: 10px;
   }
   #paginator .page-number {
     margin: 0 5px;
   }
+  .responsive-pad {
+    width: 25px;
+    padding-left: 5px;
+  }
   #mega-head {
     text-align: center;
     text-decoration: none;
+    margin: 0 auto;
     font-family: 'Amatic SC', cursive;
     font-size: 2em;
     color: #000;
+  }
+  #mega-head a {
+    text-decoration: none;
   }
   #mega-head a:visited {
     color: #000;
@@ -239,7 +253,129 @@
     color: #808080;
   }
   .layout-socialmedia {
+    position: absolute;
+    width: 100%;
+    top: 5.5rem;
+    text-align: center;
+    background-color: #fff;
+  }
+  .other-page {
+    background-color: #fff;
+    width: 100%;
+    position: absolute;
+    top: 2rem;
+  }
+  .other-page a {
+    font-size: 1.25rem;
+    margin: 6px auto;
+    display: block;
+    text-decoration: none;
+    text-align: center;
+  }
+  .other-page a:visited {
+    color: #000;
+  }
+  .other-page a:hover {
+    color: #808080;
+  }
+  .layout-socialmedia,
+  .other-page {
+    animation: showmenu 1s linear;
+  }
+@-moz-keyframes showmenu {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+}
+@-webkit-keyframes showmenu {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+}
+@-o-keyframes showmenu {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+}
+@keyframes showmenu {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+}
+  .layout-socialmedia.hide,
+  .other-page.hide {
+    display: none;
+  }
+  .responsive-bar {
+    box-sizing: border-box;
+    font-size: 2rem;
     text-align: right;
+    padding-right: 5px;
+    height: 2rem;
+  }
+  .responsive-bar.show {
+    box-sizing: border-box;
+    font-size: 2rem;
+    text-align: right;
+    padding-right: 5px;
+    height: 2rem;
+    animation: show 1s ease;
+  }
+@-moz-keyframes show {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+}
+@-webkit-keyframes show {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+}
+@-o-keyframes show {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+}
+@keyframes show {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+}
+  .archive {
+    text-align: center;
+    flex: 1;
+  }
+  .archive-list-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    line-height: 20px;
+    margin-top: 15px;
   }
 }
 #post {
@@ -291,21 +427,6 @@ img {
   max-height: 100%;
   box-sizing: border-box;
   border: 1px solid #eaeefb;
-}
-.archive {
-  text-align: center;
-  flex: 1;
-}
-.archive-list-item {
-  height: 24px;
-  line-height: 24px;
-  margin-top: 15px;
-}
-.archive-list-item .archive-article-title {
-  float: left;
-}
-.archive-list-item .archive-article-time {
-  float: right;
 }
 #page {
   line-height: 2;

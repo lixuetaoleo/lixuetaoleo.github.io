@@ -69,10 +69,12 @@
 }
 #mega-head {
   text-align: center;
-  text-decoration: none;
   font-family: 'Amatic SC', cursive;
   font-size: 3em;
   color: #000;
+}
+#mega-head a {
+  text-decoration: none;
 }
 #mega-head a:visited {
   color: #000;
@@ -82,4 +84,8 @@
 }
 .layout-socialmedia {
   text-align: right;
+}
+.responsive-bar,
+.responsive-pad {
+  display: none;
 }
