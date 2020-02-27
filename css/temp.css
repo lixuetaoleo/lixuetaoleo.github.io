@@ -158,7 +158,8 @@
     text-align: right;
   }
   .responsive-bar,
-  .responsive-pad {
+  .responsive-pad,
+  .responsive-bar.show {
     display: none;
   }
   .archive {
@@ -194,6 +195,17 @@
     position: sticky;
     top: 0px;
     background-color: #fff;
+    text-align: center;
+  }
+  #layout-menu a {
+    color: #000;
+    text-decoration: none;
+  }
+  #layout-menu a:visited {
+    color: #000;
+  }
+  #layout-menu a:hover {
+    color: #808080;
   }
   #content {
     display: flex;
@@ -236,27 +248,14 @@
     padding-left: 5px;
   }
   #mega-head {
-    text-align: center;
-    text-decoration: none;
     margin: 0 auto;
     font-family: 'Amatic SC', cursive;
     font-size: 2em;
-    color: #000;
-  }
-  #mega-head a {
-    text-decoration: none;
-  }
-  #mega-head a:visited {
-    color: #000;
-  }
-  #mega-head a:hover {
-    color: #808080;
   }
   .layout-socialmedia {
     position: absolute;
     width: 100%;
     top: 5.5rem;
-    text-align: center;
     background-color: #fff;
   }
   .other-page {
@@ -269,14 +268,6 @@
     font-size: 1.25rem;
     margin: 6px auto;
     display: block;
-    text-decoration: none;
-    text-align: center;
-  }
-  .other-page a:visited {
-    color: #000;
-  }
-  .other-page a:hover {
-    color: #808080;
   }
   .layout-socialmedia,
   .other-page {
@@ -318,7 +309,8 @@
   .other-page.hide {
     display: none;
   }
-  .responsive-bar {
+  .responsive-bar,
+  .responsive-bar.show {
     box-sizing: border-box;
     font-size: 2rem;
     text-align: right;
@@ -326,11 +318,6 @@
     height: 2rem;
   }
   .responsive-bar.show {
-    box-sizing: border-box;
-    font-size: 2rem;
-    text-align: right;
-    padding-right: 5px;
-    height: 2rem;
     animation: show 1s ease;
   }
 @-moz-keyframes show {
