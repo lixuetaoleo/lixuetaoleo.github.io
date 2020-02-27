@@ -6,13 +6,22 @@
         font-weight: bold
     h2,h3,h4,h5,h6
         line-height: 2
-    h2,h3,h4,h5,h6,ol,ul,p
         margin-top: 10px
-    ul
-        margin-top: .4rem
-        padding-left: .8rem
-        li
-            margin: 0
+    ol,ul,p,pre
+        margin-top: 10px
+    ol,ul
+        padding-left: 1rem
+    table
+        text-align: center
+        width: 100%
+        margin: 10px auto
+        border: 1px solid black
+        tbody
+            tr:nth-child(odd)
+                background: lightgray;
+            tr:nth-child(even)
+                background: white;
+
 .sidebar-toc
     position: relative
     float: right
