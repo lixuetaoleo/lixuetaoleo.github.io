@@ -171,3 +171,18 @@
     transform: rotate(360deg);
   }
 }
+#bottom {
+  box-sizing: border-box;
+  height: 24px;
+  line-height: 24px;
+}
+#bottom a {
+  text-decoration: none;
+  color: #000;
+}
+#bottom a:visited {
+  color: #000;
+}
+#bottom a:hover {
+  color: #808080;
+}
