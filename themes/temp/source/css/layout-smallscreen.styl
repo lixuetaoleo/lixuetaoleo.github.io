@@ -5,7 +5,6 @@
     justify-content: center
     min-height: 100%;
     font-family: 'Lato', sans-serif;
-
 #layout-menu
     box-sizing: border-box
     width: 100%
@@ -14,6 +13,14 @@
     position: sticky;
     top: 0px;
     background-color: white
+    text-align: center
+    a
+        color: black
+        text-decoration: none
+    a:visited
+        color: black
+    a:hover
+        color: gray
 
 #content
     display: flex
@@ -50,48 +57,27 @@
     padding-left: 5px
 
 #mega-head
-    text-align: center
-    text-decoration: none
     margin: 0 auto
     font-family: 'Amatic SC', cursive;
     font-size: 2em
-    color: black
-    a
-        text-decoration: none
-    a:visited
-        color: black
-    a:hover
-        color: gray
 
 .layout-socialmedia
     position: absolute
     width: 100%
     top: 5.5rem
-    text-align: center
     background-color: white
 
 .other-page
     background-color: white
-    // flex: 1
     width: 100%
     position: absolute
     top: 2rem
     a
-        // width: 100%
         font-size: 1.25rem
         margin: 6px auto
         display: block
-        // margin: 0 auto
-        text-decoration: none
-        text-align: center
-    //   font-size: 1.125em
-    //   color: black
-    a:visited
-      color: black
-    a:hover
-      color: gray 
-// .layout-socialmedia, .other-page
-//     display: none
+        
+
 .layout-socialmedia, .other-page
     animation: showmenu 1s linear
     @keyframes showmenu
@@ -99,8 +85,10 @@
             opacity: 0
         to
             opacity: 1
+            
 .layout-socialmedia.hide, .other-page.hide
     display: none
+
 .responsive-bar
     box-sizing: border-box
     font-size: 2rem
@@ -109,11 +97,7 @@
     height: 2rem
 
 .responsive-bar.show
-    box-sizing: border-box
-    font-size: 2rem
-    text-align: right
-    padding-right: 5px
-    height: 2rem
+    @extend .responsive-bar
     animation: show 1s ease 
     @keyframes show
         from
