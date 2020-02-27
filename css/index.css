@@ -6,6 +6,16 @@
   height: 100%;
   overflow: hidden;
 }
+#main-page a {
+  text-decoration: none;
+  color: #000;
+}
+#main-page a:visited {
+  color: #000;
+}
+#main-page a:hover {
+  color: #808080;
+}
 #main-page:after {
   content: "";
   background-image: url("../image/bgi.jpg");
@@ -44,28 +54,10 @@
 }
 #index-menu a {
   margin: 0 10px;
-  text-decoration: none;
   font-family: 'Lato', sans-serif;
-  color: #000;
-}
-#index-menu a:visited {
-  color: #000;
-}
-#index-menu a:hover {
-  color: #808080;
 }
 #bottom {
   box-sizing: border-box;
   height: 24px;
   line-height: 24px;
-}
-#bottom a {
-  text-decoration: none;
-  color: #000;
-}
-#bottom a:visited {
-  color: #000;
-}
-#bottom a:hover {
-  color: #808080;
 }

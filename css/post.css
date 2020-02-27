@@ -13,23 +13,29 @@
 #post h5,
 #post h6 {
   line-height: 2;
-}
-#post h2,
-#post h3,
-#post h4,
-#post h5,
-#post h6,
-#post ol,
-#post ul,
-#post p {
   margin-top: 10px;
 }
-#post ul {
-  margin-top: 0.4rem;
-  padding-left: 0.8rem;
+#post ol,
+#post ul,
+#post p,
+#post pre {
+  margin-top: 10px;
 }
-#post ul li {
-  margin: 0;
+#post ol,
+#post ul {
+  padding-left: 1rem;
+}
+#post table {
+  text-align: center;
+  width: 100%;
+  margin: 10px auto;
+  border: 1px solid #000;
+}
+#post table tbody tr:nth-child(odd) {
+  background: #d3d3d3;
+}
+#post table tbody tr:nth-child(even) {
+  background: #fff;
 }
 .sidebar-toc {
   position: relative;
