@@ -5,14 +5,16 @@
   justify-content: center
   height: 100%;
   overflow: hidden
+  a
+    text-decoration: none
+    color: black
+  a:visited
+    color: black
+  a:hover
+    color: gray 
   &:after
     content: ""  
     background-image: url('../image/bgi.jpg')
-    // animation: changeImage 20s infinite step-end
-    // @keyframes changeImage
-    //   for i in 0..3
-    //     {25% * i}
-    //       background-image: url('../image/img'+i+'.jpg')
     background-position: center center
     background-size: cover
     top: 0
@@ -25,38 +27,26 @@
 
 #mega-title,#index-menu,.main-socialmedia,#bottom
   text-align: center
+
 #mega-title,#index-menu,.main-socialmedia
   flex:1
+  
 #mega-title
   margin-top:150px;
   line-height: 5em
-  
   h1
     font-size: 5em
-    font-family: 'Amatic SC', cursive;
+    font-family: 'Amatic SC', cursive
   p
     font-size: 1.25em
-    font-family: 'Lato', sans-serif;
+    font-family: 'Lato', sans-serif
+
 #index-menu
   a
     margin: 0 10px;
-    text-decoration: none
-    font-family: 'Lato', sans-serif;
-    color: black
-  a:visited
-    color: black
-  a:hover
-    color: gray 
+    font-family: 'Lato', sans-serif
 
 #bottom
   box-sizing: border-box
   height:24px
   line-height:24px
-  a
-    text-decoration: none
-    color: black
-  a:visited
-    color: black
-  a:hover
-    color: gray 
-
