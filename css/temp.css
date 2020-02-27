@@ -577,3 +577,51 @@ q:after {
 .icon-instagram:before {
   content: "\e886";
 }
+.icon-gallary:before {
+  content: "\e7d7";
+}
+.icon-rss:before {
+  content: "\e7e0";
+}
+.icon-alipay:before {
+  content: "\e87c";
+}
+.icon-zhihu:before {
+  content: "\e87d";
+}
+.icon-linkedin:before {
+  content: "\e87e";
+}
+.icon-facebook:before {
+  content: "\e87f";
+}
+.icon-skype:before {
+  content: "\e880";
+}
+.icon-codesandbox:before {
+  content: "\e881";
+}
+.icon-codepen:before {
+  content: "\e882";
+}
+.icon-sketch:before {
+  content: "\e883";
+}
+.icon-gitlab:before {
+  content: "\e884";
+}
+.icon-dribbble:before {
+  content: "\e885";
+}
+.icon-reddit:before {
+  content: "\e887";
+}
+.icon-youtube:before {
+  content: "\e888";
+}
+.icon-qq:before {
+  content: "\e889";
+}
+.icon-wechat:before {
+  content: "\e88c";
+}
