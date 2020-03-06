@@ -1,0 +1,65 @@
+<!DOCTYPE html><html lang="en"><head><meta name="generator" content="Hexo 3.9.0"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta charset="UTF-8"><title>Client-side Storage | LI XUETAO</title><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+<link href="https://fonts.googleapis.com/css?family=Amatic+SC|Lato|Source+Sans+Pro&display=swap" rel="stylesheet"></head><body><div id="layout-page"><nav id="layout-menu"><div class="other-page hide"><a href="/about">About</a><a href="/archives">Archives</a></div><div class="responsive-pad"></div><div id="mega-head"><a href="/">LI XUETAO</a></div><div class="layout-socialmedia hide"><a class="link-item main-link-item" title="Instagram" href="https://www.instagram.com/lixuetaoleo/"><i class="iconfont icon-instagram"></i></a><a class="link-item main-link-item" title="Twitter" href="https://twitter.com/lixuetaoleo"><i class="iconfont icon-twitter"></i></a><a class="link-item main-link-item" title="Weibo" href="https://weibo.com/u/1791741344"><i class="iconfont icon-weibo"></i></a><a class="link-item main-link-item" title="GitHub" href="https://github.com/lixuetaoleo"><i class="iconfont icon-github"></i></a></div><div class="responsive-bar" onclick="toggle(this)">≡</div></nav><div id="content"><article id="post"><h1>Client-side Storage</h1><time class="created-date" datetime="2020-03-06T01:26:54.000Z">2020-03-06</time><p>参考:<a href="https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/Client-side_web_APIs/Client-side_storage" target="_blank" rel="noopener">Client-side Storage by MDN</a></p>
+<h2 id="什么是客户端存储"><a href="#什么是客户端存储" class="headerlink" title="什么是客户端存储"></a>什么是客户端存储</h2><ol>
+<li><p>概述：在客户端存储数据 (比如在用户的机器上)，而且可以在需要的时候重新取得需要的数据。</p>
+</li>
+<li><p>用处：</p>
+<ol>
+<li>个性化网站偏好（比如显示一个用户选择的窗口小部件，颜色主题，或者字体）。</li>
+<li>保存之前的站点行为 (比如从先前的session中获取购物车中的内容， 记住用户是否之前已经登陆过)。</li>
+<li>本地化保存数据和静态资源可以使一个站点更快（至少让资源变少）的下载， 甚至可以在网络失去链接的时候变得暂时可用。</li>
+<li>保存web已经生产的文档可以在离线状态下访问。 </li>
+</ol>
+</li>
+</ol>
+<h2 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>Cookie是服务器发送到浏览器并保存在本地的<code>一小块数据</code>，会在浏览器向服务器再次发起请求时携带，通常被用来告知服务器两个请求是否来自同一浏览器，比如保持用户登录状态。</p>
+<h3 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h3><ol>
+<li>会话状态管理(如用户登录状态，购物车，游戏分数等)</li>
+<li>个性化设置(如用户自定义设置，主题等)</li>
+<li>浏览器行为跟踪(如跟踪分析用户行为等)</li>
+</ol>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><p>浏览器每次请求都会携带Cookie，带来额外开销，<code>渐渐被淘汰</code></p>
+<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><p>当服务器收到HTTP请求时，服务器在响应头里加一个set-cookie选项，浏览器收到后会保存下来，之后每次请求都通过cookie请求头部将cookie信息发送至服务器。</p>
+<p>cookie的过期时间、域、路径、有效期、适用站点均可由需要来指定</p>
+<p>基本格式: <code>set-cookie: &lt;name&gt;=&lt;value&gt;</code></p>
+<p>然后在浏览器-&gt;服务器时：</p>
+<p>GET /xxx.html HTTP/1.1</p>
+<p>Host: <a href="http://www.xxx.org" target="_blank" rel="noopener">www.xxx.org</a></p>
+<p>Cookie: &lt;name1&gt;=&lt;value1&gt;;&lt;name2&gt;=&lt;value2&gt;</p>
+<h3 id="Cookie的分类"><a href="#Cookie的分类" class="headerlink" title="Cookie的分类"></a>Cookie的分类</h3><p>在Cookie添加一些属性，可以给Cookie带来不同效果</p>
+<ol>
+<li>会话期Cookie：浏览器关闭后自动删除</li>
+<li>持久性Cookie：可指定过期时间(时间取决于客户端).e.g:<code>set-cookie: xx=yy, Expires=a_date</code></li>
+<li>secure: 被标记了secure的cookie只能被HTTPS传至服务器，但是即使加了secure，敏感信息也不能用cookie传，因为cookie特有的不安全性</li>
+<li>HTTPOnly：设置了这个属性，document.cookie这个API就无法访问，只能发送给服务器，<code>避免XSS攻击</code></li>
+</ol>
+<h3 id="安全"><a href="#安全" class="headerlink" title="安全"></a>安全</h3><ol>
+<li>会话劫持 &amp; XSS：web应用中，cookie常被用做标记用户or授权会话，所以如果web应用cookie被窃取，可能导致授权用户的会话遭受攻击，HTTPONLY的cookie能一定程度缓解这个问题</li>
+<li>CSRF,跨站请求伪造：比如某站的一张图片，其实是一个银行提现的链接，当你点开这张含有URL的图片，如果之前你登录了银行账号而且cookie还生效(而且还没有其它验证步骤)，那么钱就没了。阻止此悲剧发生的手段：<ol>
+<li>对用户输入进行过滤来阻止XSS</li>
+<li>任何敏感操作都要确认</li>
+<li>用于敏感信息的cookie生命周期要短</li>
+</ol>
+</li>
+</ol>
+<h2 id="Web-Storage–存储简单数据"><a href="#Web-Storage–存储简单数据" class="headerlink" title="Web Storage–存储简单数据"></a>Web Storage–存储简单数据</h2><h3 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h3><p>web storage提供一种非常简单的语法，用于存储和检索较小的，由<code>name</code>和<code>value</code>组成的数据项(并且只能是string和number)，当只存储一些简单数据(如用户名字，用户是否登录，屏幕背景颜色等)是非常有效的。</p>
+<h3 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h3><p>web storage 数据都包含在浏览器内两个类似于对象的结构中： sessionStorage 和 localStorage。 第一种方法，只要浏览器开着，数据就会一直保存 (关闭浏览器时数据会丢失) ，而第二种会一直保存数据，甚至到浏览器关闭又开启后也是这样。</p>
+<p>常用API:</p>
+<ol>
+<li>Storage.setItem()(分为localStorage和sessionStorage,后同)方法允许在存储中保存一个数据项——它接受两个参数：数据项的名字及其值。</li>
+<li>Storage.getItem() 方法接受一个参数——你想要检索的数据项的名称——并返回数据项的值。</li>
+<li>Storage.removeItem() 方法接受一个参数——你想要删除的数据项的名称——并从 web storage 中删除该数据项。</li>
+</ol>
+<h3 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h3><ol>
+<li>数据一直存在。</li>
+<li>为每个域名分离存储。</li>
+</ol>
+<h2 id="IndexedDB–存储复杂数据"><a href="#IndexedDB–存储复杂数据" class="headerlink" title="IndexedDB–存储复杂数据"></a>IndexedDB–存储复杂数据</h2><h3 id="概述-2"><a href="#概述-2" class="headerlink" title="概述"></a>概述</h3><p>IndexedDB(又称IDB)可以在浏览器中访问的一个完整的数据库系统，可以存储复杂的关系数据。其种类不限于像字符串和数字这样的简单值，可以在一个IndexedDB中存储视频，图像和许多其他的内容。</p>
+<h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><p>见参考文章的这一节，MDN给出了两个很好的例子，包括存储字符串和视频。</p>
+<h2 id="Service-Worker与离线文件存储"><a href="#Service-Worker与离线文件存储" class="headerlink" title="Service Worker与离线文件存储"></a>Service Worker与离线文件存储</h2><h3 id="概述-3"><a href="#概述-3" class="headerlink" title="概述"></a>概述</h3><p>使用IndexedDB已经是对用户体验的一个很大的改进，但每次访问网站时仍然需要下载主要的HTML，CSS和JavaScript文件，这意味着当没有网络连接时，它将无法工作。</p>
+<p>这时可以利用service worker以及cache API。</p>
+<h3 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h3><p>Service Workers 要求必须在 HTTPS 下才能运行</p>
+<p>步骤遵循：register -&gt; install -&gt; fetch</p>
+<p>详细教程可以参考<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Service_Worker_API/Using_Service_Workers" target="_blank" rel="noopener">使用 Service Workers–MDN</a></p>
+</article><div id="paginator"></div></div><footer id="bottom"><span>© </span><span>Li Xuetao</span><span>. Powered By </span><a href="http://hexo.io"><span>HEXO</span></a><span>. Theme </span><a href="https://github.com/lixuetaoleo/hexo-theme-leo">leo</a></footer></div><script src="/js/style.js"></script><script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script></body></html>
