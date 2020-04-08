@@ -1,8 +1,9 @@
 <!DOCTYPE html><html lang="en"><head><meta name="generator" content="Hexo 3.9.0"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta charset="UTF-8"><title>JavaScript中的async/await | LI XUETAO</title><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
-<link href="https://fonts.googleapis.com/css?family=Amatic+SC|Lato|Source+Sans+Pro&display=swap" rel="stylesheet"></head><body><div id="layout-page"><nav id="layout-menu"><div class="other-page hide"><a href="/about">About</a><a href="/archives">Archives</a></div><div class="responsive-pad"></div><div id="mega-head"><a href="/">LI XUETAO</a></div><div class="layout-socialmedia hide"><a class="link-item main-link-item" title="Instagram" href="https://www.instagram.com/lixuetaoleo/"><i class="iconfont icon-instagram"></i></a><a class="link-item main-link-item" title="Twitter" href="https://twitter.com/lixuetaoleo"><i class="iconfont icon-twitter"></i></a><a class="link-item main-link-item" title="Weibo" href="https://weibo.com/u/1791741344"><i class="iconfont icon-weibo"></i></a><a class="link-item main-link-item" title="GitHub" href="https://github.com/lixuetaoleo"><i class="iconfont icon-github"></i></a></div><div class="responsive-bar" onclick="toggle(this)">≡</div></nav><div id="content"><article id="post"><h1>JavaScript中的async/await</h1><time class="created-date" datetime="2020-02-13T01:02:50.000Z">2020-02-13</time><p>参考:<a href="https://developer.mozilla.org/zh-CN/docs/learn/JavaScript/%E5%BC%82%E6%AD%A5/Async_await" target="_blank" rel="noopener">MDN-async和await:让异步编程更简单</a></p>
-<ol>
+<link href="https://fonts.googleapis.com/css?family=Amatic+SC|Lato|Source+Sans+Pro&display=swap" rel="stylesheet"></head><body><div id="layout-page"><nav id="layout-menu"><div class="other-page hide"><a href="/about">About</a><a href="/archives">Archives</a></div><div class="responsive-pad"></div><div id="mega-head"><a href="/">LI XUETAO</a></div><div class="layout-socialmedia hide"><a class="link-item main-link-item" title="Instagram" href="https://www.instagram.com/lixuetaoleo/"><i class="iconfont icon-instagram"></i></a><a class="link-item main-link-item" title="Twitter" href="https://twitter.com/lixuetaoleo"><i class="iconfont icon-twitter"></i></a><a class="link-item main-link-item" title="Weibo" href="https://weibo.com/u/1791741344"><i class="iconfont icon-weibo"></i></a><a class="link-item main-link-item" title="GitHub" href="https://github.com/lixuetaoleo"><i class="iconfont icon-github"></i></a></div><div class="responsive-bar" onclick="toggle(this)">≡</div></nav><div id="content"><article id="post"><h1>JavaScript中的async/await</h1><time class="created-date" datetime="2020-02-13T01:02:50.000Z">2020-02-13</time><ol>
 <li>它们是ES2017加入的关键字，充当Promise的语法糖。</li>
-<li>async关键字放在函数声明之前，它将任何函数转化为Promise，使得该函数返回后可以用then()方法。<pre><code class="js">//写法1
+<li>async关键字放在函数声明之前，它将任何函数转化为Promise，使得该函数返回后可以用then()方法。</li>
+</ol>
+<pre><code class="js">//写法1
 async function hello() { return &quot;Hello&quot; };
 //写法2
 let hello = async function() { return &quot;Hello&quot; };
@@ -10,8 +11,6 @@ let hello = async function() { return &quot;Hello&quot; };
 let hello = async () =&gt; { return &quot;Hello&quot; };
 console.log(hello()); // Promise { &#39;hello&#39; }
 hello().then((result)=&gt;console.log(result)); // hello</code></pre>
-</li>
-</ol>
 <p>通过仅在函数声明为异步时添加必要的处理，JavaScript引擎可以优化程序。</p>
 <ol start="3">
 <li>await可以放在任何基于异步声明的函数之前，只能在异步函数内部工作暂停代码在该行上，直到promise完成，然后返回结果值。与此同时，可能正在等待执行机会的其他代码也会这样做。可以在调用任何返回Promise的函数时使用await，包括Web API函数。</li>
@@ -105,5 +104,89 @@ async function timeTest() {
 <p>在这里，将三个Promise对象存储在变量中，这样可以同时启动它们关联的进程。接下来，等待他们的结果 - 因为promise都在基本上同时开始处理，promise将同时完成;</p>
 <p>第二个示例警报框报告总运行时间刚刚过3秒！</p>
 <p><code>对于使用async/await造成的性能问题，必须仔细测试代码，并在性能开始受损时牢记这一点。</code></p>
+<hr>
+<h3 id="总结–async-await比Promise更好的七个原因"><a href="#总结–async-await比Promise更好的七个原因" class="headerlink" title="总结–async/await比Promise更好的七个原因"></a>总结–async/await比Promise更好的七个原因</h3><ol>
+<li>语法更加简洁</li>
+<li>可以用传统的try…catch来捕获error(Promise只能调用.catch()方法来捕获error)</li>
+<li>在条件语句时没有那么繁琐(即没有Promise有那么多括号要写)</li>
+</ol>
+<pre><code class="js">const makeRequest = () =&gt; {
+  return getJSON()
+    .then(data =&gt; {
+      if (data.needsAnotherRequest) {
+        return makeAnotherRequest(data)
+          .then(moreData =&gt; {
+            console.log(moreData)
+            return moreData
+          })
+      } else {
+        console.log(data)
+        return data
+      }
+    })
+}
+
+const makeRequest = async () =&gt; {
+  const data = await getJSON()
+  if (data.needsAnotherRequest) {
+    const moreData = await makeAnotherRequest(data);
+    console.log(moreData)
+    return moreData
+  } else {
+    console.log(data)
+    return data    
+  }
+}</code></pre>
+<ol start="4">
+<li>中间值<br>比如有promise1, promise2, promise3,运行promise2需要promise1的返回值，然后运行promise3又需要promise2和promise1的返回值，如果用Promise的写法会出现下面的情况：</li>
+</ol>
+<pre><code class="js">const makeRequest = () =&gt; {
+  return promise1()
+    .then(value1 =&gt; {
+      // do something
+      return promise2(value1)
+        .then(value2 =&gt; {
+          // do something          
+          return promise3(value1, value2)
+        })
+    })
+}</code></pre>
+<p>而如果用async,则会简单许多</p>
+<pre><code class="js">const makeRequest = async () =&gt; {
+  const value1 = await promise1()
+  const value2 = await promise2(value1)
+  return promise3(value1, value2)
+}</code></pre>
+<ol start="5">
+<li><p>错误栈(error stack)<br>使用Promise的.then()链式调用，在报错时错误信息非常不清晰，只能有诸如<code>Error: oops at callAPromise.then.then.then.then.then (index.js:8:13)</code>这样的信息，而使用async的错误信息如下<code>Error: oops at makeRequest (index.js:7:9)</code></p>
+</li>
+<li><p>debug更友好，可以打断点</p>
+</li>
+<li><p>await可以作用于同步代码和异步代码</p>
+</li>
+</ol>
+<p>假设你想利用Date.now()来记录某段代码运行了多久，使用Promise的情况下对于同步代码会报错</p>
+<pre><code class="js">const recordTime = (makeRequest) =&gt; {
+  const timeStart = Date.now();
+  makeRequest().then(() =&gt; { // throws error for sync functions (.then is not a function)
+    const timeEnd = Date.now();
+    console.log(&#39;time take:&#39;, timeEnd - timeStart);
+  })
+}</code></pre>
+<p>而使用async/await则没有问题</p>
+<pre><code class="js">const recordTime = async (makeRequest) =&gt; {
+  const timeStart = Date.now();
+  await makeRequest(); // works for any sync or async function
+  const timeEnd = Date.now();
+  console.log(&#39;time take:&#39;, timeEnd - timeStart);
+}</code></pre>
+<p>总之，async/await可以使代码更加简洁，优雅！</p>
+<hr>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
+<li><p><a href="https://developer.mozilla.org/zh-CN/docs/learn/JavaScript/%E5%BC%82%E6%AD%A5/Async_await" target="_blank" rel="noopener">MDN-async和await:让异步编程更简单</a></p>
+</li>
+<li><p><a href="https://dev.to/gafi/7-reasons-to-always-use-async-await-over-plain-promises-tutorial-4ej9" target="_blank" rel="noopener">7 Reasons Why JavaScript Async/Await Is Better Than Plain Promises (Tutorial)</a></p>
+</li>
+</ul>
 </article><div id="paginator"></div></div><footer id="bottom"><span>© </span><span>Li Xuetao</span><span>. Powered By </span><a href="http://hexo.io"><span>HEXO</span></a><span>. Theme </span><a href="https://github.com/lixuetaoleo/hexo-theme-leo">leo</a></footer></div><script src="/js/style.js"></script><script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script></body></html>
