@@ -1,0 +1,22 @@
+<!DOCTYPE html><html lang="en"><head><meta name="generator" content="Hexo 3.9.0"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta charset="UTF-8"><title>Redux总结 | LI XUETAO</title><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+<link href="https://fonts.googleapis.com/css?family=Amatic+SC|Lato|Source+Sans+Pro&display=swap" rel="stylesheet"></head><body><div id="layout-page"><nav id="layout-menu"><div class="other-page hide"><a href="/about">About</a><a href="/archives">Archives</a></div><div class="responsive-pad"></div><div id="mega-head"><a href="/">LI XUETAO</a></div><div class="layout-socialmedia hide"><a class="link-item main-link-item" title="Instagram" href="https://www.instagram.com/lixuetaoleo/"><i class="iconfont icon-instagram"></i></a><a class="link-item main-link-item" title="Twitter" href="https://twitter.com/lixuetaoleo"><i class="iconfont icon-twitter"></i></a><a class="link-item main-link-item" title="Weibo" href="https://weibo.com/u/1791741344"><i class="iconfont icon-weibo"></i></a><a class="link-item main-link-item" title="GitHub" href="https://github.com/lixuetaoleo"><i class="iconfont icon-github"></i></a></div><div class="responsive-bar" onclick="toggle(this)">≡</div></nav><div id="content"><article id="post"><h1>Redux总结</h1><time class="created-date" datetime="2020-04-13T14:54:26.000Z">2020-04-13</time><p>虽然一直在项目中用Redux，但是一直没有对Redux做一个总结，特此借此文作为自己对于理解Redux的一篇总结。</p>
+<h2 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h2><p>Redux是由Facebook的Flux演变而来，并受到了函数式编程语言Elm的启发。不仅仅和React配合，任何JavaScript库都可以应用Redux</p>
+<p>Redux解决的痛点：状态管理与数据的流动与共享。</p>
+<blockquote>
+<p>你可能并不需要Redux： <a href="https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367" target="_blank" rel="noopener">“You Might Not Need Redux”</a></p>
+</blockquote>
+<h2 id="应用背景"><a href="#应用背景" class="headerlink" title="应用背景"></a>应用背景</h2><p>在React中，数据是单向流动的，只能从父组件到子组件，如果子组件想要给父组件传递数据(props)，那么只能通过父组件传回调给子组件，然后子组件再利用回调来给父组件传数据。假设在大项目中，有非常多的组件，如下图所示，如果绿色的组件(节点)想和红色组件(节点)进行数据传递的话，将原地爆炸。</p>
+<p><img src="https://i.loli.net/2020/04/13/1l6jGJgtMTy7AhC.png" alt="image.png"></p>
+<p>这个时候，如果利用Redux对state进行统一管理，将很好地解决这个问题</p>
+<h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><p>应用中所有的 state 都以一个对象树的形式储存在一个单一的 store 中。 惟一改变 state 的办法是触发 action，一个描述发生什么的对象。 为了描述 action 如何改变 state 树，你需要编写 reducers。</p>
+<p>说人话：</p>
+<p>把你去图书馆借书这一过程类比为components获取state的过程：你(components)，首先要去图书馆说”我要借书”(action creators)，并把这句话告诉图书馆管理员(dispatch(action))，管理员(store)收到你的请求后会带着这次action去查询记录本(reducer)，通过记录本查询到你要借的书之后把书拿回来然后交给你(返回state)，这样你就成功借到书了(components拿到state)</p>
+<p><img src="https://i.loli.net/2020/04/13/zwQKrJB8Nuah6nO.png" alt="image.png"></p>
+<p><strong>store是redux的核心，所有的数据都要经过store</strong></p>
+<p>e.g:</p>
+<pre><code class="js"></code></pre>
+<h2 id="React-Redux"><a href="#React-Redux" class="headerlink" title="React-Redux"></a>React-Redux</h2><h2 id="useReducer与Context"><a href="#useReducer与Context" class="headerlink" title="useReducer与Context"></a>useReducer与Context</h2><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="https://redux.js.org/introduction/getting-started" target="_blank" rel="noopener">Getting Started with Redux</a><br><a href></a><br><a href></a></p>
+<hr>
+<p>(全文未完待续…)</p>
+</article><div id="paginator"></div></div><footer id="bottom"><span>© </span><span>Li Xuetao</span><span>. Powered By </span><a href="http://hexo.io"><span>HEXO</span></a><span>. Theme </span><a href="https://github.com/lixuetaoleo/hexo-theme-leo">leo</a></footer></div><script src="/js/style.js"></script><script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script></body></html>
