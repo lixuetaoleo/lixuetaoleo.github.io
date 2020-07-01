@@ -1,6 +1,6 @@
-import React from "react"
-import { graphql } from "gatsby"
-import Layout from "../components/layout"
+import React from 'react';
+import { graphql } from 'gatsby';
+import Layout from '../components/layout';
 
 export default ({ data }) => (
   <Layout>
@@ -10,7 +10,7 @@ export default ({ data }) => (
       photos and videos of pandas eating lots of food.
     </p>
   </Layout>
-)
+);
 
 export const query = graphql`
   query {
@@ -20,4 +20,4 @@ export const query = graphql`
       }
     }
   }
-`
+`;
