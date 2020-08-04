@@ -4,7 +4,7 @@ before_script:
 node_js:
   - "10"
 deploy:
-  provider: script
+  provider: pages
   # Note: change "docs" to the directory where your gatsby-site lives, if necessary
   script: cd gatsby/ && yarn install && yarn run deploy
   skip_cleanup: true
