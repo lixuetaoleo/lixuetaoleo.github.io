@@ -36,7 +36,7 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
-    "deploy": "gatsby build --prefix-paths && gh-pages -d public -b master -r https://16df5fa3f5273b46e6852a62837dce233810d59c@github.com/lixuetaoleo/lixuetaoleo.github.io.git"
+    "deploy": "gatsby build --prefix-paths && gh-pages -d public -b master -r https://$GH_TOKEN@github.com/lixuetaoleo/lixuetaoleo.github.io.git"
   },
   "repository": {
     "type": "git",
