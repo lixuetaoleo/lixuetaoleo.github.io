@@ -1,0 +1,67 @@
+@font-face {
+  font-family: "AmaticSC-Regular";
+  src: url("../assets/AmaticSC-Regular.ttf");
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  a {
+    text-decoration: none;
+    &:link {
+      color: black;
+    }
+    &:visited {
+      color: black;
+    }
+    &:hover {
+      color: #87B3F8;
+    }
+    &:active {
+      color: #87B3F8;
+    }
+  }
+
+  .author {
+    font-family: "AmaticSC-Regular";
+    font-size: 5rem;
+  }
+
+  .description {
+  }
+
+  .link-to-other-page {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 30%;
+  }
+
+  .socialmedia {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    margin-top: 10rem;
+    & > span {
+      margin: 0 1rem;
+    }
+  }
+
+  &::after {
+    content: '';
+    background-image: url(../assets/background-image.jpg);
+    background-position: center center;
+    background-size: cover;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+    opacity: 0.7;
+  }
+}
