@@ -8,5 +8,6 @@ deploy:
   # Note: change "docs" to the directory where your gatsby-site lives, if necessary
   script: npm install && npm run deploy
   skip_cleanup: true
+  github-token: $GH_TOKEN
   on:
     branch: gatsby
