@@ -6,7 +6,7 @@ node_js:
 deploy:
   provider: pages
   # Note: change "docs" to the directory where your gatsby-site lives, if necessary
-  script: yarn install && yarn run deploy
+  script: npm install && npm run deploy
   skip_cleanup: true
   on:
     branch: master
