@@ -12,6 +12,7 @@ deploy:
   # Note: change "docs" to the directory where your gatsby-site lives, if necessary
   skip_cleanup: true
   github-token: $GH_TOKEN
+  local-dir: public
   on:
     branch: gatsby
   target_branch: master
