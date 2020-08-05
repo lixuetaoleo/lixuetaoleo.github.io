@@ -1,0 +1,55 @@
+@font-face {
+  font-family: 'AmaticSC-Regular';
+  src: url('../assets/AmaticSC-Regular.ttf');
+}
+
+.header {
+  display: flex;
+  width: 90vw;
+  margin: 0 auto;
+  height: 10vh;
+  align-items: center;
+  a {
+    text-decoration: none;
+    &:link {
+      color: black;
+    }
+    &:visited {
+      color: black;
+    }
+    &:hover {
+      color: #87b3f8;
+    }
+    &:active {
+      color: #87b3f8;
+    }
+  }
+}
+
+.link-to-other-page {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  & > a:first-child {
+    margin-right: 2rem;
+  }
+}
+
+.link-to-home {
+  flex: 1;
+  margin: 0;
+  text-align: center;
+  font-size: 3rem;
+  font-family: 'AmaticSC-Regular', sans-serif;
+}
+
+.socialmedia {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  & > span {
+    margin-left: 1rem;
+  }
+}
