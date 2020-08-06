@@ -1,5 +1,6 @@
 ---
 title: Effective C++ 3
+titleImage:
 categories:
   - Software Development
 date: 2019-11-04 23:25:43

@@ -1,5 +1,6 @@
 ---
 title: Effective C++ 7
+titleImage:
 categories:
   - Software Development
 date: 2019-11-13 19:58:14

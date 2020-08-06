@@ -1,5 +1,6 @@
 ---
 title: Effective C++ 6
+titleImage:
 categories:
   - Software Development
 date: 2019-11-09 19:28:31

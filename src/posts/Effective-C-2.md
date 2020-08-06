@@ -1,5 +1,6 @@
 ---
 title: Effective-C++-2
+titleImage:
 categories:
   - Software Development
 date: 2019-11-04 22:24:34

@@ -1,5 +1,6 @@
 ---
 title: Effective C++ 5
+titleImage:
 categories:
   - Software Development
 date: 2019-11-07 19:39:33
