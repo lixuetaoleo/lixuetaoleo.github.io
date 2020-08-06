@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, graphql } from 'gatsby';
+import hljs from 'highlight.js';
+import 'highlight.js/styles/github.css';
 import Layout from '../components/layout';
 import style from '../styles/template.module.less';
 
 export default ({ data, pageContext }) => {
   const post = data.markdownRemark;
-  const { previous, next } = pageContext
+  const { previous, next } = pageContext;
+  useEffect(() => {
+    console.log('dafadsf');
+    document.querySelectorAll('pre code').forEach((block) => {
+      hljs.highlightBlock(block);
+    });
+  }, []);
   return (
     <Layout>
       <div className={style['post-container']}>
