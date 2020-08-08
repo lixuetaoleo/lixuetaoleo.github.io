@@ -1,12 +1,12 @@
 module.exports = {
   siteMetadata: {
     title: `LXT's share space`,
-    description: `A space for sharing my life.`,
+    description: `万丈高楼平地起  勿在浮沙筑高台`,
     author: `Li Xuetao`,
     socialMedia: {
-      Instagram: '',
-      Twitter: '',
-      Weibo: '',
+      Instagram: 'https://www.instagram.com/lixuetaoleo/',
+      Twitter: 'https://twitter.com/lixuetaoleo',
+      Weibo: 'https://weibo.com/u/1791741344',
     },
   },
   plugins: [
