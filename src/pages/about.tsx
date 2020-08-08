@@ -38,6 +38,12 @@ const About = () => {
             lixuetaoleo@gmail.com
           </a>
         </p>
+        <p>
+          Github:{' '}
+          <a href='https://github.com/lixuetaoleo' target='_blank' rel='noopener'>
+            lixuetaoleo
+          </a>{' '}
+        </p>
         <p>Switch神秘代码: SW-6111-0949-8603</p>
       </div>
     </Layout>
