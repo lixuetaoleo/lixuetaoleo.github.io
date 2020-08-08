@@ -16,7 +16,13 @@
 
   a {
     color: black;
+    @media (prefers-color-scheme: dark) {
+      color: rgba(255, 255, 255, 0.603);
+    }
     text-decoration: none;
     border-bottom: 1px solid #87b3f8;
+  }
+  @media (prefers-color-scheme: dark) {
+    color: rgba(255, 255, 255, 0.603);
   }
 }

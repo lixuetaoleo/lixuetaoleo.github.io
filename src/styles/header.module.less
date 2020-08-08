@@ -13,9 +13,15 @@
     text-decoration: none;
     &:link {
       color: black;
+      @media (prefers-color-scheme: dark) {
+        color: rgba(255, 255, 255, 0.603);
+      }
     }
     &:visited {
       color: black;
+      @media (prefers-color-scheme: dark) {
+        color: rgba(255, 255, 255, 0.603);
+      }
     }
     &:hover {
       color: #87b3f8;
@@ -60,5 +66,8 @@
     @media screen and (max-width: 767px) {
       margin-left: 0.7rem;
     }
+  }
+  @media (prefers-color-scheme: dark) {
+    filter: brightness(1.5);
   }
 }
