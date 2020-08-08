@@ -13,6 +13,7 @@ deploy:
   skip_cleanup: true
   github-token: $GH_TOKEN
   local-dir: public
+  repo: lixuetaoleo/lixuetaoleo.github.io
   on:
     branch: gatsby
   target_branch: master
