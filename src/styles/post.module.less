@@ -22,6 +22,9 @@
   & > h3 {
     font-family: 'AmaticSC-Regular';
     font-size: 3rem;
+    @media screen and (max-width: 767px) {
+      font-size: 2rem;
+    }
   }
 }
 
@@ -47,17 +50,31 @@
     float: left;
     margin-bottom: 6px;
     margin-top: 6px;
+    @media screen and (max-width: 767px) {
+      height: 30vh;
+    }
   }
   & > div:nth-child(3n + 2) {
     // background-color: blue;
     height: 50vh;
     width: 49.5%;
     float: left;
+    @media screen and (max-width: 767px) {
+      width: 100%;
+      height: 30vh;
+      margin-bottom: 6px;
+    }
   }
   & > div:nth-child(3n + 3) {
     // background-color: yellow;
     height: 50vh;
     width: 49.5%;
     float: right;
+    @media screen and (max-width: 767px) {
+      width: 100%;
+      float: left;
+      height: 30vh;
+      margin-bottom: 6px;
+    }
   }
 }

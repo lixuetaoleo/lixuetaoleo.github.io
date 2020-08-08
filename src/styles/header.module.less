@@ -33,6 +33,9 @@
   align-items: center;
   & > a:first-child {
     margin-right: 2rem;
+    @media screen and (max-width: 767px) {
+      margin-right: 1rem;
+    }
   }
 }
 
@@ -42,6 +45,9 @@
   text-align: center;
   font-size: 3rem;
   font-family: 'AmaticSC-Regular', sans-serif;
+  @media screen and (max-width: 767px) {
+    font-size: 2rem;
+  }
 }
 
 .socialmedia {
@@ -51,5 +57,8 @@
   align-items: center;
   & > span {
     margin-left: 1rem;
+    @media screen and (max-width: 767px) {
+      margin-left: 0.7rem;
+    }
   }
 }
