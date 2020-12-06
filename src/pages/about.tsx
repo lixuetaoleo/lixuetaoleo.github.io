@@ -44,7 +44,7 @@ const About = () => {
             lixuetaoleo
           </a>{' '}
         </p>
-        <p>Switch神秘代码: SW-6111-0949-8603</p>
+        {/* <p>Switch神秘代码: SW-6111-0949-8603</p> */}
       </div>
     </Layout>
   );
