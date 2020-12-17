@@ -9,7 +9,7 @@ export default ({ data, pageContext }) => {
   const post = data.markdownRemark;
   const { previous, next } = pageContext;
   useEffect(() => {
-    console.log('dafadsf');
+    // console.log('dafadsf');
     document.querySelectorAll('pre code').forEach((block) => {
       hljs.highlightBlock(block);
     });
