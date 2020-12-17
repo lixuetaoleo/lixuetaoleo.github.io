@@ -1,7 +1,7 @@
 ---
 title: "Test typography"
-date: "2020-12-17"
-titleImage: 'https://i.loli.net/2020/08/08/MwxFCgfKrpHUSZY.jpg'
+date: "1999-12-31"
+titleImage: 'https://i.loli.net/2020/12/17/jZVs4RNr2Y3niMS.jpg'
 ---
 # Welcome to Leanote! 欢迎来到Leanote!
  
